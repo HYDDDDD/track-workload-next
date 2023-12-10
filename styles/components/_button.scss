@@ -1,0 +1,27 @@
+@use "sass:selector";
+
+@mixin button-rounder($key, $size) {
+  &#{selector-append(&, '-rounder-#{$key}')} {
+    border-radius: $size;
+
+    &::after {
+      border-radius: $size;
+    }
+  }
+}
+
+.button {
+  @apply inline-flex items-center justify-center outline-none transition;
+
+  min-height: 48px;
+
+  /* ROUDER */
+  @include button-rounder("default", theme("spacing.1"));
+  @include button-rounder("sm", theme("spacing[0.5]"));
+  @include button-rounder("lg", theme("spacing[2]"));
+  @include button-rounder("xl", theme("spacing[3]"));
+  @include button-rounder("2xl", theme("spacing[4]"));
+  @include button-rounder("3xl", theme("spacing[6]"));
+  @include button-rounder("full", 9999px);
+  @include button-rounder("none", 0px);
+}
