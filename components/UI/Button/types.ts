@@ -4,9 +4,9 @@ export type ButtonVariant =
   | "default"
   | "primary"
   | "success"
-  | "warning"
-  | "error"
-  | "info";
+  | "warn"
+  | "danger"
+  | "milk-pink";
 export type ButtonSize = "default" | "medium" | "small";
 export type ButtonRounder =
   | "default"
@@ -21,7 +21,12 @@ export type Button = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export type ButtonProps = Button & {
   variant?: ButtonVariant;
+  disabled?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  loading?: boolean;
+  active?: boolean;
   size?: ButtonSize;
   rounder?: ButtonRounder;
+  isOutline?: boolean;
+  isInvert?: boolean;
 };

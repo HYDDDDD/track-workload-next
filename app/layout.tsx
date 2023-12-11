@@ -1,7 +1,6 @@
+import clsx from "clsx";
 import { Metadata } from "next";
 
-import Footer from "@/components/layouts/Footer";
-import Header from "@/components/layouts/Header";
 import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
@@ -16,8 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Header />
+      <body className={clsx(`font-sans`)}>
         <main>{children}</main>
       </body>
     </html>
