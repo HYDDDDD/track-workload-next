@@ -1,0 +1,11 @@
+.field {
+  @apply rounded-lg bg-primary-500 px-6 py-2 text-white placeholder-white;
+
+  &-box {
+    @apply flex flex-col space-y-6;
+
+    > label {
+      @apply text-body-20;
+    }
+  }
+}

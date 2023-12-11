@@ -1,8 +1,10 @@
 @tailwind base;
-@import './base/root';
-@import './base/layout';
+@import "./base/root";
+@import "./base/layout";
 
 @tailwind components;
-@import './components/_button';
+@import "./components/_button";
+@import "./components/_card";
+@import "./components/_field";
 
 @tailwind utilities;

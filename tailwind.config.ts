@@ -3,11 +3,11 @@ import plugin from "tailwindcss/plugin";
 const BASE_FONT_SIZE = {
   header: {
     lineHeight: "140%",
-    fontWeight: 500,
+    fontWeight: 700,
   },
   body: {
     lineHeight: "150%",
-    fontWeight: 400,
+    fontWeight: 600,
   },
 };
 /** @type {import('tailwindcss').Config} */
@@ -97,6 +97,9 @@ module.exports = {
           500: "#a0aac3",
         },
       },
+      boxShadow: {
+        "01": "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+      },
       spacing: {
         "header-height": "var(--header-height)",
       },
@@ -126,6 +129,14 @@ module.exports = {
           "@media (max-width: 1280px)": {
             maxWidth: "100%",
           },
+        },
+
+        // Center screen
+        ".h-page": {
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
         },
       });
     }),

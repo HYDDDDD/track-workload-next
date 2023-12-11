@@ -1,22 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import clsx from "clsx";
-import Link from "next/link";
+import AuthenticationCard from "@/components/Cards/AuthenticationCard";
+import LoginForm from "@/components/Forms/Login";
 
-import Button from "@/components/UI/Button";
-
-export default function HomePage() {
+export default function LoginPage() {
   return (
-    <div>
+    <Fragment>
       <section>
-        <div className={clsx(`container`)}>
-          <h1>content</h1>
-
-          <Link href="/register">
-            <Button className={clsx(`bg-orange-300`)}>Click it!!</Button>
-          </Link>
-        </div>
+        <AuthenticationCard header="เข้าสู่ระบบ">
+          <LoginForm />
+        </AuthenticationCard>
       </section>
-    </div>
+    </Fragment>
   );
 }

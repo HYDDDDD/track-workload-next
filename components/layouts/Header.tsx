@@ -9,7 +9,7 @@ const Header = () => {
       <header
         className={clsx(
           `main-space-x py-4`,
-          `fixed top-0 z-50 w-full bg-orange-500`,
+          `fixed top-0 z-50 w-full bg-primary-500`,
         )}
       >
         <div className={clsx(`container flex items-center justify-between`)}>
