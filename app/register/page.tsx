@@ -1,9 +1,18 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import clsx from "clsx";
+import AuthenticationCard from "@/components/Cards/AuthenticationCard";
+import RegisterForm from "@/components/Forms/Register";
 
 const RegisterPage = () => {
-  return <div className={clsx(`container`)}>RegisterPage</div>;
+  return (
+    <Fragment>
+      <section>
+        <AuthenticationCard header="ลงทะเบียน">
+          <RegisterForm />
+        </AuthenticationCard>
+      </section>
+    </Fragment>
+  );
 };
 
 export default RegisterPage;

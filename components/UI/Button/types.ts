@@ -7,7 +7,7 @@ export type ButtonVariant =
   | "warn"
   | "danger"
   | "milk-pink";
-export type ButtonSize = "default" | "medium" | "small";
+export type ButtonSize = "default";
 export type ButtonRounder =
   | "default"
   | "sm"

@@ -1,5 +1,14 @@
-.field {
+.field,
+.list-box {
   @apply rounded-lg bg-primary-500 px-6 py-2 text-white placeholder-white;
+
+  &.list-box {
+    @apply flex w-full cursor-default justify-between text-start focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300;
+
+    > span {
+      @apply block truncate;
+    }
+  }
 
   &-box {
     @apply flex flex-col space-y-6;
@@ -8,4 +17,8 @@
       @apply text-body-20;
     }
   }
+}
+
+.list-box-option {
+  @apply absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm;
 }
