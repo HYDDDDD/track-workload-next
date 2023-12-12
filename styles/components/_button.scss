@@ -55,7 +55,7 @@
 }
 
 .button {
-  @apply inline-flex items-center justify-center outline-none transition;
+  @apply shadow-02 inline-flex items-center justify-center outline-none transition;
 
   min-height: 48px;
 
@@ -102,8 +102,8 @@
       theme("colors.milkPink.500"),
       theme("colors.milkPink.500"),
       theme("colors.black"),
-      theme("colors.milkPink.500"),
-      theme("colors.milkPink.500")
+      theme("colors.milkPink.500 / 75%"),
+      theme("colors.milkPink.500 / 75%")
     );
   }
 
@@ -112,8 +112,8 @@
       theme("colors.success.500"),
       theme("colors.success.500"),
       theme("colors.black"),
-      theme("colors.success.500"),
-      theme("colors.success.500")
+      theme("colors.success.500 / 75%"),
+      theme("colors.success.500 / 75%")
     );
 
     &.button-outline {
@@ -143,8 +143,8 @@
       theme("colors.danger.500"),
       theme("colors.danger.500"),
       theme("colors.black"),
-      theme("colors.danger.500"),
-      theme("colors.danger.500")
+      theme("colors.danger.500 / 75%"),
+      theme("colors.danger.500 / 75%")
     );
 
     &.button-outline {
@@ -174,8 +174,8 @@
       theme("colors.warn.500"),
       theme("colors.warn.500"),
       theme("colors.black"),
-      theme("colors.warn.500"),
-      theme("colors.warn.500")
+      theme("colors.warn.500 / 75%"),
+      theme("colors.warn.500 / 75%")
     );
 
     &.button-outline {

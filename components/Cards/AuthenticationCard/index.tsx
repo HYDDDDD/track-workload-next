@@ -1,10 +1,12 @@
+"use client";
+
 import React, { HTMLAttributes, ReactNode } from "react";
 
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import Button from "@/components/UI/Button";
 import Card from "@/components/UI/Card";
 import LogoICTPng from "@/icons/logo-ict.png";
 
@@ -19,8 +21,10 @@ const AuthenticationCard = ({
   children,
   titleClassName,
 }: IAuthenticationCardProps) => {
+  const pathName = usePathname();
+
   return (
-    <div className={clsx(`container h-page`)}>
+    <div className={clsx([`container`, { [`h-page`]: pathName === "/" }])}>
       <Card className={clsx(`grid w-full grid-cols-2`, `lg:grid-cols-1`)}>
         <div
           className={clsx([
@@ -35,11 +39,19 @@ const AuthenticationCard = ({
         </div>
         <div className={clsx([`p-7`, `space-y-8`])}>
           <div className={clsx([`flex justify-end space-x-6`])}>
-            <Link href="#">
-              <p>เข้าสู่ระบบ</p>
+            <Link href="/">
+              <p className={clsx({ [`text-primary-500`]: pathName !== "/" })}>
+                เข้าสู่ระบบ
+              </p>
             </Link>
-            <Link href="#">
-              <p className={clsx(`text-primary-500`)}>ลงทะเบียน</p>
+            <Link href="/register">
+              <p
+                className={clsx({
+                  [`text-primary-500`]: pathName !== "/register",
+                })}
+              >
+                ลงทะเบียน
+              </p>
             </Link>
           </div>
           {header && (
@@ -52,14 +64,6 @@ const AuthenticationCard = ({
             </div>
           )}
           {children}
-
-          <div className={clsx([`flex justify-center space-x-6`])}>
-            <Link href="#">
-              <Button variant="milk-pink" rounder="full">
-                <p>เข้าสู่ระบบ</p>
-              </Button>
-            </Link>
-          </div>
         </div>
       </Card>
     </div>

@@ -2,9 +2,9 @@ import { IActivityDataProps } from "@/types/activity/activity.types";
 import { IRoleDataProps } from "@/types/role/role.types";
 
 export const DEFAULT_USER_ROLE_DATA: IRoleDataProps[] = [
-  { id: "", role: "" },
-  { id: "", role: "Personnel" },
-  { id: "", role: "Officer" },
+  { id: "1", role: "" },
+  { id: "2", role: "Personnel" },
+  { id: "3", role: "Officer" },
 ];
 
 export const DEFAULT_BRANCH_DATA_AUTH = [
@@ -47,3 +47,13 @@ export const DEFAULT_ACTIVITY: IActivityDataProps[] = [
 ];
 
 export const DEFAULT_TOTAL_HOURS = 0;
+
+export const DEFAULT_DAYS_TH = [
+  "วันอาทิตย์",
+  "วันจันทร์",
+  "วันอังคาร",
+  "วันพุธ",
+  "วันพฤหัสบดี",
+  "วันศุกร์",
+  "วันเสาร์",
+];
