@@ -1,6 +1,8 @@
-import clsx from "clsx";
+import { Fragment } from "react";
+
 import { Metadata } from "next";
 
+import Header from "@/components/layouts/Header";
 import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
@@ -14,8 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={clsx(`font-sans`)}>{children}</body>
-    </html>
+    <Fragment>
+      <Header />
+      <main>{children}</main>
+    </Fragment>
   );
 }
