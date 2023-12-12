@@ -1,4 +1,5 @@
-import clsx from "clsx";
+import { Fragment } from "react";
+
 import { Metadata } from "next";
 
 import "@/styles/globals.scss";
@@ -14,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={clsx(`font-sans`)}>{children}</body>
-    </html>
+    <Fragment>
+      <main>{children}</main>
+    </Fragment>
   );
 }
