@@ -1,12 +1,14 @@
 import { IActivityDataProps } from "@/types/activity/activity.types";
 import { IRoleDataProps } from "@/types/role/role.types";
 
+// User role
 export const DEFAULT_USER_ROLE_DATA: IRoleDataProps[] = [
   { id: "1", role: "" },
   { id: "2", role: "Personnel" },
   { id: "3", role: "Officer" },
 ];
 
+// Branch
 export const DEFAULT_BRANCH_DATA_AUTH = [
   "",
   "Digital Business",
@@ -33,21 +35,28 @@ export const DEFAULT_BRANCH_DATA_SUMMARY_OFFICER = [
   "All",
 ];
 
+// Activity
 export const DEFAULT_ACTIVITY: IActivityDataProps[] = [
   {
     id: "1",
-    category: "culture",
-    hours: 6,
+    category: "ประเภท",
+    hours: 0,
   },
   {
     id: "2",
-    category: "health",
+    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
+    hours: 6,
+  },
+  {
+    id: "3",
+    category: "งานด้านส่งเสริมสุขภาพ",
     hours: 4,
   },
 ];
 
 export const DEFAULT_TOTAL_HOURS = 0;
 
+// Days
 export const DEFAULT_DAYS_TH = [
   "วันอาทิตย์",
   "วันจันทร์",

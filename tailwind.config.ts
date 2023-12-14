@@ -103,6 +103,9 @@ module.exports = {
       height: {
         "90": "90px",
       },
+      gridTemplateColumns: {
+        "space-3": "224px auto auto",
+      },
       boxShadow: {
         "01": "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         "02": "0px 2px 2px 0px rgba(0, 0, 0, 0.25)",
@@ -144,6 +147,20 @@ module.exports = {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
+        },
+
+        // Grid
+        ".grid-col-space-3": {
+          gridTemplateColumns: "224px auto auto",
+          "@media (max-width: 1280px)": {
+            gridTemplateColumns: "160px auto auto",
+          },
+          "@media (max-width: 768px)": {
+            gridTemplateColumns: "112px auto auto",
+          },
+          "@media (max-width: 640px)": {
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+          },
         },
       });
     }),
