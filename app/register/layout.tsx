@@ -1,8 +1,7 @@
 import { Fragment } from "react";
 
+import clsx from "clsx";
 import { Metadata } from "next";
-
-import "@/styles/globals.scss";
 
 export const metadata: Metadata = {
   title: "Next.js",
@@ -16,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <Fragment>
-      <main>{children}</main>
+      <main className={clsx([`sm:p-0`])}>{children}</main>
     </Fragment>
   );
 }

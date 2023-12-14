@@ -24,12 +24,17 @@ const AuthenticationCard = ({
   const pathName = usePathname();
 
   return (
-    <div className={clsx([`container`, { [`h-page`]: pathName === "/" }])}>
+    <div
+      className={clsx([
+        `container main-space-x`,
+        { [`h-page`]: pathName === "/" },
+      ])}
+    >
       <Card className={clsx(`grid w-full grid-cols-2`, `lg:grid-cols-1`)}>
         <div
           className={clsx([
             `flex flex-col items-center justify-center rounded-l-2xl bg-primary-500`,
-            `lg:rounded-none`,
+            `lg:rounded-b-none lg:rounded-t-2xl`,
           ])}
         >
           <Image src={LogoICTPng} alt="logo ict png" />
@@ -37,7 +42,7 @@ const AuthenticationCard = ({
             ระบบติดตามภาระงาน
           </p>
         </div>
-        <div className={clsx([`p-7`, `space-y-8`])}>
+        <div className={clsx([`space-y-8 p-7`])}>
           <div className={clsx([`flex justify-end space-x-6`])}>
             <Link href="/">
               <p className={clsx({ [`text-primary-500`]: pathName !== "/" })}>

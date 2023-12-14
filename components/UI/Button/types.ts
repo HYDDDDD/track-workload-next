@@ -3,6 +3,7 @@ import type { ButtonHTMLAttributes, MouseEvent } from "react";
 export type ButtonVariant =
   | "default"
   | "primary"
+  | "secondary"
   | "success"
   | "warn"
   | "danger"

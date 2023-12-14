@@ -2,14 +2,14 @@ import React, { Fragment } from "react";
 
 import clsx from "clsx";
 
-const PersonnelHomePage = () => {
+const PersonnelFormPage = () => {
   return (
     <Fragment>
       <section>
-        <div className={clsx(`container`)}>PersonnelHomePage</div>
+        <div className={clsx([`container main-space-x`])}>Personnel form</div>
       </section>
     </Fragment>
   );
 };
 
-export default PersonnelHomePage;
+export default PersonnelFormPage;

@@ -97,6 +97,12 @@ module.exports = {
           500: "#a0aac3",
         },
       },
+      width: {
+        "90": "90px",
+      },
+      height: {
+        "90": "90px",
+      },
       boxShadow: {
         "01": "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         "02": "0px 2px 2px 0px rgba(0, 0, 0, 0.25)",
