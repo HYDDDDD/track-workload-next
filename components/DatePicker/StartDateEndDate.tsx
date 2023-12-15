@@ -9,11 +9,15 @@ import SortLeftPng from "@/icons/sort-left-icon.png";
 interface IStartDateEndDatePickerProps {
   startDate: Date | null;
   setStartDate: React.Dispatch<React.SetStateAction<Date | null>>;
+  endDate: Date | null;
+  setEndDate: React.Dispatch<React.SetStateAction<Date | null>>;
 }
 
 const StartDateEndDatePicker = ({
   startDate,
   setStartDate,
+  endDate,
+  setEndDate,
 }: IStartDateEndDatePickerProps) => {
   return (
     <div
@@ -30,6 +34,7 @@ const StartDateEndDatePicker = ({
             showIcon
             selected={startDate}
             onChange={(date) => setStartDate(date)}
+            dateFormat="dd/MM/yyyy"
             placeholderText="Select a weekday"
             className={clsx([`date-picker`])}
           />
@@ -50,8 +55,9 @@ const StartDateEndDatePicker = ({
         <div className={clsx([`box-date-picker`, `container-box-search`])}>
           <DatePicker
             showIcon
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            dateFormat="dd/MM/yyyy"
             placeholderText="Select a weekday"
             className={clsx([`date-picker`])}
           />

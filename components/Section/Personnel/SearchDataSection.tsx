@@ -7,9 +7,12 @@ import clsx from "clsx";
 import Image from "next/image";
 
 import StartDateEndDatePicker from "@/components/DatePicker/StartDateEndDate";
-import { DEFAULT_ACTIVITY } from "@/constant/constant";
+import Table from "@/components/Table/Table";
+import { DEFAULT_ACTIVITY, USERS } from "@/constant/constant";
 import SortLeftPng from "@/icons/sort-left-icon.png";
 import { IActivityDataProps } from "@/types/activity/activity.types";
+
+import { UserColumns } from "./Column";
 
 const SearchDataSection = () => {
   // _State
@@ -17,6 +20,7 @@ const SearchDataSection = () => {
     DEFAULT_ACTIVITY[0],
   );
   const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -71,7 +75,10 @@ const SearchDataSection = () => {
       <StartDateEndDatePicker
         startDate={startDate}
         setStartDate={setStartDate}
+        endDate={endDate}
+        setEndDate={setEndDate}
       />
+      <Table info={USERS} columns={UserColumns} />
     </section>
   );
 };

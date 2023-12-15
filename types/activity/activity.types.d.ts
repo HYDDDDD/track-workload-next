@@ -1,4 +1,4 @@
-export interface IActivityActionDataProps {
+export interface IActivityRequestDataProps {
   id: string;
   category: string;
   image: string;
@@ -8,6 +8,12 @@ export interface IActivityActionDataProps {
   hours: number;
 }
 
+export interface IActivityResponseDataProps {
+  id: string;
+  category: string;
+  updateDate: string;
+  hours: number;
+}
 export interface IActivityDataProps {
   id: string;
   category: string;
