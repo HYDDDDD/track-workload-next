@@ -6,6 +6,7 @@ import clsx from "clsx";
 import Image from "next/image";
 
 import Button from "@/components/UI/Button";
+import InputTable from "@/components/UI/Input/InputTable";
 import BackIcon from "@/icons/Back";
 import BackerIcon from "@/icons/Backer";
 import ForwardIcon from "@/icons/Forward";
@@ -19,31 +20,6 @@ interface PaginationTableProps {
 const PaginationTable = ({ table }: PaginationTableProps) => {
   // _MOCK
   const userContext = "1";
-
-  // _State
-  const [pages, setPages] = useState<number[]>([]); // double element.
-  const [uniquePages, setUniquePages] = useState<number[]>([]);
-
-  // _Event
-  const handleFindPages = () => {
-    for (let index = 1; index < table.getPageCount(); index++) {
-      setPages((prevPages) => [...prevPages, index]);
-    }
-  };
-
-  // _Effect
-  useEffect(() => {
-    handleFindPages();
-  }, []);
-
-  useEffect(() => {
-    if (pages) {
-      const uniqueArray = pages.filter((value, index, self) => {
-        return self.indexOf(value) === index;
-      });
-      setUniquePages(uniqueArray);
-    }
-  }, [pages]);
 
   return (
     <div className={clsx([`pagination`])}>
@@ -80,30 +56,8 @@ const PaginationTable = ({ table }: PaginationTableProps) => {
             <BackIcon />
           </Button>
         </div>
-        <div
-          className={clsx(
-            `flex items-center`,
-            table.getPageCount() === 1 ? `justify-center` : `justify-between`,
-          )}
-        >
-          {table.getPageCount() === 1 ? (
-            <Button variant="none" size="none">
-              <span className={clsx([`px-2`])}>{1}</span>
-            </Button>
-          ) : (
-            uniquePages.map((page, index) => {
-              return (
-                <Button
-                  variant="none"
-                  size="none"
-                  key={index}
-                  onClick={() => table.setPageIndex(page)}
-                >
-                  <span className={clsx([`px-2`])}>{page + 1}</span>
-                </Button>
-              );
-            })
-          )}
+        <div className={clsx(`w-full`)}>
+          <InputTable table={table} />
         </div>
         <div className={clsx([`flex items-center justify-between`])}>
           <Button
