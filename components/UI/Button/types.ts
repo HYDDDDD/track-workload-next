@@ -23,7 +23,6 @@ export type Button = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export type ButtonProps = Button & {
   variant?: ButtonVariant;
-  disabled?: boolean;
   loading?: boolean;
   active?: boolean;
   size?: ButtonSize;

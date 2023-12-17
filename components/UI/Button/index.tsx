@@ -10,7 +10,6 @@ const Button = ({
   rounder = "default",
   className,
   children,
-  disabled,
   active,
   loading,
   isOutline,
@@ -30,10 +29,8 @@ const Button = ({
           "button-invert": isInvert,
         },
         variant,
-        `focus:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
+        `focus:outline-none disabled:cursor-not-allowed disabled:opacity-30`,
         className,
-        `disabled:bg-red-500 disabled:text-red-500`,
-        { disabled: loading || disabled },
       )}
       {...props}
     >
