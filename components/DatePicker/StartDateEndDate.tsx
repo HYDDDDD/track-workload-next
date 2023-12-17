@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import clsx from "clsx";
 import Image from "next/image";
 
-import SortLeftPng from "@/icons/sort-left-icon.png";
+import SortLeftPng from "@/public/sort-left-icon.png";
 
 interface IStartDateEndDatePickerProps {
   startDate: Date | null;

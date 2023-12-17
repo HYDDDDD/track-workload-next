@@ -8,7 +8,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import Card from "@/components/UI/Card";
-import LogoICTPng from "@/icons/logo-ict.png";
+import LogoICTPng from "@/public/logo-ict.png";
 
 interface IAuthenticationCardProps extends HTMLAttributes<HTMLDivElement> {
   titleClassName?: string;

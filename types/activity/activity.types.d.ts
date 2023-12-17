@@ -9,11 +9,13 @@ export interface IActivityRequestDataProps {
 }
 
 export interface IActivityResponseDataProps {
+  userID: string;
   id: string;
   category: string;
   updateDate: string;
   hours: number;
 }
+
 export interface IActivityDataProps {
   id: string;
   category: string;

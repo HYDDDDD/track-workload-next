@@ -10,7 +10,7 @@ import Link from "next/link";
 
 import Button from "@/components/UI/Button";
 import { DEFAULT_USER_ROLE_DATA } from "@/constant/constant";
-import SortLeftPng from "@/icons/sort-left-icon.png";
+import SortLeftPng from "@/public/sort-left-icon.png";
 import { IRoleDataProps } from "@/types/role/role.types";
 
 import { onSubmit } from "./_actions/create-user-form";

@@ -1,3 +1,25 @@
 .tanstackTable {
-  @apply mx-auto max-w-5xl fill-gray-400 p-2;
+  @apply mx-auto w-full overflow-x-auto rounded-lg border lg:max-w-5xl;
+
+  > table {
+    @apply w-full;
+
+    > thead {
+      @apply text-bodyNormal-24 sm:text-bodyNormal-16 border-b bg-primary-500 text-center;
+    }
+
+    > tbody {
+      @apply text-bodyThin-20 sm:text-bodyThin-14 divide-y border-b text-center;
+    }
+
+    > tfoot {
+      > div {
+        @apply px-3.5 py-2;
+      }
+    }
+
+    td {
+      @apply px-3.5 py-2;
+    }
+  }
 }

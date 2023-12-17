@@ -64,6 +64,10 @@
   }
 
   /* VARIANT */
+  &.none {
+    @apply min-h-0 shadow-none hover:bg-gray-100;
+  }
+
   &.primary {
     @include button-variant(
       theme("colors.primary.500"),
@@ -246,5 +250,9 @@
   /* DEFAULT */
   &.button-type-default {
     @apply px-6;
+  }
+
+  &.button-type-none {
+    @apply px-1;
   }
 }

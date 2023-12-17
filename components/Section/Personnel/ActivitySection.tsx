@@ -5,8 +5,8 @@ import Image from "next/image";
 
 import Progress from "@/components/Progress";
 import Button from "@/components/UI/Button";
-import CulturePng from "@/icons/culture-icon.png";
-import HealthPng from "@/icons/health-icon.png";
+import CulturePng from "@/public/culture-icon.png";
+import HealthPng from "@/public/health-icon.png";
 
 const ActivitySection = () => {
   return (

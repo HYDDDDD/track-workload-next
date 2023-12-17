@@ -9,6 +9,14 @@ const BASE_FONT_SIZE = {
     lineHeight: "150%",
     fontWeight: 600,
   },
+  bodyNormal: {
+    lineHeight: "150%",
+    fontWeight: 500,
+  },
+  bodyThin: {
+    lineHeight: "150%",
+    fontWeight: 400,
+  },
 };
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -50,6 +58,20 @@ module.exports = {
         "body-14": ["14px", BASE_FONT_SIZE.body],
         "body-12": ["12px", BASE_FONT_SIZE.body],
         "body-10": ["10px", BASE_FONT_SIZE.body],
+        "bodyNormal-24": ["24px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-20": ["20px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-18": ["18px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-16": ["16px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-14": ["14px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-12": ["12px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-10": ["10px", BASE_FONT_SIZE.bodyNormal],
+        "bodyThin-24": ["24px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-20": ["20px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-18": ["18px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-16": ["16px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-14": ["14px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-12": ["12px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-10": ["10px", BASE_FONT_SIZE.bodyThin],
         se: ["0.625rem", { lineHeight: "1.5" }],
         xs: ["0.75rem", { lineHeight: "1.5" }],
         sm: ["0.875rem", { lineHeight: "1.5" }],

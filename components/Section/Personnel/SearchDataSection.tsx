@@ -7,9 +7,9 @@ import clsx from "clsx";
 import Image from "next/image";
 
 import StartDateEndDatePicker from "@/components/DatePicker/StartDateEndDate";
-import Table from "@/components/Table/Table";
-import { DEFAULT_ACTIVITY, USERS } from "@/constant/constant";
-import SortLeftPng from "@/icons/sort-left-icon.png";
+import Table from "@/components/Section/Personnel/Table/Table";
+import { PERSONNELTABLE, DEFAULT_ACTIVITY } from "@/constant/constant";
+import SortLeftPng from "@/public/sort-left-icon.png";
 import { IActivityDataProps } from "@/types/activity/activity.types";
 
 import { UserColumns } from "./Column";
@@ -78,7 +78,7 @@ const SearchDataSection = () => {
         endDate={endDate}
         setEndDate={setEndDate}
       />
-      <Table info={USERS} columns={UserColumns} />
+      <Table info={PERSONNELTABLE} columns={UserColumns} />
     </section>
   );
 };

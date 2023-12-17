@@ -4,10 +4,10 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-import AvatarPng from "@/icons/avatar-icon.png";
-import LinePng from "@/icons/line-icon.png";
-import LogoICTPng from "@/icons/logo-ict.png";
-import MapPinPng from "@/icons/map-pin-icon.png";
+import AvatarPng from "@/public/avatar-icon.png";
+import LinePng from "@/public/line-icon.png";
+import LogoICTPng from "@/public/logo-ict.png";
+import MapPinPng from "@/public/map-pin-icon.png";
 
 const Header = () => {
   return (

@@ -1,4 +1,7 @@
-import { IActivityDataProps } from "@/types/activity/activity.types";
+import {
+  IActivityDataProps,
+  IActivityResponseDataProps,
+} from "@/types/activity/activity.types";
 import { IRoleDataProps } from "@/types/role/role.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
@@ -20,12 +23,14 @@ export const USERS: IUserDataProps[] = [
     },
     activity: [
       {
+        userID: "1",
         id: "1",
         category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
         updateDate: "1/12/2023",
         hours: 6,
       },
       {
+        userID: "1",
         id: "2",
         category: "งานด้านส่งเสริมสุขภาพ",
         updateDate: "2/12/2023",
@@ -75,6 +80,7 @@ export const USERS: IUserDataProps[] = [
     },
     activity: [
       {
+        userID: "4",
         id: "1",
         category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
         updateDate: String(new Date()),
@@ -159,6 +165,93 @@ export const DEFAULT_ACTIVITY: IActivityDataProps[] = [
   {
     id: "3",
     category: "งานด้านส่งเสริมสุขภาพ",
+    hours: 4,
+  },
+];
+
+export const PERSONNELTABLE: IActivityResponseDataProps[] = [
+  {
+    userID: "1",
+    id: "1",
+    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
+    updateDate: "1/12/2023",
+    hours: 6,
+  },
+  {
+    userID: "1",
+    id: "2",
+    category: "งานด้านส่งเสริมสุขภาพ",
+    updateDate: "2/12/2023",
+    hours: 4,
+  },
+  {
+    userID: "1",
+    id: "3",
+    category: "งานด้านส่งเสริมสุขภาพ",
+    updateDate: "3/12/2023",
+    hours: 4,
+  },
+  {
+    userID: "1",
+    id: "4",
+    category: "งานด้านส่งเสริมสุขภาพ",
+    updateDate: "4/12/2023",
+    hours: 4,
+  },
+  {
+    userID: "1",
+    id: "5",
+    category: "งานด้านส่งเสริมสุขภาพ",
+    updateDate: "5/12/2023",
+    hours: 4,
+  },
+  {
+    userID: "1",
+    id: "6",
+    category: "งานด้านส่งเสริมสุขภาพ",
+    updateDate: "6/12/2023",
+    hours: 4,
+  },
+  {
+    userID: "1",
+    id: "7",
+    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
+    updateDate: "7/12/2023",
+    hours: 6,
+  },
+  {
+    userID: "1",
+    id: "8",
+    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
+    updateDate: "8/12/2023",
+    hours: 6,
+  },
+  {
+    userID: "1",
+    id: "9",
+    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
+    updateDate: "9/12/2023",
+    hours: 6,
+  },
+  {
+    userID: "1",
+    id: "10",
+    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
+    updateDate: "10/12/2023",
+    hours: 6,
+  },
+  {
+    userID: "1",
+    id: "11",
+    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
+    updateDate: "11/12/2023",
+    hours: 6,
+  },
+  {
+    userID: "4",
+    id: "2",
+    category: "งานด้านส่งเสริมสุขภาพ",
+    updateDate: "2/12/2023",
     hours: 4,
   },
 ];
