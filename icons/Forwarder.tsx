@@ -3,16 +3,16 @@ import React from "react";
 import clsx from "clsx";
 import Image from "next/image";
 
-import ForwardedIconPng from "@/public/forward-icon.png";
+import ForwarderIconPng from "@/public/forward-icon.png";
 import LineIconPng from "@/public/line-icon.png";
 
-const ForwardedIcon = () => {
+const ForwarderIcon = () => {
   return (
     <div className={clsx([`flex items-center`])}>
       <Image src={LineIconPng} alt="line icon png" />
-      <Image src={ForwardedIconPng} alt="forwarded icon png" />
+      <Image src={ForwarderIconPng} alt="forwarded icon png" />
     </div>
   );
 };
 
-export default ForwardedIcon;
+export default ForwarderIcon;

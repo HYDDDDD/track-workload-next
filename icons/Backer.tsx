@@ -6,7 +6,7 @@ import Image from "next/image";
 import BackIconPng from "@/public/back-icon.png";
 import LineIconPng from "@/public/line-icon.png";
 
-const BackedIcon = () => {
+const BackerIcon = () => {
   return (
     <div className={clsx([`flex items-center`])}>
       <Image src={LineIconPng} alt="line icon png" />
@@ -15,4 +15,4 @@ const BackedIcon = () => {
   );
 };
 
-export default BackedIcon;
+export default BackerIcon;

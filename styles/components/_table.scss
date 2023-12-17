@@ -9,7 +9,7 @@
     }
 
     > tbody {
-      @apply divide-y border-b text-center text-bodyThin-20 sm:text-bodyThin-14;
+      @apply divide-y border-b text-center;
     }
 
     > tfoot {
@@ -24,6 +24,16 @@
   }
 
   .pagination {
-    @apply grid w-full grid-cols-3 items-center px-6 py-2 text-bodyThin-20 lg:grid-cols-1 lg:space-y-3 sm:px-2 sm:text-bodyThin-14;
+    @apply grid w-full grid-cols-3 items-center px-6 py-2  lg:grid-cols-1 lg:space-y-3 sm:px-2;
+  }
+
+  .notHaveData {
+    @apply flex items-center justify-center border-b py-2;
+  }
+
+  tbody,
+  .pagination,
+  .notHaveData {
+    @apply text-bodyThin-20 sm:text-bodyThin-14;
   }
 }
