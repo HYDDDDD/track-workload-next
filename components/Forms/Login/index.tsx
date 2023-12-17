@@ -31,7 +31,7 @@ const LoginForm = () => {
                 component="input"
                 type="email"
                 placeholder="Example@gmail.com"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
@@ -41,7 +41,7 @@ const LoginForm = () => {
                 component="input"
                 type="password"
                 placeholder="********"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
           </form>

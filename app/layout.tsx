@@ -1,3 +1,5 @@
+import "react-datepicker/dist/react-datepicker.css";
+
 import clsx from "clsx";
 import { Metadata } from "next";
 

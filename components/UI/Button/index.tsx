@@ -15,7 +15,6 @@ const Button = ({
   loading,
   isOutline,
   isInvert,
-  onClick,
   ...props
 }: ButtonProps) => {
   return (
@@ -33,11 +32,7 @@ const Button = ({
         variant,
         `focus:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
         className,
-        {
-          onClick: (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
-            if (!disabled && onClick) onClick(e);
-          },
-        },
+        `disabled:bg-red-500 disabled:text-red-500`,
         { disabled: loading || disabled },
       )}
       {...props}
