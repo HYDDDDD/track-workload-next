@@ -10,11 +10,10 @@ import {
 import clsx from "clsx";
 import Image from "next/image";
 
-import DownloadButton from "@/components/Button/Download";
 import SlideDownPng from "@/public/slide-down-icon.png";
 import SlideUpPng from "@/public/slide-up-icon.png";
 
-import PaginationTable from "./PaginationTable";
+import PaginationTable from "../../PaginationTable";
 import { ITableProps } from "./types";
 
 const Table = ({ info, columns }: ITableProps) => {
@@ -116,9 +115,6 @@ const Table = ({ info, columns }: ITableProps) => {
           </div>
         )}
         <PaginationTable table={table} />
-      </div>
-      <div className={clsx([`mb-2 flex justify-between`])}>
-        <DownloadButton data={info} fileName="Export file data" />
       </div>
     </Fragment>
   );

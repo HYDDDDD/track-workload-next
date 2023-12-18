@@ -10,6 +10,5 @@ export interface IUserDataProps {
   phone: string;
   role: IRoleDataProps;
   branch?: IBranchDataProps;
-  activity?: IActivityResponseDataProps[];
   totalHours?: number;
 }

@@ -10,6 +10,11 @@ import LogoICTPng from "@/public/logo-ict.png";
 import MapPinPng from "@/public/map-pin-icon.png";
 
 const Header = () => {
+  // _MOCK
+  const userContext = {
+    role: "",
+  };
+
   return (
     <Fragment>
       <header className={clsx(`fixed top-0 z-50 w-full bg-white`)}>
@@ -61,6 +66,20 @@ const Header = () => {
             >
               หน้าหลัก
             </span>
+
+            {userContext.role === "officer" ? (
+              <span
+                className={clsx([
+                  `text-body-20`,
+                  `lg:text-body-16`,
+                  `sm:hidden`,
+                ])}
+              >
+                ข้อมูลสรุปผล
+              </span>
+            ) : (
+              <></>
+            )}
             <Image
               src={LinePng}
               alt="line icon png"
