@@ -34,32 +34,29 @@ const SearchDataSection = () => {
 
   const [exportData, setExportData] = useState<IExportDataProps[]>([]);
 
-  // _Effect
-  // useEffect(() => {
-  //   if (OFFICERTABLE) {
-  //     OFFICERTABLE.map((officer) => {
-  //       setExportData((prevInfo) => [
-  //         ...prevInfo,
-  //         {
-  //           id: officer.id,
-  //           firstName: officer.firstName,
-  //           lastName: officer.lastName,
-  //           branch: officer.branch.branchName,
-  //           category: officer.category.category,
-  //           updateDate: officer.updateDate,
-  //           totalHours: officer.totalHours,
-  //         },
-  //       ]);
-  //     });
+  useEffect(() => {
+    if (OFFICERTABLE) {
+      const filteredData = OFFICERTABLE.map((officer) => ({
+        id: officer.id,
+        firstName: officer.firstName,
+        lastName: officer.lastName,
+        branch: officer.branch.branchName,
+        category: officer.category.category,
+        updateDate: officer.updateDate,
+        totalHours: officer.totalHours,
+      }));
 
-  //     exportData.filter((value, index, self) => {
-  //       return self.indexOf(value) === index;
-  //     });
-  //   }
-  // }, [OFFICERTABLE]);
+      // Remove duplicates based on 'id'
+      const uniqueData = filteredData.filter(
+        (value, index, self) =>
+          self.findIndex((item) => item.id === value.id) === index,
+      );
 
-  // console.log("Export : ", exportData);
-  // console.log("officer : ", OFFICERTABLE);
+      if (uniqueData) {
+        setExportData(uniqueData);
+      }
+    }
+  }, [OFFICERTABLE]);
 
   return (
     <section className={clsx([`space-y-8`])}>

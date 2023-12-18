@@ -33,7 +33,7 @@ const PaginationTable = ({ table }: PaginationTableProps) => {
         }{" "}
         รายการ
       </span>
-      <div className={clsx([`grid grid-cols-3 items-center`])}>
+      <div className={clsx([`grid grid-cols-3 items-center gap-5`])}>
         <div className={clsx([`flex items-center justify-between`])}>
           <Button
             variant="none"
