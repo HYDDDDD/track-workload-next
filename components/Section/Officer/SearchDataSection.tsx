@@ -20,7 +20,7 @@ import {
 } from "@/types/activity/activity.types";
 import { IStatusDataProps } from "@/types/status/status.types";
 
-import Table from "../Personnel/Table/Table";
+import Table from "../Table/Table";
 import { UsersColumns } from "./Column";
 
 const SearchDataSection = () => {
@@ -34,6 +34,7 @@ const SearchDataSection = () => {
 
   const [exportData, setExportData] = useState<IExportDataProps[]>([]);
 
+  // _Effect
   useEffect(() => {
     if (OFFICERTABLE) {
       const filteredData = OFFICERTABLE.map((officer) => ({

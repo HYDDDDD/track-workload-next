@@ -12,11 +12,20 @@ import Image from "next/image";
 
 import SlideDownPng from "@/public/slide-down-icon.png";
 import SlideUpPng from "@/public/slide-up-icon.png";
+import {
+  IActivityResponseDataOfficerProps,
+  IActivityResponseDataProps,
+} from "@/types/activity/activity.types";
 
-import PaginationTable from "../../PaginationTable";
-import { ITableProps } from "./types";
+import PaginationTable from "../PaginationTable";
+import { TableType } from "./types";
 
-const Table = ({ info, columns }: ITableProps) => {
+const Table = <
+  T extends IActivityResponseDataOfficerProps | IActivityResponseDataProps,
+>({
+  info,
+  columns,
+}: TableType<T>) => {
   const table = useReactTable({
     data: info,
     columns: columns,

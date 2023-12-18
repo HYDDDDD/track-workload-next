@@ -7,7 +7,7 @@ import clsx from "clsx";
 import Image from "next/image";
 
 import StartDateEndDatePicker from "@/components/DatePicker/StartDateEndDate";
-import Table from "@/components/Section/Personnel/Table/Table";
+import Table from "@/components/Section/Table/Table";
 import { PERSONNELTABLE, DEFAULT_ACTIVITY } from "@/constant/constant";
 import SortLeftPng from "@/public/sort-left-icon.png";
 import { IActivityDataProps } from "@/types/activity/activity.types";
