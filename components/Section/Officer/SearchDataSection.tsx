@@ -37,14 +37,14 @@ const SearchDataSection = () => {
   // _Effect
   useEffect(() => {
     if (OFFICERTABLE) {
-      const filteredData = OFFICERTABLE.map((officer) => ({
-        id: officer.id,
-        firstName: officer.firstName,
-        lastName: officer.lastName,
-        branch: officer.branch.branchName,
-        category: officer.category.category,
-        updateDate: officer.updateDate,
-        totalHours: officer.totalHours,
+      const filteredData = OFFICERTABLE.map((info) => ({
+        id: info.id,
+        firstName: info.firstName,
+        lastName: info.lastName,
+        branch: info.branch.branchName,
+        category: info.category.category,
+        updateDate: info.updateDate,
+        hours: info.category.hours,
       }));
 
       // Remove duplicates based on 'id'

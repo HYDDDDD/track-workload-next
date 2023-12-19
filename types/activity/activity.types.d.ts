@@ -26,10 +26,10 @@ export interface IActivityResponseDataOfficerProps {
   lastName: string;
   branch: IBranchDataProps;
   category: IActivityDataProps;
-  updateDate?: string;
-  hours?: number;
-  totalHours?: number;
-  status?: IStatusDataProps;
+  updateDate: string;
+  // hours: number;
+  totalHours: number;
+  status: IStatusDataProps;
 }
 
 export interface IExportDataProps {
@@ -45,7 +45,14 @@ export interface IExportDataProps {
   status?: IStatusDataProps;
 }
 
-export interface IExportUsersDataProps {}
+export interface IExportUsersDataProps {
+  id: string;
+  firstName: string;
+  lastName: string;
+  branch: string;
+  category: string;
+  totalHours: number | undefined;
+}
 
 export interface IActivityDataProps {
   id: string;

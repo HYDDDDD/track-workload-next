@@ -183,7 +183,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
       category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
       hours: 6,
     },
-    totalHours: 0,
+    totalHours: 10,
     updateDate: "11/11/2023",
     status: {
       id: "2",
@@ -193,7 +193,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
   {
     id: "2",
     userID: "1",
-    firstName: "เขียว",
+    firstName: "ขาว",
     lastName: "ใจดี",
     branch: {
       id: "1",
@@ -204,7 +204,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
       category: "งานด้านส่งเสริมสุขภาพ",
       hours: 4,
     },
-    totalHours: 0,
+    totalHours: 50,
     updateDate: "11/11/2023",
     status: {
       id: "2",

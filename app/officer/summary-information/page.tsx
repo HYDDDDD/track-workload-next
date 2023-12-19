@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 import clsx from "clsx";
 
 import SearchSummaryInfoSection from "@/components/Section/Officer/SummaryInformation/SearchDataSection";
+import SummaryInfoChartSection from "@/components/Section/Officer/SummaryInformation/SummaryInfoChartSection";
 
 const SummaryInformationPage = () => {
   return (
@@ -18,6 +19,7 @@ const SummaryInformationPage = () => {
       >
         <p className={clsx([`text-center text-header-3`])}>ข้อมูลสรุปผล</p>
         <SearchSummaryInfoSection />
+        <SummaryInfoChartSection />
       </div>
     </Fragment>
   );

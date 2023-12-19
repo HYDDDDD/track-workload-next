@@ -6,9 +6,11 @@ import { Listbox, Transition } from "@headlessui/react";
 import clsx from "clsx";
 import Image from "next/image";
 
+import DownloadButton from "@/components/Button/Download";
 import {
   DEFAULT_ACTIVITY,
   DEFAULT_BRANCH_DATA_SUMMARY_OFFICER,
+  OFFICERTABLE,
 } from "@/constant/constant";
 import SortLeftPng from "@/public/sort-left-icon.png";
 import {
@@ -16,6 +18,9 @@ import {
   IExportUsersDataProps,
 } from "@/types/activity/activity.types";
 import { IBranchDataProps } from "@/types/branch/branch.types";
+
+import Table from "../../Table/Table";
+import { SummaryInfoColumn } from "./SummaryInfoColumn";
 
 const SearchSummaryInfoSection = () => {
   // _State
@@ -30,29 +35,28 @@ const SearchSummaryInfoSection = () => {
   const [exportData, setExportData] = useState<IExportUsersDataProps[]>([]);
 
   // _Effect
-  // useEffect(() => {
-  //   if (OFFICERTABLE) {
-  //     const filteredData = OFFICERTABLE.map((officer) => ({
-  //       id: officer.id,
-  //       firstName: officer.firstName,
-  //       lastName: officer.lastName,
-  //       branch: officer.branch.branchName,
-  //       category: officer.category.category,
-  //       updateDate: officer.updateDate,
-  //       totalHours: officer.totalHours,
-  //     }));
+  useEffect(() => {
+    if (OFFICERTABLE) {
+      const filteredData = OFFICERTABLE.map((info) => ({
+        id: info.id,
+        firstName: info.firstName,
+        lastName: info.lastName,
+        branch: info.branch.branchName,
+        category: info.category.category,
+        totalHours: info.totalHours,
+      }));
 
-  //     // Remove duplicates based on 'id'
-  //     const uniqueData = filteredData.filter(
-  //       (value, index, self) =>
-  //         self.findIndex((item) => item.id === value.id) === index,
-  //     );
+      // Remove duplicates based on 'id'
+      const uniqueData = filteredData.filter(
+        (value, index, self) =>
+          self.findIndex((item) => item.id === value.id) === index,
+      );
 
-  //     if (uniqueData) {
-  //       setExportData(uniqueData);
-  //     }
-  //   }
-  // }, [OFFICERTABLE]);
+      if (uniqueData) {
+        setExportData(uniqueData);
+      }
+    }
+  }, [OFFICERTABLE]);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -161,7 +165,10 @@ const SearchSummaryInfoSection = () => {
         </div>
       </div>
 
-      {/* <Table info={OFFICERTABLE} columns={UsersColumns} /> */}
+      <Table info={OFFICERTABLE} columns={SummaryInfoColumn} />
+      <div className={clsx([`mb-2 flex justify-between`])}>
+        <DownloadButton data={exportData} fileName="Export summary data file" />
+      </div>
     </section>
   );
 };
