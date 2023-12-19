@@ -12,7 +12,7 @@ const PersonnelIndexPage = () => {
         className={clsx([
           `container`,
           `mt-10`,
-          `lg:main-space-x`,
+          `main-space-x`,
           `space-y-16`,
           `sm:space-y-6`,
         ])}

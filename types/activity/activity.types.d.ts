@@ -45,6 +45,8 @@ export interface IExportDataProps {
   status?: IStatusDataProps;
 }
 
+export interface IExportUsersDataProps {}
+
 export interface IActivityDataProps {
   id: string;
   category: string;

@@ -7,7 +7,7 @@
   }
 
   &.list-box {
-    @apply flex w-full cursor-pointer justify-between text-start focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300;
+    @apply flex w-full cursor-pointer justify-between rounded-full text-start focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300;
 
     > span {
       @apply block truncate;
@@ -50,11 +50,16 @@
 }
 
 .box-date-picker {
-  @apply flex items-center justify-between rounded-lg bg-primary-500;
+  @apply flex items-center justify-between;
 }
 
 .date-picker {
-  @apply col-span-2 rounded-lg bg-primary-500 placeholder-black;
+  @apply col-span-2 placeholder-black;
+}
+
+.box-date-picker,
+.date-picker {
+  @apply rounded-full bg-primary-500;
 }
 
 .react-datepicker__view-calendar-icon input {

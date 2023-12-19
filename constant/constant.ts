@@ -22,7 +22,7 @@ export const USERS: IUserDataProps[] = [
     },
     branch: {
       id: "1",
-      branchName: "Digital Business",
+      branchName: "สาขาวิชาธุรกิจดิจิทัล",
     },
   },
   {
@@ -48,7 +48,7 @@ export const USERS: IUserDataProps[] = [
     },
     branch: {
       id: "9",
-      branchName: "Software Engineering",
+      branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร",
     },
   },
   {
@@ -63,7 +63,7 @@ export const USERS: IUserDataProps[] = [
     },
     branch: {
       id: "9",
-      branchName: "Software Engineering",
+      branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร",
     },
   },
   {
@@ -89,7 +89,7 @@ export const USERS: IUserDataProps[] = [
     },
     branch: {
       id: "10",
-      branchName: "Computer Graphics and Multimedia",
+      branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย",
     },
   },
 ];
@@ -104,28 +104,28 @@ export const DEFAULT_USER_ROLE_DATA: IRoleDataProps[] = [
 // Branch
 export const DEFAULT_BRANCH_DATA_AUTH: IBranchDataProps[] = [
   { id: "1", branchName: "" },
-  { id: "2", branchName: "Digital Business" },
-  { id: "3", branchName: "Information Technology" },
-  { id: "4", branchName: "Geographic Information Science" },
-  { id: "5", branchName: "Computer Science" },
-  { id: "6", branchName: "Data Science and Application" },
-  { id: "7", branchName: "Computer Engineering" },
-  { id: "8", branchName: "Software Engineering" },
-  { id: "9", branchName: "Computer Graphics and Multimedia" },
+  { id: "2", branchName: "สาขาวิชาธุรกิจดิจิทัล" },
+  { id: "3", branchName: "สาขาวิชาเทคโนโลยีสารสนเทศ" },
+  { id: "4", branchName: "สาขาวิชาภูมิสารสนเทศศาสตร์" },
+  { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์" },
+  { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์" },
+  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร" },
+  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร" },
+  { id: "9", branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย" },
 ];
 
-export const DEFAULT_BRANCH_DATA_SUMMARY_OFFICER = [
-  "",
-  "Digital Business",
-  "Information Technology",
-  "Geographic Information Science",
-  "Computer Science",
-  "Data Science and Application",
-  "Computer Engineering",
-  "Software Engineering",
-  "Computer Graphics and Multimedia",
-  "Officer",
-  "All",
+export const DEFAULT_BRANCH_DATA_SUMMARY_OFFICER: IBranchDataProps[] = [
+  { id: "1", branchName: "" },
+  { id: "2", branchName: "สาขาวิชาธุรกิจดิจิทัล" },
+  { id: "3", branchName: "สาขาวิชาเทคโนโลยีสารสนเทศ" },
+  { id: "4", branchName: "สาขาวิชาภูมิสารสนเทศศาสตร์" },
+  { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์" },
+  { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์" },
+  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร" },
+  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร" },
+  { id: "9", branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย" },
+  { id: "10", branchName: "สำนักงานคณะ" },
+  { id: "11", branchName: "ทั้งหมด" },
 ];
 
 // Status
@@ -176,7 +176,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     lastName: "ใจดี",
     branch: {
       id: "1",
-      branchName: "Digital Business",
+      branchName: "สาขาวิชาธุรกิจดิจิทัล",
     },
     category: {
       id: "2",
@@ -197,7 +197,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     lastName: "ใจดี",
     branch: {
       id: "1",
-      branchName: "Digital Business",
+      branchName: "สาขาวิชาธุรกิจดิจิทัล",
     },
     category: {
       id: "2",

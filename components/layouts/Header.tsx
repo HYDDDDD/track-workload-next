@@ -12,7 +12,7 @@ import MapPinPng from "@/public/map-pin-icon.png";
 const Header = () => {
   // _MOCK
   const userContext = {
-    role: "",
+    role: "officer",
   };
 
   return (
@@ -68,15 +68,17 @@ const Header = () => {
             </span>
 
             {userContext.role === "officer" ? (
-              <span
-                className={clsx([
-                  `text-body-20`,
-                  `lg:text-body-16`,
-                  `sm:hidden`,
-                ])}
-              >
-                ข้อมูลสรุปผล
-              </span>
+              <Link href="/officer/summary-information">
+                <span
+                  className={clsx([
+                    `text-body-20`,
+                    `lg:text-body-16`,
+                    `sm:hidden`,
+                  ])}
+                >
+                  ข้อมูลสรุปผล
+                </span>
+              </Link>
             ) : (
               <></>
             )}
