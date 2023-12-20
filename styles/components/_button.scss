@@ -55,7 +55,7 @@
 }
 
 .button {
-  @apply shadow-02 inline-flex items-center justify-center outline-none transition;
+  @apply inline-flex items-center justify-center shadow-02 outline-none transition;
 
   min-height: 48px;
 
@@ -64,6 +64,10 @@
   }
 
   /* VARIANT */
+  &.none {
+    @apply min-h-0 shadow-none hover:bg-gray-100;
+  }
+
   &.primary {
     @include button-variant(
       theme("colors.primary.500"),
@@ -93,6 +97,39 @@
         theme("colors.primary.500"),
         theme("colors.primary.500"),
         theme("colors.white")
+      );
+    }
+  }
+
+  &.secondary {
+    @include button-variant(
+      theme("colors.secondary.500"),
+      theme("colors.secondary.500"),
+      theme("colors.black"),
+      theme("colors.secondary.500 / 75%"),
+      theme("colors.secondary.500 / 75%"),
+      theme("colors.black")
+    );
+
+    &.button-outline {
+      @include button-variant(
+        theme("colors.white / 0%"),
+        theme("colors.secondary.500"),
+        theme("colors.secondary.500"),
+        theme("colors.secondary.500"),
+        theme("colors.secondary.500"),
+        theme("colors.black")
+      );
+    }
+
+    &.button-invert {
+      @include button-variant(
+        theme("colors.secondary.500 / 10%"),
+        theme("colors.secondary.500 / 0%"),
+        theme("colors.secondary.500"),
+        theme("colors.secondary.500"),
+        theme("colors.secondary.500"),
+        theme("colors.black")
       );
     }
   }
@@ -213,5 +250,9 @@
   /* DEFAULT */
   &.button-type-default {
     @apply px-6;
+  }
+
+  &.button-type-none {
+    @apply px-1;
   }
 }

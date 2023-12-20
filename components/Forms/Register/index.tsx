@@ -10,7 +10,7 @@ import Link from "next/link";
 
 import Button from "@/components/UI/Button";
 import { DEFAULT_USER_ROLE_DATA } from "@/constant/constant";
-import SortLeftPng from "@/icons/sort-left-icon.png";
+import SortLeftPng from "@/public/sort-left-icon.png";
 import { IRoleDataProps } from "@/types/role/role.types";
 
 import { onSubmit } from "./_actions/create-user-form";
@@ -37,7 +37,7 @@ const RegisterForm = () => {
                 component="input"
                 type="text"
                 placeholder="First name"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
@@ -47,7 +47,7 @@ const RegisterForm = () => {
                 component="input"
                 type="text"
                 placeholder="Last name"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
@@ -57,7 +57,7 @@ const RegisterForm = () => {
                 component="input"
                 type="text"
                 placeholder="08XXXXXXXX"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
@@ -67,7 +67,7 @@ const RegisterForm = () => {
                 component="input"
                 type="email"
                 placeholder="Example@gmail.com"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
@@ -77,7 +77,7 @@ const RegisterForm = () => {
                 component="input"
                 type="password"
                 placeholder="********"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
@@ -87,14 +87,16 @@ const RegisterForm = () => {
                 component="input"
                 type="password"
                 placeholder="********"
-                className={clsx(`field`)}
+                className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
               <label>สถานะ</label>
               <Listbox value={selectedRole} onChange={setSelectedRole}>
                 <div className={clsx(`relative`)}>
-                  <Listbox.Button className={clsx(`list-box`)}>
+                  <Listbox.Button
+                    className={clsx([`list-box`, `list-box-text-white`])}
+                  >
                     <span>{selectedRole.role}</span>
 
                     <Image
