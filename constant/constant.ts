@@ -192,7 +192,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
   },
   {
     id: "2",
-    userID: "1",
+    userID: "2",
     firstName: "ขาว",
     lastName: "ใจดี",
     branch: {
@@ -205,6 +205,90 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
       hours: 4,
     },
     totalHours: 50,
+    updateDate: "11/11/2023",
+    status: {
+      id: "2",
+      status: "ผ่าน",
+    },
+  },
+  {
+    id: "3",
+    userID: "3",
+    firstName: "ดำ",
+    lastName: "ใจดี",
+    branch: {
+      id: "1",
+      branchName: "สาขาวิชาธุรกิจดิจิทัล",
+    },
+    category: {
+      id: "2",
+      category: "งานด้านส่งเสริมสุขภาพ",
+      hours: 4,
+    },
+    totalHours: 60,
+    updateDate: "11/11/2023",
+    status: {
+      id: "2",
+      status: "ผ่าน",
+    },
+  },
+  {
+    id: "4",
+    userID: "4",
+    firstName: "น้ำเงิน",
+    lastName: "ใจดี",
+    branch: {
+      id: "1",
+      branchName: "สาขาวิชาธุรกิจดิจิทัล",
+    },
+    category: {
+      id: "2",
+      category: "งานด้านส่งเสริมสุขภาพ",
+      hours: 4,
+    },
+    totalHours: 70,
+    updateDate: "11/11/2023",
+    status: {
+      id: "2",
+      status: "ผ่าน",
+    },
+  },
+  {
+    id: "5",
+    userID: "5",
+    firstName: "ส้ม",
+    lastName: "ใจดี",
+    branch: {
+      id: "1",
+      branchName: "สาขาวิชาธุรกิจดิจิทัล",
+    },
+    category: {
+      id: "2",
+      category: "งานด้านส่งเสริมสุขภาพ",
+      hours: 4,
+    },
+    totalHours: 80,
+    updateDate: "11/11/2023",
+    status: {
+      id: "2",
+      status: "ผ่าน",
+    },
+  },
+  {
+    id: "6",
+    userID: "6",
+    firstName: "ชมพู",
+    lastName: "ใจดี",
+    branch: {
+      id: "1",
+      branchName: "สาขาวิชาธุรกิจดิจิทัล",
+    },
+    category: {
+      id: "2",
+      category: "งานด้านส่งเสริมสุขภาพ",
+      hours: 4,
+    },
+    totalHours: 90,
     updateDate: "11/11/2023",
     status: {
       id: "2",
