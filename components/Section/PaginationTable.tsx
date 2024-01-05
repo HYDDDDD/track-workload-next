@@ -5,8 +5,8 @@ import { Table } from "@tanstack/react-table";
 import clsx from "clsx";
 import Image from "next/image";
 
+import InputTable from "@/components/Input/InputTable";
 import Button from "@/components/UI/Button";
-import InputTable from "@/components/UI/Input/InputTable";
 import BackIcon from "@/icons/Back";
 import BackerIcon from "@/icons/Backer";
 import ForwardIcon from "@/icons/Forward";

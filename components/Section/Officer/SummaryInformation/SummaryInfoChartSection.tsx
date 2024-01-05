@@ -1,11 +1,15 @@
 import React from "react";
 
+import clsx from "clsx";
+
 import VerticalBarChart from "@/components/Chart/VerticalBarChart";
 
 const SummaryInfoChartSection = () => {
   return (
     <section>
-      <VerticalBarChart />
+      <div className={clsx([`flex w-full items-center justify-center`])}>
+        <VerticalBarChart />
+      </div>
     </section>
   );
 };

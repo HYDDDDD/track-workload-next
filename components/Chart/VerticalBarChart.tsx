@@ -37,7 +37,7 @@ const VerticalBarChart = () => {
       },
       title: {
         display: true,
-        text: "Top 5 จำนวนคนที่ได้ชั่วโมงมากที่สุด",
+        text: "Top 5 บุคลากรที่ได้ชั่วโมงมากที่สุด",
       },
     },
   };
@@ -46,9 +46,14 @@ const VerticalBarChart = () => {
     labels: labelChart.map((label) => label),
     datasets: [
       {
-        label: "จำนวนชั่วโมง(ชั่วโมง)",
+        label: "จำนวนชั่วโมงด้านทำนุบำรุงศิลปวัฒนธรรม(ชั่วโมง)",
         data: datas.map((data) => data),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "#BBD7E9",
+      },
+      {
+        label: "จำนวนชั่วโมงด้านส่งเสริมสุขภาพ(ชั่วโมง)",
+        data: datas.map((data) => data),
+        backgroundColor: "#FFC5C5",
       },
     ],
   };

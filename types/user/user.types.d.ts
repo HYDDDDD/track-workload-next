@@ -8,7 +8,9 @@ export interface IUserDataProps {
   lastName: string;
   email: string;
   phone: string;
-  role: IRoleDataProps;
-  branch?: IBranchDataProps;
+  role: string;
+  branch?: string;
   totalHours?: number;
+  password?: string;
+  confiremPassword?: string;
 }

@@ -26,20 +26,35 @@ const LoginForm = () => {
           >
             <div className={clsx([`field-box`])}>
               <label>อีเมล</label>
-              <Field
+              {/* <Field
                 name="email"
                 component="input"
                 type="email"
+                value={email}
+                placeholder="Example@gmail.com"
+                className={clsx([`field`, `field-text-white`])}
+              /> */}
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Example@gmail.com"
                 className={clsx([`field`, `field-text-white`])}
               />
             </div>
             <div className={clsx([`field-box`])}>
               <label>รหัสผ่าน</label>
-              <Field
+              {/* <Field
                 name="password"
                 component="input"
                 type="password"
+                placeholder="********"
+                className={clsx([`field`, `field-text-white`])}
+              /> */}
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="********"
                 className={clsx([`field`, `field-text-white`])}
               />
@@ -47,7 +62,7 @@ const LoginForm = () => {
           </form>
           <div className={clsx([`flex justify-center space-x-6`])}>
             <Link href="#">
-              <Button variant="milk-pink" rounder="full">
+              <Button type="submit" variant="milk-pink" rounder="full">
                 <p>เข้าสู่ระบบ</p>
               </Button>
             </Link>
