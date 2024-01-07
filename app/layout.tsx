@@ -5,6 +5,7 @@ import { Metadata } from "next";
 
 import Providers from "@/lib/Providers";
 import "@/styles/globals.scss";
+import Toast from "@/utils/Toast";
 
 export const metadata: Metadata = {
   title: "ระบบติดตามภาระงาน ICT",
@@ -18,9 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Providers>
-        <body className={clsx(`font-sans`)}>{children}</body>
-      </Providers>
+      <body className={clsx(`font-sans`)}>
+        <Providers>
+          <Toast />
+          <div>{children}</div>
+        </Providers>
+      </body>
     </html>
   );
 }

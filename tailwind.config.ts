@@ -100,6 +100,9 @@ module.exports = {
           800: "#665e56",
           900: "#332f2b",
         },
+        "blue-second": {
+          500: "#12266D",
+        },
         milkPink: {
           500: "#ffc5c5",
         },
@@ -131,6 +134,7 @@ module.exports = {
       boxShadow: {
         "01": "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         "02": "0px 2px 2px 0px rgba(0, 0, 0, 0.25)",
+        "03": "3px 3px 4px 0px rgba(0, 0, 0, 0.25)",
       },
       spacing: {
         "header-height": "var(--header-height)",
