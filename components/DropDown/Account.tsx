@@ -26,7 +26,7 @@ const AccountDropDown = () => {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   // _State
-  const [accountMenu, setAccountMenu] = useState<boolean>(true);
+  const [accountMenu, setAccountMenu] = useState<boolean>(false);
 
   // _Ref สำหรับเก็บอ้างอิงของ dropdown
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -107,16 +107,14 @@ const AccountDropDown = () => {
             </p>
           </div>
 
-          {isAuthenticated && (
-            <Button
-              variant="danger"
-              rounder="xl"
-              isOutline={true}
-              className={clsx(`w-full border-danger-500`)}
-            >
-              ออกจากระบบ
-            </Button>
-          )}
+          <Button
+            variant="danger"
+            rounder="xl"
+            isOutline={true}
+            className={clsx(`w-full border-danger-500`)}
+          >
+            ออกจากระบบ
+          </Button>
         </div>
       )}
     </div>

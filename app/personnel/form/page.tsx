@@ -2,6 +2,8 @@ import React, { Fragment } from "react";
 
 import clsx from "clsx";
 
+import SendActivitySection from "@/components/Section/Personnel/SendActivitySection";
+
 const PersonnelFormPage = () => {
   return (
     <Fragment>
@@ -14,7 +16,7 @@ const PersonnelFormPage = () => {
           `sm:space-y-6`,
         ])}
       >
-        Personnel form
+        <SendActivitySection />
       </div>
     </Fragment>
   );
