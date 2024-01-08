@@ -181,14 +181,16 @@
       theme("colors.danger.500"),
       theme("colors.black"),
       theme("colors.danger.500 / 75%"),
-      theme("colors.danger.500 / 75%")
+      theme("colors.danger.500 / 75%"),
+      theme("colors.black")
     );
 
     &.button-outline {
       @include button-variant(
         theme("colors.white / 0%"),
         theme("colors.danger.500"),
-        theme("colors.black"),
+        theme("colors.danger.500"),
+        theme("colors.danger.500"),
         theme("colors.danger.500"),
         theme("colors.white")
       );
@@ -198,7 +200,7 @@
       @include button-variant(
         theme("colors.danger.500 / 10%"),
         theme("colors.danger.500 / 0%"),
-        theme("colors.black"),
+        theme("colors.danger.500"),
         theme("colors.danger.500"),
         theme("colors.danger.500"),
         theme("colors.white")

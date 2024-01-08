@@ -5,9 +5,17 @@ import clsx from "clsx";
 const PersonnelFormPage = () => {
   return (
     <Fragment>
-      <section>
-        <div className={clsx([`container main-space-x`])}>Personnel form</div>
-      </section>
+      <div
+        className={clsx([
+          `container`,
+          `mt-10`,
+          `main-space-x`,
+          `space-y-16`,
+          `sm:space-y-6`,
+        ])}
+      >
+        Personnel form
+      </div>
     </Fragment>
   );
 };

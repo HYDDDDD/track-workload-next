@@ -26,6 +26,7 @@ const Button = ({
           "button-loading": loading,
           active: active,
           "button-outline": isOutline,
+          "border border-solid shadow-none": isOutline,
           "button-invert": isInvert,
         },
         variant,

@@ -16,14 +16,8 @@ export const USERS: IUserDataProps[] = [
     lastName: "ใจดี",
     email: "green@gmail.com",
     phone: "0999999999",
-    role: {
-      id: "2",
-      role: "Personnel",
-    },
-    branch: {
-      id: "1",
-      branchName: "สาขาวิชาธุรกิจดิจิทัล",
-    },
+    role: "Personnel",
+    branch: "สาขาวิชาธุรกิจดิจิทัล",
   },
   {
     userID: "2",
@@ -31,10 +25,7 @@ export const USERS: IUserDataProps[] = [
     lastName: "สะอาดใจ",
     email: "red@gmail.com",
     phone: "0888888888",
-    role: {
-      id: "3",
-      role: "Officer",
-    },
+    role: "Officer",
   },
   {
     userID: "3",
@@ -42,14 +33,8 @@ export const USERS: IUserDataProps[] = [
     lastName: "ไหลเย็น",
     email: "water@gmail.com",
     phone: "0777777777",
-    role: {
-      id: "2",
-      role: "Personnel",
-    },
-    branch: {
-      id: "9",
-      branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร",
-    },
+    role: "Personnel",
+    branch: "สาขาวิชาวิศวกรรมซอฟต์แวร",
   },
   {
     userID: "4",
@@ -57,14 +42,8 @@ export const USERS: IUserDataProps[] = [
     lastName: "พิวเตอร์ล่าสุด",
     email: "computer@gmail.com",
     phone: "0777777777",
-    role: {
-      id: "2",
-      role: "Personnel",
-    },
-    branch: {
-      id: "9",
-      branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร",
-    },
+    role: "Personnel",
+    branch: "สาขาวิชาวิศวกรรมซอฟต์แวร",
   },
   {
     userID: "5",
@@ -72,10 +51,7 @@ export const USERS: IUserDataProps[] = [
     lastName: "จากสวน",
     email: "orange@gmail.com",
     phone: "0777777777",
-    role: {
-      id: "3",
-      role: "Officer",
-    },
+    role: "Officer",
   },
   {
     userID: "6",
@@ -83,14 +59,8 @@ export const USERS: IUserDataProps[] = [
     lastName: "ใจดี",
     email: "tiger@gmail.com",
     phone: "0777777777",
-    role: {
-      id: "2",
-      role: "Personnel",
-    },
-    branch: {
-      id: "10",
-      branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย",
-    },
+    role: "Personnel",
+    branch: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย",
   },
 ];
 

@@ -2,9 +2,9 @@ import React from "react";
 
 import clsx from "clsx";
 
-import { InputTableProps } from "./types";
+import { IInputTableProps } from "../UI/Input/types";
 
-const InputTable = ({ table }: InputTableProps) => {
+const InputTable = ({ table }: IInputTableProps) => {
   return (
     <input
       type="number"
