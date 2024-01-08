@@ -3,8 +3,12 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 import { useLoginMutation } from "@/lib/redux/features/authApiSlice";
+import { setAuth } from "@/lib/redux/features/authSlice";
+import { useAppDispatch } from "@/lib/redux/hooks";
 
 export default function useLogin(email: string, password: string) {
+  const dispatch = useAppDispatch();
+
   // _Mutation
   const [login, { isLoading }] = useLoginMutation();
 
@@ -16,11 +20,12 @@ export default function useLogin(email: string, password: string) {
     login({ email, password })
       .unwrap()
       .then(() => {
-        toast.success("ล็อคอินสำเร็จ");
+        dispatch(setAuth());
+        toast.success("ล็อกอินสำเร็จ");
         router.push("/personnel/");
       })
       .catch(() => {
-        toast.error("กรุณาล็อคอินอีกครั้ง");
+        toast.error("กรุณาล็อกอินอีกครั้ง");
       });
   };
 
