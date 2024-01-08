@@ -55,16 +55,31 @@ const VerticalBarChart = () => {
 
   // _Effect
   useEffect(() => {
-    if (OFFICERTABLE) {
+    if (OFFICERTABLE && (labelChart.length && datas.length) < 5) {
       const filteredFirstName = OFFICERTABLE.map((info) => info.firstName);
       const filteredTotalHour = OFFICERTABLE.map((info) => info.totalHours);
+      // 10 20 30 40 50
+      // 50 40 30 20 10
+      const newTotalHour = new Array<number>();
 
-      if (filteredFirstName) {
-        setLabelChart(filteredFirstName);
+      for (let index = 0; index < OFFICERTABLE.length; index++) {
+        if (OFFICERTABLE[index] > OFFICERTABLE[index + 1]) {
+          OFFICERTABLE.map((info) => newTotalHour.push(info.totalHours));
+        } else {
+          OFFICERTABLE[OFFICERTABLE.length];
+        }
       }
 
+      console.log("NEW : ", newTotalHour);
+
+      // if (filteredFirstName) {
+      //   setLabelChart(filteredFirstName);
+      // }
+
       if (filteredTotalHour) {
-        setDatas(filteredTotalHour);
+        console.log(filteredTotalHour);
+
+        // setDatas(filteredTotalHour);
       }
     }
   }, [OFFICERTABLE]);
