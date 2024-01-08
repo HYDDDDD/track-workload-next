@@ -23,7 +23,7 @@ const ActivitySection = () => {
           <Progress maxHour={102} hour={70} type="warn" />
           <Button variant="secondary">
             <Link
-              href="/personnel/form"
+              href="/personnel/form/culture"
               className={clsx([
                 `flex w-full items-center justify-start space-x-4 p-4 `,
                 `lg:space-x-0`,
@@ -51,7 +51,7 @@ const ActivitySection = () => {
           <Progress maxHour={102} hour={25} type="danger" />
           <Button variant="secondary">
             <Link
-              href="/personnel/form"
+              href="/personnel/form/health"
               className={clsx([
                 `flex w-full items-center justify-start space-x-4 p-4 `,
                 `lg:space-x-0`,
