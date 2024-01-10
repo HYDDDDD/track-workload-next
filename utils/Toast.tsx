@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useVerify } from "@/hooks";
 
 const Toast = () => {
-  useVerify();
+  // useVerify();
 
   return <ToastContainer />;
 };

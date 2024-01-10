@@ -1,11 +1,19 @@
-import React from "react";
+"use client";
 
+import React, { useEffect } from "react";
+
+import axios from "axios";
 import clsx from "clsx";
 
 import ActivitySection from "@/components/Section/Personnel/ActivitySection";
 import SearchDataSection from "@/components/Section/Personnel/SearchDataSection";
+import { useAuth } from "@/context/AuthProvider";
 
 const PersonnelIndexPage = () => {
+  const { userInfo } = useAuth();
+
+  console.log(userInfo);
+
   return (
     <div
       className={clsx([

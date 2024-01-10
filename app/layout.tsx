@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import clsx from "clsx";
 import { Metadata } from "next";
 
+import { AuthProvider } from "@/context/AuthProvider";
 import Providers from "@/lib/Providers";
 import "@/styles/globals.scss";
 import Toast from "@/utils/Toast";
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body className={clsx(`font-sans`)}>
         <Providers>
           <Toast />
-          <div>{children}</div>
+          <AuthProvider>{children}</AuthProvider>
         </Providers>
       </body>
     </html>

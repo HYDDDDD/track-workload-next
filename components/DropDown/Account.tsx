@@ -53,8 +53,6 @@ const AccountDropDown = () => {
       });
   };
 
-  console.log(isAuthenticated);
-
   // _Effect สำหรับเพิ่มและถอด event listener เมื่อ component ถูก mount และ unmount
   useEffect(() => {
     document.addEventListener("click", handleOutsideClick);

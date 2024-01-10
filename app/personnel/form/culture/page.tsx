@@ -4,9 +4,7 @@ import SendActivitySection from "@/components/Section/Personnel/SendActivitySect
 
 const CultureFormPage = () => {
   return (
-    <div>
-      <SendActivitySection lable="หลักฐานภาระงานด้านทำนุบำรุงศิลปวัฒนธรรมและอนุรักษ์สิ่งแวดล้อม" />
-    </div>
+    <SendActivitySection lable="หลักฐานภาระงานด้านทำนุบำรุงศิลปวัฒนธรรมและอนุรักษ์สิ่งแวดล้อม" />
   );
 };
 
