@@ -124,9 +124,11 @@ module.exports = {
       },
       width: {
         "90": "90px",
+        "412": "412px",
       },
       height: {
         "90": "90px",
+        "412": "412px",
       },
       gridTemplateColumns: {
         "space-3": "224px auto auto",

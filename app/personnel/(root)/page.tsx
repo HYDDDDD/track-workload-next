@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import clsx from "clsx";
 
@@ -7,20 +7,18 @@ import SearchDataSection from "@/components/Section/Personnel/SearchDataSection"
 
 const PersonnelIndexPage = () => {
   return (
-    <Fragment>
-      <div
-        className={clsx([
-          `container`,
-          `mt-10`,
-          `main-space-x`,
-          `space-y-16`,
-          `sm:space-y-6`,
-        ])}
-      >
-        <ActivitySection />
-        <SearchDataSection />
-      </div>
-    </Fragment>
+    <div
+      className={clsx([
+        `container`,
+        `mt-10`,
+        `main-space-x`,
+        `space-y-16`,
+        `sm:space-y-6`,
+      ])}
+    >
+      <ActivitySection />
+      <SearchDataSection />
+    </div>
   );
 };
 
