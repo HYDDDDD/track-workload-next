@@ -4,12 +4,12 @@ import * as XLSX from "xlsx";
 
 import Button from "../UI/Button";
 
-interface DownloadButtonProps {
+interface IDownloadButtonProps {
   data: any[];
   fileName: string;
 }
 
-const DownloadButton = ({ data, fileName }: DownloadButtonProps) => {
+const DownloadButton = ({ data, fileName }: IDownloadButtonProps) => {
   return (
     <Button
       variant="primary"

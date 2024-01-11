@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import clsx from "clsx";
 
@@ -7,21 +7,19 @@ import SummaryInfoChartSection from "@/components/Section/Officer/SummaryInforma
 
 const SummaryInformationPage = () => {
   return (
-    <Fragment>
-      <div
-        className={clsx([
-          `container`,
-          `mt-10`,
-          `main-space-x`,
-          `space-y-16`,
-          `sm:space-y-6`,
-        ])}
-      >
-        <p className={clsx([`text-center text-header-3`])}>ข้อมูลสรุปผล</p>
-        <SearchSummaryInfoSection />
-        <SummaryInfoChartSection />
-      </div>
-    </Fragment>
+    <div
+      className={clsx([
+        `container`,
+        `mt-10`,
+        `main-space-x`,
+        `space-y-16`,
+        `sm:space-y-6`,
+      ])}
+    >
+      <p className={clsx([`text-center text-header-3`])}>ข้อมูลสรุปผล</p>
+      <SearchSummaryInfoSection />
+      <SummaryInfoChartSection />
+    </div>
   );
 };
 

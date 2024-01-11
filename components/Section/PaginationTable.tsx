@@ -13,11 +13,11 @@ import ForwardIcon from "@/icons/Forward";
 import ForwarderIcon from "@/icons/Forwarder";
 import SortLeftPng from "@/public/sort-left-icon.png";
 
-interface PaginationTableProps {
+interface IPaginationTableProps {
   table: Table<any>;
 }
 
-const PaginationTable = ({ table }: PaginationTableProps) => {
+const PaginationTable = ({ table }: IPaginationTableProps) => {
   // _MOCK
   const userContext = "1";
 

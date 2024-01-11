@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 
-import axios from "axios";
 import clsx from "clsx";
 
 import ActivitySection from "@/components/Section/Personnel/ActivitySection";
@@ -10,6 +9,7 @@ import SearchDataSection from "@/components/Section/Personnel/SearchDataSection"
 import { useAuth } from "@/context/AuthProvider";
 
 const PersonnelIndexPage = () => {
+  // _Context
   const { userInfo } = useAuth();
 
   console.log(userInfo);

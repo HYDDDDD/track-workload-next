@@ -6,8 +6,7 @@ import { ProgressBarProps } from "../types";
 
 const ProgressBar = ({ percent, color }: ProgressBarProps) => {
   return (
-    // scss
-    <div className="w-full rounded-full border border-black bg-white">
+    <div className={clsx(`w-full rounded-full border border-black bg-white`)}>
       <div
         className={clsx([
           `rounded-full p-0.5 text-center text-xs font-medium leading-none text-blue-100`,

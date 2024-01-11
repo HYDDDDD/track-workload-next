@@ -1,17 +1,15 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 import AuthenticationCard from "@/components/Cards/AuthenticationCard";
 import RegisterForm from "@/components/Forms/Register";
 
 const RegisterPage = () => {
   return (
-    <Fragment>
-      <section>
-        <AuthenticationCard header="ลงทะเบียน">
-          <RegisterForm />
-        </AuthenticationCard>
-      </section>
-    </Fragment>
+    <section>
+      <AuthenticationCard header="ลงทะเบียน">
+        <RegisterForm />
+      </AuthenticationCard>
+    </section>
   );
 };
 

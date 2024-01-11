@@ -1,5 +1,3 @@
-import { Fragment } from "react";
-
 import clsx from "clsx";
 import { Metadata } from "next";
 
@@ -12,9 +10,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <Fragment>
-      <main className={clsx([`sm:p-0`])}>{children}</main>
-    </Fragment>
-  );
+  return <main className={clsx([`sm:p-0`])}>{children}</main>;
 }

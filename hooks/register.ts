@@ -15,6 +15,7 @@ export default function useRegister(newUser: IUserDataProps) {
   // _Router
   const router = useRouter();
 
+  // _State
   const [infoUser, setInfoUser] = useState(false);
 
   const {
