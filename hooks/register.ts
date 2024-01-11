@@ -28,7 +28,7 @@ export default function useRegister(newUser: IUserDataProps) {
     branch,
     totalHours,
     password,
-    confiremPassword,
+    re_password,
   } = newUser;
 
   // _Action
@@ -43,7 +43,7 @@ export default function useRegister(newUser: IUserDataProps) {
       branch,
       totalHours,
       password,
-      confiremPassword,
+      re_password,
     })
       .unwrap()
       .then(() => {

@@ -80,7 +80,7 @@ export const DEFAULT_BRANCH_DATA_AUTH: IBranchDataProps[] = [
   { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์" },
   { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์" },
   { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร" },
-  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร" },
+  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร์" },
   { id: "9", branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย" },
 ];
 

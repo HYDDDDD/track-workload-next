@@ -1,15 +1,10 @@
 "use client";
 
-import { toast } from "react-toastify";
-
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-import { useLogoutMutation } from "@/lib/redux/features/authApiSlice";
-import { logout as setLogout } from "@/lib/redux/features/authSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { useAuth } from "@/context/AuthProvider";
 import LinePng from "@/public/line-icon.png";
 import LogoICTPng from "@/public/logo-ict.png";
 import MapPinPng from "@/public/map-pin-icon.png";
@@ -17,35 +12,8 @@ import MapPinPng from "@/public/map-pin-icon.png";
 import AccountDropDown from "../DropDown/Account";
 
 const Header = () => {
-  // const dispatch = useAppDispatch();
-
-  // // _Router
-  // const router = useRouter();
-
-  // // _Mutation
-  // const [logout] = useLogoutMutation();
-
-  // const { isAuthenticated } = useAppSelector((state) => state.auth);
-
-  // _MOCK
-  const userContext = {
-    role: "personnel",
-  };
-
-  // // _Action
-  // const handleLogout = () => {
-  //   logout(undefined)
-  //     .unwrap()
-  //     .then(() => {
-  //       dispatch(setLogout());
-  //     })
-  //     .finally(() => {
-  //       toast.success("ล็อกเอาท์สำเร็จ");
-  //       router.push("/");
-  //     });
-  // };
-
-  // console.log(isAuthenticated);
+  // _Context
+  const { userInfo, isActivated, setIsActivated } = useAuth();
 
   return (
     <header className={clsx(`fixed top-0 z-50 w-full bg-white`)}>
@@ -91,7 +59,7 @@ const Header = () => {
             หน้าหลัก
           </span>
 
-          {userContext.role === "officer" ? (
+          {userInfo?.role === "ADMIN" && (
             <Link href="/officer/summary-information">
               <span
                 className={clsx([
@@ -103,8 +71,6 @@ const Header = () => {
                 ข้อมูลสรุปผล
               </span>
             </Link>
-          ) : (
-            <></>
           )}
           <Image
             src={LinePng}

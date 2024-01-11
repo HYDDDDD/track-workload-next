@@ -10,9 +10,7 @@ import { useAuth } from "@/context/AuthProvider";
 
 const PersonnelIndexPage = () => {
   // _Context
-  const { userInfo } = useAuth();
-
-  console.log(userInfo);
+  const { userInfo, isActivated } = useAuth();
 
   return (
     <div

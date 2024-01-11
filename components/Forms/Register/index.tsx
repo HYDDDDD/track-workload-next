@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Form } from "react-final-form";
 
 import { Listbox, Transition } from "@headlessui/react";
@@ -10,32 +10,55 @@ import Image from "next/image";
 import Spinner from "@/components/Progress/Spinner";
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
-import { DEFAULT_USER_ROLE_DATA } from "@/constant/constant";
+import {
+  DEFAULT_BRANCH_DATA_AUTH,
+  DEFAULT_USER_ROLE_DATA,
+} from "@/constant/constant";
 import { useRegister } from "@/hooks";
 import SortLeftPng from "@/public/sort-left-icon.png";
+import { IBranchDataProps } from "@/types/branch/branch.types";
 import { IRoleDataProps } from "@/types/role/role.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
 const RegisterForm = () => {
   // _State
+  const [selectedRole, setSelectedRole] = useState<IRoleDataProps>(
+    DEFAULT_USER_ROLE_DATA[0],
+  );
+  const [selectedBranch, setSelectedBranch] = useState<IBranchDataProps>(
+    DEFAULT_BRANCH_DATA_AUTH[0],
+  );
   const [newUser, setNewUser] = useState<IUserDataProps>({
     userID: "",
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    role: "",
-    branch: "",
+    role: selectedRole.role,
+    branch: selectedBranch.branchName,
     totalHours: 0,
     password: "",
-    confiremPassword: "",
+    re_password: "",
   });
-  const [selectedRole, setSelectedRole] = useState<IRoleDataProps>(
-    DEFAULT_USER_ROLE_DATA[0],
-  );
 
   // _Hook
   const { isLoading, onSubmit } = useRegister(newUser);
+
+  // _Effect
+  useEffect(() => {
+    if (selectedRole) {
+      setNewUser({ ...newUser, role: selectedRole.role });
+    }
+  }, [selectedRole]);
+
+  useEffect(() => {
+    if (newUser.role === "Personnel" && selectedBranch) {
+      setNewUser({ ...newUser, branch: selectedBranch.branchName });
+    } else {
+      setSelectedBranch(DEFAULT_BRANCH_DATA_AUTH[0]);
+      setNewUser({ ...newUser, branch: "" });
+    }
+  }, [selectedBranch, newUser.role]);
 
   return (
     <Form
@@ -109,15 +132,16 @@ const RegisterForm = () => {
           <Input
             name="password"
             component="input"
-            value={newUser.confiremPassword}
+            value={newUser.re_password}
             onChange={(e) => {
-              setNewUser({ ...newUser, confiremPassword: e.target.value });
+              setNewUser({ ...newUser, re_password: e.target.value });
             }}
             type="password"
             placeholder="********"
           >
             ยืนยันรหัสผ่าน
           </Input>
+
           <div className={clsx([`field-box`])}>
             <label>สถานะ</label>
             <Listbox value={selectedRole} onChange={setSelectedRole}>
@@ -164,6 +188,56 @@ const RegisterForm = () => {
               </div>
             </Listbox>
           </div>
+
+          {selectedRole.role === "Personnel" && (
+            <div className={clsx([`field-box`])}>
+              <label>สาขา</label>
+              <Listbox value={selectedBranch} onChange={setSelectedBranch}>
+                <div className={clsx(`relative`)}>
+                  <Listbox.Button
+                    className={clsx([`list-box`, `list-box-text-white`])}
+                  >
+                    <span>{selectedBranch.branchName}</span>
+
+                    <Image
+                      src={SortLeftPng}
+                      alt="sort left icon png"
+                      className="pointer-events-none"
+                      priority
+                    />
+                  </Listbox.Button>
+                  <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className={clsx(`list-box-option`)}>
+                      {DEFAULT_BRANCH_DATA_AUTH.map((branch) => (
+                        <Listbox.Option
+                          key={branch.id}
+                          className={({ active }) =>
+                            `${
+                              branch.id !== "1" &&
+                              `relative cursor-default select-none py-2 pl-10 pr-4`
+                            } ${
+                              branch.id !== "1" && active
+                                ? `bg-amber-100 text-primary-900`
+                                : `text-gray-900`
+                            }`
+                          }
+                          value={branch}
+                        >
+                          {branch.id !== "1" && branch.branchName}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+            </div>
+          )}
+
           <div className={clsx([`flex justify-center`])}>
             <Button
               variant="milk-pink"

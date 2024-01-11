@@ -7,9 +7,10 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import { useAuth } from "@/context/AuthProvider";
 import { useLogoutMutation } from "@/lib/redux/features/authApiSlice";
 import { logout as setLogout } from "@/lib/redux/features/authSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { useAppDispatch } from "@/lib/redux/hooks";
 import AvatarPng from "@/public/avatar-icon.png";
 
 import Button from "../UI/Button";
@@ -23,7 +24,11 @@ const AccountDropDown = () => {
   // _Mutation
   const [logout] = useLogoutMutation();
 
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  // _Context
+  const { userInfo, isActivated, setIsActivated } = useAuth();
+
+  console.log(userInfo);
+  console.log("pub", isActivated);
 
   // _State
   const [accountMenu, setAccountMenu] = useState<boolean>(false);
@@ -31,7 +36,8 @@ const AccountDropDown = () => {
   // _Ref สำหรับเก็บอ้างอิงของ dropdown
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // _Action handler สำหรับปิด dropdown เมื่อคลิกนอก dropdown
+  // _Actions
+  // handler สำหรับปิด dropdown เมื่อคลิกนอก dropdown
   const handleOutsideClick = (event: MouseEvent) => {
     if (
       dropdownRef.current &&
@@ -46,6 +52,8 @@ const AccountDropDown = () => {
       .unwrap()
       .then(() => {
         dispatch(setLogout());
+        setIsActivated(false);
+        localStorage.removeItem("auth_token");
       })
       .finally(() => {
         toast.success("ล็อกเอาท์สำเร็จ");
@@ -110,6 +118,10 @@ const AccountDropDown = () => {
             rounder="xl"
             isOutline={true}
             className={clsx(`w-full border-danger-500`)}
+            onClick={() => {
+              handleLogout();
+              // router.push("/");
+            }}
           >
             ออกจากระบบ
           </Button>

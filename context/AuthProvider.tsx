@@ -13,8 +13,8 @@ import axios from "axios";
 interface AuthContextProps {
   userInfo: userContextData | null;
   setUserInfo: (userInfo: userContextData | null) => void;
-  isPublicView: boolean;
-  setIsPublicView: (isPublicView: boolean) => void;
+  isActivated: boolean | null;
+  setIsActivated: (isPublicView: boolean) => void;
 }
 
 interface userContextData {
@@ -30,7 +30,7 @@ const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // _State
   const [userInfo, setUserInfo] = useState<userContextData | null>(null);
-  const [isPublicView, setIsPublicView] = useState<boolean>(false);
+  const [isActivated, setIsActivated] = useState<boolean | null>(null);
 
   if (typeof window !== "undefined") {
     // นี่คือบริบทที่รันบนเว็บเบราว์เซอร์
@@ -50,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/api/users/me/");
         setUserInfo(response.data);
+        setIsActivated(true);
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
@@ -58,13 +59,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     fetchUserInfo();
   }, []); // ทำงานเพียงครั้งเมื่อ Component ถูก mount
 
+  // useEffect(() => {
+  //   if (isActivated === false) {
+  //     localStorage.removeItem("auth_token");
+  //   }
+  // }, [isActivated]);
+
+  // console.log(isActivated);
+
   return (
     <AuthContext.Provider
       value={{
         userInfo,
         setUserInfo,
-        isPublicView,
-        setIsPublicView,
+        isActivated,
+        setIsActivated,
       }}
     >
       {children}
