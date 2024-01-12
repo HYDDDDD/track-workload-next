@@ -8,6 +8,9 @@ import { IRoleDataProps } from "@/types/role/role.types";
 import { IStatusDataProps } from "@/types/status/status.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
+// URL
+export const BASEURL = "http://127.0.0.1:8000";
+
 // User
 export const USERS: IUserDataProps[] = [
   {

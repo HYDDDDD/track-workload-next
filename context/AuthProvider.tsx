@@ -10,6 +10,8 @@ import React, {
 
 import axios from "axios";
 
+import { BASEURL } from "@/constant/constant";
+
 interface AuthContextProps {
   userInfo: userContextData | null;
   setUserInfo: (userInfo: userContextData | null) => void;
@@ -35,7 +37,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/user/");
+      const response = await axios.get(`${BASEURL}/api/user/`);
       setUserInfo(response.data);
       setIsActivated(true);
     } catch (error) {

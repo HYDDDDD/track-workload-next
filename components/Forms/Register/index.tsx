@@ -47,7 +47,7 @@ const RegisterForm = () => {
   // _Effect
   useEffect(() => {
     if (selectedRole) {
-      setNewUser({ ...newUser, role: selectedRole.role });
+      setNewUser({ ...newUser, role: selectedRole.value });
     }
   }, [selectedRole]);
 
@@ -189,7 +189,7 @@ const RegisterForm = () => {
             </Listbox>
           </div>
 
-          {selectedRole.role === "Personnel" && (
+          {selectedRole.value === "Personnel" && (
             <div className={clsx([`field-box`])}>
               <label>สาขา</label>
               <Listbox value={selectedBranch} onChange={setSelectedBranch}>

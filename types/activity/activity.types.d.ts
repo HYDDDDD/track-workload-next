@@ -2,13 +2,11 @@ import { IBranchDataProps } from "../branch/branch.types";
 import { IStatusDataProps } from "../status/status.types";
 
 export interface IActivityRequestDataProps {
-  id: string;
+  activityUser: string;
   category: string;
-  image: string;
-  createDate: string;
-  createBy: string;
+  status?: string;
   updateDate: string;
-  hours: number;
+  hour: number;
 }
 
 export interface IActivityResponseDataProps {
