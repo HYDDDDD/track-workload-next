@@ -37,7 +37,7 @@ const AuthenticationCard = ({
             `lg:rounded-b-none lg:rounded-t-2xl`,
           ])}
         >
-          <Image src={LogoICTPng} alt="logo ict png" />
+          <Image src={LogoICTPng} alt="logo ict png" priority />
           <p className={clsx([`text-header-3`, `sm:text-header-4`])}>
             ระบบติดตามภาระงาน
           </p>

@@ -39,7 +39,13 @@ const Header = () => {
       >
         <div className={clsx([`flex items-center space-x-2`])}>
           <Link href={"#"}>
-            <Image src={LogoICTPng} alt="logo ict png" width={56} height={56} />
+            <Image
+              src={LogoICTPng}
+              alt="logo ict png"
+              width={56}
+              height={56}
+              priority
+            />
           </Link>
 
           <div className={clsx([`flex flex-col`])}>
