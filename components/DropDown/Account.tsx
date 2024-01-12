@@ -7,6 +7,10 @@ import clsx from "clsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import {
+  DEFAULT_BRANCH_DATA_AUTH,
+  DEFAULT_USER_ROLE_DATA,
+} from "@/constant/constant";
 import { useAuth } from "@/context/AuthProvider";
 import { useLogoutMutation } from "@/lib/redux/features/authApiSlice";
 import { logout as setLogout } from "@/lib/redux/features/authSlice";
@@ -89,13 +93,21 @@ const AccountDropDown = () => {
             ></div>
             <div>
               <p className={clsx([`text-body-20 text-blue-second-500`])}>
-                นายเขียวใจดี
+                {userInfo?.firstName + " " + userInfo?.lastName}
               </p>
               <p className={clsx([`text-bodyNormal-14 text-muted-500`])}>
-                วิศวกรรมซอฟต์แวร์
+                {DEFAULT_BRANCH_DATA_AUTH.filter(
+                  (branch) => userInfo?.branch === branch.value,
+                ).map((branch) => {
+                  return branch.branchName;
+                })}
               </p>
               <p className={clsx(`text-body-16 text-blue-second-500`)}>
-                บุคลากร
+                {DEFAULT_USER_ROLE_DATA.filter(
+                  (role) => userInfo?.role === role.value,
+                ).map((role) => {
+                  return role.role;
+                })}
               </p>
             </div>
           </div>

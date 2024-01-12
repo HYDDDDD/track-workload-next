@@ -66,36 +66,44 @@ export const USERS: IUserDataProps[] = [
 
 // User role
 export const DEFAULT_USER_ROLE_DATA: IRoleDataProps[] = [
-  { id: "1", role: "" },
-  { id: "2", role: "Personnel" },
-  { id: "3", role: "Officer" },
+  { id: "1", role: "", value: "" },
+  { id: "2", role: "บุคลากร", value: "Personnel" },
+  { id: "3", role: "เจ้าหน้าที่", value: "Officer" },
 ];
 
 // Branch
 export const DEFAULT_BRANCH_DATA_AUTH: IBranchDataProps[] = [
-  { id: "1", branchName: "" },
-  { id: "2", branchName: "สาขาวิชาธุรกิจดิจิทัล" },
-  { id: "3", branchName: "สาขาวิชาเทคโนโลยีสารสนเทศ" },
-  { id: "4", branchName: "สาขาวิชาภูมิสารสนเทศศาสตร์" },
-  { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์" },
-  { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์" },
-  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร" },
-  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร์" },
-  { id: "9", branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย" },
+  { id: "1", branchName: "", value: "" },
+  { id: "2", branchName: "สาขาวิชาธุรกิจดิจิทัล", value: "DB" },
+  { id: "3", branchName: "สาขาวิชาเทคโนโลยีสารสนเทศ", value: "IT" },
+  { id: "4", branchName: "สาขาวิชาภูมิสารสนเทศศาสตร์", value: "GIS" },
+  { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์", value: "CS" },
+  { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์", value: "DSA" },
+  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร์", value: "CPE" },
+  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร์", value: "SE" },
+  {
+    id: "9",
+    branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย",
+    value: "CG",
+  },
 ];
 
 export const DEFAULT_BRANCH_DATA_SUMMARY_OFFICER: IBranchDataProps[] = [
-  { id: "1", branchName: "" },
-  { id: "2", branchName: "สาขาวิชาธุรกิจดิจิทัล" },
-  { id: "3", branchName: "สาขาวิชาเทคโนโลยีสารสนเทศ" },
-  { id: "4", branchName: "สาขาวิชาภูมิสารสนเทศศาสตร์" },
-  { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์" },
-  { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์" },
-  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร" },
-  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร" },
-  { id: "9", branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย" },
-  { id: "10", branchName: "สำนักงานคณะ" },
-  { id: "11", branchName: "ทั้งหมด" },
+  { id: "1", branchName: "", value: "" },
+  { id: "2", branchName: "สาขาวิชาธุรกิจดิจิทัล", value: "DB" },
+  { id: "3", branchName: "สาขาวิชาเทคโนโลยีสารสนเทศ", value: "IT" },
+  { id: "4", branchName: "สาขาวิชาภูมิสารสนเทศศาสตร์", value: "GIS" },
+  { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์", value: "CS" },
+  { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์", value: "DSA" },
+  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร", value: "CPE" },
+  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร", value: "SE" },
+  {
+    id: "9",
+    branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย",
+    value: "CG",
+  },
+  { id: "10", branchName: "สำนักงานคณะ", value: "OF" },
+  { id: "11", branchName: "ทั้งหมด", value: "ALL" },
 ];
 
 // Status
@@ -147,6 +155,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     branch: {
       id: "1",
       branchName: "สาขาวิชาธุรกิจดิจิทัล",
+      value: "DB",
     },
     category: {
       id: "2",
@@ -168,6 +177,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     branch: {
       id: "1",
       branchName: "สาขาวิชาธุรกิจดิจิทัล",
+      value: "DB",
     },
     category: {
       id: "2",
@@ -189,6 +199,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     branch: {
       id: "1",
       branchName: "สาขาวิชาธุรกิจดิจิทัล",
+      value: "DB",
     },
     category: {
       id: "2",
@@ -210,6 +221,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     branch: {
       id: "1",
       branchName: "สาขาวิชาธุรกิจดิจิทัล",
+      value: "DB",
     },
     category: {
       id: "2",
@@ -231,6 +243,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     branch: {
       id: "1",
       branchName: "สาขาวิชาธุรกิจดิจิทัล",
+      value: "DB",
     },
     category: {
       id: "2",
@@ -252,6 +265,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     branch: {
       id: "1",
       branchName: "สาขาวิชาธุรกิจดิจิทัล",
+      value: "DB",
     },
     category: {
       id: "2",

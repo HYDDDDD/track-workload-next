@@ -22,6 +22,8 @@ interface userContextData {
   role: string;
   firstName: string;
   lastName: string;
+  branch: string;
+  phone: string;
   token: string;
 }
 
@@ -50,9 +52,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/api/users/me/");
         setUserInfo(response.data);
+        console.log("User Info:", response.data);
+
         setIsActivated(true);
       } catch (error) {
         console.error("Error fetching user info:", error);
+        setIsActivated(false);
       }
     };
 

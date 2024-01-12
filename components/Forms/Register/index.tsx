@@ -34,8 +34,8 @@ const RegisterForm = () => {
     lastName: "",
     email: "",
     phone: "",
-    role: selectedRole.role,
-    branch: selectedBranch.branchName,
+    role: "",
+    branch: "",
     totalHours: 0,
     password: "",
     re_password: "",
@@ -53,7 +53,7 @@ const RegisterForm = () => {
 
   useEffect(() => {
     if (newUser.role === "Personnel" && selectedBranch) {
-      setNewUser({ ...newUser, branch: selectedBranch.branchName });
+      setNewUser({ ...newUser, branch: selectedBranch.value });
     } else {
       setSelectedBranch(DEFAULT_BRANCH_DATA_AUTH[0]);
       setNewUser({ ...newUser, branch: "" });
