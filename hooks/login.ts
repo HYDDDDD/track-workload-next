@@ -1,0 +1,50 @@
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+import { useRouter } from "next/navigation";
+
+import { useLoginMutation } from "@/lib/redux/features/authApiSlice";
+import { setAuth } from "@/lib/redux/features/authSlice";
+import { useAppDispatch } from "@/lib/redux/hooks";
+
+export default function useLogin(email: string, password: string) {
+  const dispatch = useAppDispatch();
+
+  // _State
+  const [token, setToken] = useState<string>("");
+
+  // _Mutation
+  const [login, { isLoading }] = useLoginMutation();
+
+  // _Router
+  const router = useRouter();
+
+  // _Action
+  const onSubmit = () => {
+    login({ email, password })
+      .unwrap()
+      .then((res) => {
+        dispatch(setAuth());
+
+        setToken(res.access);
+
+        router.push("/personnel/");
+        toast.success("ล็อกอินสำเร็จ");
+      })
+      .catch(() => {
+        toast.error("กรุณาล็อกอินอีกครั้ง");
+      });
+  };
+
+  // _Effect
+  useEffect(() => {
+    const authToken = window.localStorage.getItem("auth_token");
+    authToken && setToken(authToken);
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("auth_token", token);
+  }, [token]);
+
+  return { isLoading, onSubmit };
+}

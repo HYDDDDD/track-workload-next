@@ -9,6 +9,14 @@ const BASE_FONT_SIZE = {
     lineHeight: "150%",
     fontWeight: 600,
   },
+  bodyNormal: {
+    lineHeight: "150%",
+    fontWeight: 500,
+  },
+  bodyThin: {
+    lineHeight: "150%",
+    fontWeight: 400,
+  },
 };
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -50,6 +58,20 @@ module.exports = {
         "body-14": ["14px", BASE_FONT_SIZE.body],
         "body-12": ["12px", BASE_FONT_SIZE.body],
         "body-10": ["10px", BASE_FONT_SIZE.body],
+        "bodyNormal-24": ["24px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-20": ["20px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-18": ["18px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-16": ["16px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-14": ["14px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-12": ["12px", BASE_FONT_SIZE.bodyNormal],
+        "bodyNormal-10": ["10px", BASE_FONT_SIZE.bodyNormal],
+        "bodyThin-24": ["24px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-20": ["20px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-18": ["18px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-16": ["16px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-14": ["14px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-12": ["12px", BASE_FONT_SIZE.bodyThin],
+        "bodyThin-10": ["10px", BASE_FONT_SIZE.bodyThin],
         se: ["0.625rem", { lineHeight: "1.5" }],
         xs: ["0.75rem", { lineHeight: "1.5" }],
         sm: ["0.875rem", { lineHeight: "1.5" }],
@@ -78,6 +100,9 @@ module.exports = {
           800: "#665e56",
           900: "#332f2b",
         },
+        "blue-second": {
+          500: "#12266D",
+        },
         milkPink: {
           500: "#ffc5c5",
         },
@@ -97,9 +122,21 @@ module.exports = {
           500: "#a0aac3",
         },
       },
+      width: {
+        "90": "90px",
+        "412": "412px",
+      },
+      height: {
+        "90": "90px",
+        "412": "412px",
+      },
+      gridTemplateColumns: {
+        "space-3": "224px auto auto",
+      },
       boxShadow: {
         "01": "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
         "02": "0px 2px 2px 0px rgba(0, 0, 0, 0.25)",
+        "03": "3px 3px 4px 0px rgba(0, 0, 0, 0.25)",
       },
       spacing: {
         "header-height": "var(--header-height)",
@@ -138,6 +175,20 @@ module.exports = {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
+        },
+
+        // Grid
+        ".grid-col-space-3": {
+          gridTemplateColumns: "224px auto auto",
+          "@media (max-width: 1280px)": {
+            gridTemplateColumns: "160px auto auto",
+          },
+          "@media (max-width: 768px)": {
+            gridTemplateColumns: "112px auto auto",
+          },
+          "@media (max-width: 640px)": {
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+          },
         },
       });
     }),

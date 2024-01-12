@@ -1,13 +1,15 @@
-import type { ButtonHTMLAttributes, MouseEvent } from "react";
+import type { ButtonHTMLAttributes } from "react";
 
 export type ButtonVariant =
+  | "none"
   | "default"
   | "primary"
+  | "secondary"
   | "success"
   | "warn"
   | "danger"
   | "milk-pink";
-export type ButtonSize = "default";
+export type ButtonSize = "default" | "none";
 export type ButtonRounder =
   | "default"
   | "sm"
@@ -21,8 +23,6 @@ export type Button = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export type ButtonProps = Button & {
   variant?: ButtonVariant;
-  disabled?: boolean;
-  onClick?: (e: MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   loading?: boolean;
   active?: boolean;
   size?: ButtonSize;

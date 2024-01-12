@@ -10,12 +10,10 @@ const Button = ({
   rounder = "default",
   className,
   children,
-  disabled,
   active,
   loading,
   isOutline,
   isInvert,
-  onClick,
   ...props
 }: ButtonProps) => {
   return (
@@ -28,17 +26,12 @@ const Button = ({
           "button-loading": loading,
           active: active,
           "button-outline": isOutline,
+          "border border-solid shadow-none": isOutline,
           "button-invert": isInvert,
         },
         variant,
-        `focus:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
+        `focus:outline-none disabled:cursor-not-allowed disabled:opacity-30`,
         className,
-        {
-          onClick: (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
-            if (!disabled && onClick) onClick(e);
-          },
-        },
-        { disabled: loading || disabled },
       )}
       {...props}
     >
