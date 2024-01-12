@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import axios from "axios";
 import { useRouter } from "next/navigation";
 
+import { useAuth } from "@/context/AuthProvider";
 import { useLoginMutation } from "@/lib/redux/features/authApiSlice";
 import { setAuth } from "@/lib/redux/features/authSlice";
 import { useAppDispatch } from "@/lib/redux/hooks";
@@ -16,6 +18,9 @@ export default function useLogin(email: string, password: string) {
   // _Mutation
   const [login, { isLoading }] = useLoginMutation();
 
+  // _Context
+  const { fetchUserInfo } = useAuth();
+
   // _Router
   const router = useRouter();
 
@@ -27,6 +32,10 @@ export default function useLogin(email: string, password: string) {
         dispatch(setAuth());
 
         setToken(res.access);
+
+        axios.defaults.headers.common["Authorization"] = `Bearer ${res.access}`;
+
+        fetchUserInfo();
 
         router.push("/personnel/");
         toast.success("ล็อกอินสำเร็จ");
