@@ -12,5 +12,5 @@ export interface IUserDataProps {
   branch?: string;
   totalHours?: number;
   password?: string;
-  confiremPassword?: string;
+  re_password?: string;
 }
