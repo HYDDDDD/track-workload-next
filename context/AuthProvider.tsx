@@ -9,8 +9,10 @@ import React, {
 } from "react";
 
 import axios from "axios";
+import { usePathname, useRouter } from "next/navigation";
 
 import { BASEURL } from "@/constant/constant";
+import { IActivityRequestDataProps } from "@/types/activity/activity.types";
 
 interface AuthContextProps {
   userInfo: userContextData | null;
@@ -18,6 +20,8 @@ interface AuthContextProps {
   isActivated: boolean | null;
   setIsActivated: (isPublicView: boolean) => void;
   fetchUserInfo: () => Promise<void>;
+  userActivites: IActivityRequestDataProps[];
+  activites: IActivityRequestDataProps[];
 }
 
 interface userContextData {
@@ -25,42 +29,101 @@ interface userContextData {
   firstName: string;
   lastName: string;
   role: string;
+  branch: string;
   token: string;
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  // _Router
+  const router = useRouter();
+  const pathName = usePathname();
+
   // _State
   const [userInfo, setUserInfo] = useState<userContextData | null>(null);
   const [isActivated, setIsActivated] = useState<boolean | null>(null);
+  const [activites, setActivites] = useState<IActivityRequestDataProps[]>([]);
+  const [userActivites, setUserActivites] = useState<
+    IActivityRequestDataProps[]
+  >([]);
 
+  // _Action
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get(`${BASEURL}/api/user/`);
+      const response = await axios.get(`${BASEURL}/api/users/me/`);
       setUserInfo(response.data);
       setIsActivated(true);
+
+      // if (userInfo?.role === "Admin") {
+      //   router.push("/officer/");
+      // } else if (userInfo?.role === "Personnel") {
+      //   router.push("/personnel/");
+      // }
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
   };
 
+  const getActivites = async () => {
+    const response = await axios.get(`${BASEURL}/api/activity/`);
+    setActivites(response.data);
+  };
+
+  // _Effect
   useEffect(() => {
     const storedToken = localStorage.getItem("auth_token");
 
     if (storedToken) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
       fetchUserInfo();
+      getActivites();
     } else {
       console.error("No token found in Local Storage");
     }
   }, []);
 
+  useEffect(() => {
+    if (userInfo?.role === "Admin" && !pathName.includes("officer")) {
+      router.push("/officer/");
+    } else if (
+      userInfo?.role === "Personnel" &&
+      pathName.includes("personnel")
+    ) {
+      router.push("/personnel/");
+    }
+  }, [userInfo]);
+
   // useEffect(() => {
-  //   if (isActivated === false) {
-  //     localStorage.removeItem("auth_token");
+  //   if (!userInfo) {
+  //     router.push("/");
+  //   } else {
+  //     if (pathName.includes("officer") && userInfo?.role === "Personnel") {
+  //       router.push("/personnel/");
+  //     }
+
+  //     if (pathName.includes("personnel") && userInfo?.role === "Admin") {
+  //       router.push("/officer/");
+  //     }
   //   }
-  // }, [isActivated]);
+  // }, [userInfo]);
+
+  useEffect(() => {
+    if (activites && userInfo) {
+      const filterActivity = activites
+        .filter((activity) => activity.activityUser == userInfo.id)
+        .map((activity) => {
+          return activity;
+        });
+      setUserActivites(filterActivity);
+    }
+  }, [activites]);
+
+  useEffect(() => {
+    if (userInfo) {
+      getActivites();
+    }
+  }, [userInfo]);
 
   return (
     <AuthContext.Provider
@@ -70,6 +133,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         isActivated,
         setIsActivated,
         fetchUserInfo,
+        userActivites,
+        activites,
       }}
     >
       {children}

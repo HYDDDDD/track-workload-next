@@ -5,7 +5,7 @@ import clsx from "clsx";
 import ProgressBar from "./ProgressBar";
 import { IProgress } from "./types";
 
-const Progress = ({ maxHour, hour, type }: IProgress) => {
+const Progress = ({ maxHour, hour }: IProgress) => {
   return (
     <div className={clsx(`space-y-4`)}>
       <div>
@@ -14,7 +14,7 @@ const Progress = ({ maxHour, hour, type }: IProgress) => {
           จำนวนที่ได้ {hour} ชั่งโมง คงเหลือ {maxHour - hour} ชั่วโมง
         </p>
       </div>
-      <ProgressBar percent={hour} color={type} />
+      <ProgressBar percent={hour} />
     </div>
   );
 };

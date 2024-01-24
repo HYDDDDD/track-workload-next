@@ -29,10 +29,7 @@ const AccountDropDown = () => {
   const [logout] = useLogoutMutation();
 
   // _Context
-  const { userInfo, isActivated, setIsActivated } = useAuth();
-
-  console.log(userInfo);
-  console.log("pub", isActivated);
+  const { userInfo, setIsActivated } = useAuth();
 
   // _State
   const [accountMenu, setAccountMenu] = useState<boolean>(false);
@@ -96,12 +93,11 @@ const AccountDropDown = () => {
                 {userInfo?.firstName + " " + userInfo?.lastName}
               </p>
               <p className={clsx([`text-bodyNormal-14 text-muted-500`])}>
-                สาขาวิชาวิศวกรรมซอฟต์แวร์
-                {/* {DEFAULT_BRANCH_DATA_AUTH.filter(
+                {DEFAULT_BRANCH_DATA_AUTH.filter(
                   (branch) => userInfo?.branch === branch.value,
                 ).map((branch) => {
                   return branch.branchName;
-                })} */}
+                })}
               </p>
               <p className={clsx(`text-body-16 text-blue-second-500`)}>
                 {DEFAULT_USER_ROLE_DATA.filter(
@@ -133,7 +129,6 @@ const AccountDropDown = () => {
             className={clsx(`w-full border-danger-500`)}
             onClick={() => {
               handleLogout();
-              // router.push("/");
             }}
           >
             ออกจากระบบ

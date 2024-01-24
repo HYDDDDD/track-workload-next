@@ -29,7 +29,7 @@ const RegisterForm = () => {
     DEFAULT_BRANCH_DATA_AUTH[0],
   );
   const [newUser, setNewUser] = useState<IUserDataProps>({
-    userID: "",
+    id: "",
     firstName: "",
     lastName: "",
     email: "",

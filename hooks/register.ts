@@ -19,7 +19,7 @@ export default function useRegister(newUser: IUserDataProps) {
   const [infoUser, setInfoUser] = useState(false);
 
   const {
-    userID,
+    id,
     firstName,
     lastName,
     email,
@@ -34,7 +34,7 @@ export default function useRegister(newUser: IUserDataProps) {
   // _Action
   const onSubmit = () => {
     register({
-      userID,
+      id,
       firstName,
       lastName,
       email,

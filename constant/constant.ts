@@ -14,7 +14,7 @@ export const BASEURL = "http://127.0.0.1:8000";
 // User
 export const USERS: IUserDataProps[] = [
   {
-    userID: "1",
+    id: "1",
     firstName: "เขียว",
     lastName: "ใจดี",
     email: "green@gmail.com",
@@ -23,7 +23,7 @@ export const USERS: IUserDataProps[] = [
     branch: "สาขาวิชาธุรกิจดิจิทัล",
   },
   {
-    userID: "2",
+    id: "2",
     firstName: "แดง",
     lastName: "สะอาดใจ",
     email: "red@gmail.com",
@@ -31,7 +31,7 @@ export const USERS: IUserDataProps[] = [
     role: "Officer",
   },
   {
-    userID: "3",
+    id: "3",
     firstName: "น้ำใส",
     lastName: "ไหลเย็น",
     email: "water@gmail.com",
@@ -40,7 +40,7 @@ export const USERS: IUserDataProps[] = [
     branch: "สาขาวิชาวิศวกรรมซอฟต์แวร",
   },
   {
-    userID: "4",
+    id: "4",
     firstName: "คอม",
     lastName: "พิวเตอร์ล่าสุด",
     email: "computer@gmail.com",
@@ -49,7 +49,7 @@ export const USERS: IUserDataProps[] = [
     branch: "สาขาวิชาวิศวกรรมซอฟต์แวร",
   },
   {
-    userID: "5",
+    id: "5",
     firstName: "ส้มเปรี้ยวมาก",
     lastName: "จากสวน",
     email: "orange@gmail.com",
@@ -57,7 +57,7 @@ export const USERS: IUserDataProps[] = [
     role: "Officer",
   },
   {
-    userID: "6",
+    id: "6",
     firstName: "เสือ",
     lastName: "ใจดี",
     email: "tiger@gmail.com",
@@ -167,10 +167,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     },
     totalHours: 10,
     updateDate: "11/11/2023",
-    status: {
-      id: "2",
-      status: "ผ่าน",
-    },
+    status: "ผ่าน",
   },
   {
     id: "2",
@@ -189,10 +186,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     },
     totalHours: 50,
     updateDate: "11/11/2023",
-    status: {
-      id: "2",
-      status: "ผ่าน",
-    },
+    status: "ผ่าน",
   },
   {
     id: "3",
@@ -211,10 +205,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     },
     totalHours: 60,
     updateDate: "11/11/2023",
-    status: {
-      id: "2",
-      status: "ผ่าน",
-    },
+    status: "ผ่าน",
   },
   {
     id: "4",
@@ -233,10 +224,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     },
     totalHours: 70,
     updateDate: "11/11/2023",
-    status: {
-      id: "2",
-      status: "ผ่าน",
-    },
+    status: "ผ่าน",
   },
   {
     id: "5",
@@ -255,10 +243,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     },
     totalHours: 80,
     updateDate: "11/11/2023",
-    status: {
-      id: "2",
-      status: "ผ่าน",
-    },
+    status: "ผ่าน",
   },
   {
     id: "6",
@@ -277,177 +262,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     },
     totalHours: 90,
     updateDate: "11/11/2023",
-    status: {
-      id: "2",
-      status: "ผ่าน",
-    },
-  },
-];
-
-// export const PERSONNELTABLE: IActivityResponseDataProps[] = [
-//   {
-//     userID: "1",
-//     id: "3",
-//     category: "งานด้านส่งเสริมสุขภาพ",
-//     updateDate: "3/12/2023",
-//     hours: 4,
-//   },
-// ];
-
-export const PERSONNELTABLE: IActivityResponseDataProps[] = [
-  {
-    userID: "1",
-    id: "1",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "1/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "2",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "2/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "3",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "3/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "4",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "4/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "5",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "5/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "6",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "6/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "7",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "7/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "8",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "8/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "9",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "9/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "10",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "10/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "11",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "11/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "4",
-    id: "12",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "2/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "13",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "6/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "14",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "7/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "15",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "6/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "16",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "7/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "17",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "6/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "18",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "7/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "19",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "6/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "20",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "7/12/2023",
-    hours: 6,
-  },
-  {
-    userID: "1",
-    id: "21",
-    category: "งานด้านส่งเสริมสุขภาพ",
-    updateDate: "6/12/2023",
-    hours: 4,
-  },
-  {
-    userID: "1",
-    id: "22",
-    category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    updateDate: "7/12/2023",
-    hours: 6,
+    status: "ผ่าน",
   },
 ];
 

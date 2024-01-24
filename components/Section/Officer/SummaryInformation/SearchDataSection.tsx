@@ -10,24 +10,33 @@ import DownloadButton from "@/components/Button/Download";
 import {
   DEFAULT_ACTIVITY,
   DEFAULT_BRANCH_DATA_SUMMARY_OFFICER,
-  OFFICERTABLE,
 } from "@/constant/constant";
+import { useAuth } from "@/context/AuthProvider";
 import SortLeftPng from "@/public/sort-left-icon.png";
 import {
   IActivityDataProps,
+  IActivityResponseDataOfficerProps,
   IExportUsersDataProps,
 } from "@/types/activity/activity.types";
 import { IBranchDataProps } from "@/types/branch/branch.types";
+import { IUserDataProps } from "@/types/user/user.types";
 
-import Table from "../../Table/Table";
+import TableOfficer from "../../Table/TableOfficer";
+import { handleAddInfo, handleGetUsers } from "../_action/AddUserDataTable";
 import { SummaryInfoColumn } from "./SummaryInfoColumn";
 
 const SearchSummaryInfoSection = () => {
+  // _Context
+  const { activites } = useAuth();
+
   // _State
+  const [activityUsers, setActivityUsers] = useState<
+    IActivityResponseDataOfficerProps[]
+  >([]);
+  const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<IActivityDataProps>(
     DEFAULT_ACTIVITY[0],
   );
-  // const [status, setStatus] = useState<IStatusDataProps>(DEFAULT_STATUS[0]);
   const [branch, setBranch] = useState<IBranchDataProps>(
     DEFAULT_BRANCH_DATA_SUMMARY_OFFICER[0],
   );
@@ -36,8 +45,16 @@ const SearchSummaryInfoSection = () => {
 
   // _Effect
   useEffect(() => {
-    if (OFFICERTABLE) {
-      const filteredData = OFFICERTABLE.map((info) => ({
+    handleGetUsers(setInfoUsers);
+  }, []);
+
+  useEffect(() => {
+    handleAddInfo({ activites, infoUsers, setActivityUsers });
+  }, [infoUsers]);
+
+  useEffect(() => {
+    if (activityUsers) {
+      const filteredData = activityUsers.map((info) => ({
         id: info.id,
         firstName: info.firstName,
         lastName: info.lastName,
@@ -47,16 +64,20 @@ const SearchSummaryInfoSection = () => {
       }));
 
       // Remove duplicates based on 'id'
-      const uniqueData = filteredData.filter(
-        (value, index, self) =>
-          self.findIndex((item) => item.id === value.id) === index,
-      );
+      // const uniqueData = filteredData.filter(
+      //   (value, index, self) =>
+      //     self.findIndex((item) => item.id === value.id) === index,
+      // );
 
-      if (uniqueData) {
-        setExportData(uniqueData);
-      }
+      // if (uniqueData) {
+      //   setExportData(uniqueData);
+      // }
+
+      setExportData(filteredData);
     }
-  }, [OFFICERTABLE]);
+  }, [activityUsers]);
+
+  console.log(activityUsers);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -165,7 +186,7 @@ const SearchSummaryInfoSection = () => {
         </div>
       </div>
 
-      <Table info={OFFICERTABLE} columns={SummaryInfoColumn} />
+      <TableOfficer info={activityUsers} columns={SummaryInfoColumn} />
       <div className={clsx([`mb-2 flex justify-between`])}>
         <DownloadButton data={exportData} fileName="Export summary data file" />
       </div>

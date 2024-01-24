@@ -65,7 +65,7 @@ const Header = () => {
             หน้าหลัก
           </span>
 
-          {userInfo?.role === "ADMIN" && (
+          {userInfo?.role === "Admin" && (
             <Link href="/officer/summary-information">
               <span
                 className={clsx([

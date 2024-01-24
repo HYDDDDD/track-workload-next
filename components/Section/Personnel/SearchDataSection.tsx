@@ -8,13 +8,17 @@ import Image from "next/image";
 
 import StartDateEndDatePicker from "@/components/DatePicker/StartDateEndDate";
 import Table from "@/components/Section/Table/Table";
-import { PERSONNELTABLE, DEFAULT_ACTIVITY } from "@/constant/constant";
+import { DEFAULT_ACTIVITY } from "@/constant/constant";
+import { useAuth } from "@/context/AuthProvider";
 import SortLeftPng from "@/public/sort-left-icon.png";
 import { IActivityDataProps } from "@/types/activity/activity.types";
 
 import { UserColumns } from "./Column";
 
 const SearchDataSection = () => {
+  // _Context
+  const { userActivites } = useAuth();
+
   // _State
   const [selectedCategory, setSelectedCategory] = useState<IActivityDataProps>(
     DEFAULT_ACTIVITY[0],
@@ -78,7 +82,7 @@ const SearchDataSection = () => {
         endDate={endDate}
         setEndDate={setEndDate}
       />
-      <Table info={PERSONNELTABLE} columns={UserColumns} />
+      <Table info={userActivites} columns={UserColumns} />
     </section>
   );
 };

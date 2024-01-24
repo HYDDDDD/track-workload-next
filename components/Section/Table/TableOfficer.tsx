@@ -12,15 +12,14 @@ import {
 import clsx from "clsx";
 import Image from "next/image";
 
-import { useAuth } from "@/context/AuthProvider";
 import SlideDownPng from "@/public/slide-down-icon.png";
 import SlideUpPng from "@/public/slide-up-icon.png";
-import { IActivityRequestDataProps } from "@/types/activity/activity.types";
+import { IActivityResponseDataOfficerProps } from "@/types/activity/activity.types";
 
 import PaginationTable from "../PaginationTable";
 import { TableType } from "./types";
 
-const Table = <T extends IActivityRequestDataProps>({
+const TableOfficer = <T extends IActivityResponseDataOfficerProps>({
   info,
   columns,
 }: TableType<T>) => {
@@ -31,9 +30,6 @@ const Table = <T extends IActivityRequestDataProps>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
-
-  // _Context
-  const { userInfo } = useAuth();
 
   return (
     <Fragment>
@@ -96,23 +92,20 @@ const Table = <T extends IActivityRequestDataProps>({
           </thead>
           <tbody>
             {table.getPageCount() > 0 &&
-              table
-                .getRowModel()
-                .rows.filter((row) => row.original.activityUser == userInfo?.id)
-                .map((row) => {
-                  return (
-                    <tr key={row.id}>
-                      {row.getVisibleCells().map((cell) => (
-                        <td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  );
-                })}
+              table.getRowModel().rows.map((row) => {
+                return (
+                  <tr key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <td key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
         {table.getPageCount() === 0 && (
@@ -126,4 +119,4 @@ const Table = <T extends IActivityRequestDataProps>({
   );
 };
 
-export default Table;
+export default TableOfficer;

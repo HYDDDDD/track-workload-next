@@ -6,6 +6,7 @@ export interface IActivityRequestDataProps {
   category: string;
   status?: string;
   updateDate: string;
+  image: File | null;
   hour: number;
 }
 
@@ -25,9 +26,8 @@ export interface IActivityResponseDataOfficerProps {
   branch: IBranchDataProps;
   category: IActivityDataProps;
   updateDate: string;
-  // hours: number;
-  totalHours: number;
-  status: IStatusDataProps;
+  totalHours?: number;
+  status?: string;
 }
 
 export interface IExportDataProps {

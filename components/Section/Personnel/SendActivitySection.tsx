@@ -25,13 +25,14 @@ const SendActivitySection = ({ lable }: ISendActivitySectionProps) => {
   const router = useRouter();
 
   // _State
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [newActivity, setNewActivity] = useState<IActivityRequestDataProps>({
     activityUser: "",
     category: "",
     hour: 0,
+    image: selectedImage,
     updateDate: "",
   });
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   // _Action
   const handleSelectActivity = (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +51,7 @@ const SendActivitySection = ({ lable }: ISendActivitySectionProps) => {
         "หลักฐานภาระงานด้านทำนุบำรุงศิลปวัฒนธรรมและอนุรักษ์สิ่งแวดล้อม"
       ) {
         setNewActivity({
+          ...newActivity,
           activityUser: userInfo.id,
           category: "C",
           hour: 6,
@@ -57,6 +59,7 @@ const SendActivitySection = ({ lable }: ISendActivitySectionProps) => {
         });
       } else {
         setNewActivity({
+          ...newActivity,
           activityUser: userInfo.id,
           category: "H",
           hour: 4,
@@ -67,6 +70,12 @@ const SendActivitySection = ({ lable }: ISendActivitySectionProps) => {
       console.error("ไม่ได้ล็อคอิน");
     }
   }, [userInfo]);
+
+  useEffect(() => {
+    if (selectedImage) {
+      setNewActivity({ ...newActivity, image: selectedImage });
+    }
+  }, [selectedImage]);
 
   const handleAddActivity = async () => {
     if (selectedImage !== null) {
@@ -79,7 +88,7 @@ const SendActivitySection = ({ lable }: ISendActivitySectionProps) => {
               category: newActivity.category,
               hour: newActivity.hour,
               updateDate: newActivity.updateDate,
-              image: selectedImage,
+              image: newActivity.image,
             },
             {
               headers: {

@@ -8,26 +8,33 @@ import Image from "next/image";
 
 import DownloadButton from "@/components/Button/Download";
 import StartDateEndDatePicker from "@/components/DatePicker/StartDateEndDate";
-import {
-  DEFAULT_ACTIVITY,
-  DEFAULT_STATUS,
-  OFFICERTABLE,
-} from "@/constant/constant";
+import { DEFAULT_ACTIVITY, DEFAULT_STATUS } from "@/constant/constant";
+import { useAuth } from "@/context/AuthProvider";
 import SortLeftPng from "@/public/sort-left-icon.png";
 import {
   IActivityDataProps,
+  IActivityResponseDataOfficerProps,
   IExportDataProps,
 } from "@/types/activity/activity.types";
 import { IStatusDataProps } from "@/types/status/status.types";
+import { IUserDataProps } from "@/types/user/user.types";
 
-import Table from "../Table/Table";
+import TableOfficer from "../Table/TableOfficer";
 import { UsersColumns } from "./Column";
+import { handleAddInfo, handleGetUsers } from "./_action/AddUserDataTable";
 
 const SearchDataSection = () => {
+  // _Context
+  const { activites } = useAuth();
+
   // _State
+  const [activityUsers, setActivityUsers] = useState<
+    IActivityResponseDataOfficerProps[]
+  >([]);
   const [selectedCategory, setSelectedCategory] = useState<IActivityDataProps>(
     DEFAULT_ACTIVITY[0],
   );
+  const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
   const [status, setStatus] = useState<IStatusDataProps>(DEFAULT_STATUS[0]);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
@@ -36,8 +43,8 @@ const SearchDataSection = () => {
 
   // _Effect
   useEffect(() => {
-    if (OFFICERTABLE) {
-      const filteredData = OFFICERTABLE.map((info) => ({
+    if (activityUsers) {
+      const filteredData = activityUsers.map((info) => ({
         id: info.id,
         firstName: info.firstName,
         lastName: info.lastName,
@@ -47,17 +54,17 @@ const SearchDataSection = () => {
         hours: info.category.hours,
       }));
 
-      // Remove duplicates based on 'id'
-      const uniqueData = filteredData.filter(
-        (value, index, self) =>
-          self.findIndex((item) => item.id === value.id) === index,
-      );
-
-      if (uniqueData) {
-        setExportData(uniqueData);
-      }
+      setExportData(filteredData);
     }
-  }, [OFFICERTABLE]);
+  }, [activityUsers]);
+
+  useEffect(() => {
+    handleAddInfo({ activites, infoUsers, setActivityUsers });
+  }, [infoUsers]);
+
+  useEffect(() => {
+    handleGetUsers(setInfoUsers);
+  }, []);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -172,10 +179,10 @@ const SearchDataSection = () => {
         endDate={endDate}
         setEndDate={setEndDate}
       />
-      <Table info={OFFICERTABLE} columns={UsersColumns} />
+      <TableOfficer info={activityUsers} columns={UsersColumns} />
 
       <div className={clsx([`mb-2 flex justify-between`])}>
-        <DownloadButton data={exportData} fileName="Export file data" />
+        <DownloadButton data={exportData} fileName="Export file" />
       </div>
     </section>
   );
