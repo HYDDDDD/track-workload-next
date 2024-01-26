@@ -47,10 +47,4 @@ export const UsersColumns = [
       return info.getValue();
     },
   }),
-  columnHelper.accessor("status", {
-    header: "สถานะ",
-    cell: (info) => {
-      return info.getValue();
-    },
-  }),
 ];

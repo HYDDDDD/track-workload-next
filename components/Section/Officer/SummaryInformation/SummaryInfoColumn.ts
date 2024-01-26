@@ -1,8 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
 
-import { IActivityResponseDataOfficerProps } from "@/types/activity/activity.types";
+import { IExportDataProps } from "@/types/activity/activity.types";
 
-const columnHelper = createColumnHelper<IActivityResponseDataOfficerProps>();
+const columnHelper = createColumnHelper<IExportDataProps>();
 
 export const SummaryInfoColumn = [
   columnHelper.accessor("id", {
@@ -23,13 +23,13 @@ export const SummaryInfoColumn = [
       return info.getValue();
     },
   }),
-  columnHelper.accessor("branch.branchName", {
+  columnHelper.accessor("branch", {
     header: "สาขา",
     cell: (info) => {
       return info.getValue();
     },
   }),
-  columnHelper.accessor("category.category", {
+  columnHelper.accessor("category", {
     header: "ประเภทภาระงาน",
     cell: (info) => {
       return info.getValue();

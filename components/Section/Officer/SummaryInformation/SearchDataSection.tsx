@@ -15,8 +15,7 @@ import { useAuth } from "@/context/AuthProvider";
 import SortLeftPng from "@/public/sort-left-icon.png";
 import {
   IActivityDataProps,
-  IActivityResponseDataOfficerProps,
-  IExportUsersDataProps,
+  IExportDataProps,
 } from "@/types/activity/activity.types";
 import { IBranchDataProps } from "@/types/branch/branch.types";
 import { IUserDataProps } from "@/types/user/user.types";
@@ -30,9 +29,7 @@ const SearchSummaryInfoSection = () => {
   const { activites } = useAuth();
 
   // _State
-  const [activityUsers, setActivityUsers] = useState<
-    IActivityResponseDataOfficerProps[]
-  >([]);
+  const [summaryInfo, setSummaryInfo] = useState<IExportDataProps[]>([]);
   const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<IActivityDataProps>(
     DEFAULT_ACTIVITY[0],
@@ -41,43 +38,14 @@ const SearchSummaryInfoSection = () => {
     DEFAULT_BRANCH_DATA_SUMMARY_OFFICER[0],
   );
 
-  const [exportData, setExportData] = useState<IExportUsersDataProps[]>([]);
-
   // _Effect
   useEffect(() => {
     handleGetUsers(setInfoUsers);
   }, []);
 
   useEffect(() => {
-    handleAddInfo({ activites, infoUsers, setActivityUsers });
+    handleAddInfo({ activites, infoUsers, setSummaryInfo });
   }, [infoUsers]);
-
-  useEffect(() => {
-    if (activityUsers) {
-      const filteredData = activityUsers.map((info) => ({
-        id: info.id,
-        firstName: info.firstName,
-        lastName: info.lastName,
-        branch: info.branch.branchName,
-        category: info.category.category,
-        totalHours: info.totalHours,
-      }));
-
-      // Remove duplicates based on 'id'
-      // const uniqueData = filteredData.filter(
-      //   (value, index, self) =>
-      //     self.findIndex((item) => item.id === value.id) === index,
-      // );
-
-      // if (uniqueData) {
-      //   setExportData(uniqueData);
-      // }
-
-      setExportData(filteredData);
-    }
-  }, [activityUsers]);
-
-  console.log(activityUsers);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -186,9 +154,12 @@ const SearchSummaryInfoSection = () => {
         </div>
       </div>
 
-      <TableOfficer info={activityUsers} columns={SummaryInfoColumn} />
+      <TableOfficer info={summaryInfo} columns={SummaryInfoColumn} />
       <div className={clsx([`mb-2 flex justify-between`])}>
-        <DownloadButton data={exportData} fileName="Export summary data file" />
+        <DownloadButton
+          data={summaryInfo}
+          fileName="Export summary data file"
+        />
       </div>
     </section>
   );

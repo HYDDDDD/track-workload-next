@@ -14,12 +14,17 @@ import Image from "next/image";
 
 import SlideDownPng from "@/public/slide-down-icon.png";
 import SlideUpPng from "@/public/slide-up-icon.png";
-import { IActivityResponseDataOfficerProps } from "@/types/activity/activity.types";
+import {
+  IActivityResponseDataOfficerProps,
+  IExportDataProps,
+} from "@/types/activity/activity.types";
 
 import PaginationTable from "../PaginationTable";
 import { TableType } from "./types";
 
-const TableOfficer = <T extends IActivityResponseDataOfficerProps>({
+const TableOfficer = <
+  T extends IExportDataProps | IActivityResponseDataOfficerProps,
+>({
   info,
   columns,
 }: TableType<T>) => {

@@ -10,23 +10,31 @@ import {
 import {
   IActivityRequestDataProps,
   IActivityResponseDataOfficerProps,
+  IExportDataProps,
+  IExportUsersDataProps,
 } from "@/types/activity/activity.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
 interface IHandleAddInfo {
   activites: IActivityRequestDataProps[];
-  setActivityUsers: React.Dispatch<
+  setActivityUsers?: React.Dispatch<
     React.SetStateAction<IActivityResponseDataOfficerProps[]>
   >;
+  setSummaryInfo?: React.Dispatch<React.SetStateAction<IExportDataProps[]>>;
   infoUsers: IUserDataProps[];
 }
 
 export const handleAddInfo = ({
   activites,
   setActivityUsers,
+  setSummaryInfo,
   infoUsers,
 }: IHandleAddInfo) => {
-  setActivityUsers([]);
+  const result: IExportUsersDataProps[] = [];
+
+  if (setActivityUsers) {
+    setActivityUsers([]);
+  }
   activites.map((activity) => {
     infoUsers
       .filter((user) => activity.activityUser == user.id)
@@ -61,26 +69,51 @@ export const handleAddInfo = ({
           }
         });
 
-        const data: IActivityResponseDataOfficerProps = {
-          id: filterInfo.id,
-          firstName: filterInfo.firstName,
-          lastName: filterInfo.lastName,
-          branch: {
-            id: idActivity,
-            branchName: branchName,
-            value: valueBranch,
-          },
-          category: {
-            id: idActivity,
-            category: category,
-            hours: hour,
-          },
-          updateDate: activity.updateDate,
-          totalHours: hour,
-          status: activity.status,
-        };
+        if (activity.status === "P") {
+          const existingItemIndex = result.findIndex(
+            (item) =>
+              item.id == activity.activityUser && item.category == category,
+          );
 
-        setActivityUsers((prevInfo) => [...prevInfo, data]);
+          if (existingItemIndex !== -1) {
+            result[existingItemIndex].totalHours += hour;
+          } else {
+            result.push({
+              id: filterInfo.id,
+              firstName: filterInfo.firstName,
+              lastName: filterInfo.lastName,
+              branch: branchName,
+              category: category,
+              totalHours: activity.hour,
+            });
+          }
+
+          if (setSummaryInfo) {
+            setSummaryInfo(result);
+          }
+        } else {
+          const data: IActivityResponseDataOfficerProps = {
+            id: filterInfo.id,
+            firstName: filterInfo.firstName,
+            lastName: filterInfo.lastName,
+            branch: {
+              id: idActivity,
+              branchName: branchName,
+              value: valueBranch,
+            },
+            category: {
+              id: idActivity,
+              category: category,
+              hours: hour,
+            },
+            updateDate: activity.updateDate,
+            totalHours: hour,
+            status: activity.status,
+          };
+          if (setActivityUsers) {
+            setActivityUsers((prevInfo) => [...prevInfo, data]);
+          }
+        }
       });
   });
 };

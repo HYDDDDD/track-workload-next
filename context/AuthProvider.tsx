@@ -54,12 +54,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const response = await axios.get(`${BASEURL}/api/users/me/`);
       setUserInfo(response.data);
       setIsActivated(true);
-
-      // if (userInfo?.role === "Admin") {
-      //   router.push("/officer/");
-      // } else if (userInfo?.role === "Personnel") {
-      //   router.push("/personnel/");
-      // }
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -84,29 +78,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    if (userInfo?.role === "Admin" && !pathName.includes("officer")) {
-      router.push("/officer/");
-    } else if (
-      userInfo?.role === "Personnel" &&
-      pathName.includes("personnel")
-    ) {
+    if (userInfo?.role === "Admin" && !pathName.includes("admin")) {
+      router.push("/admin/");
+    }
+    if (userInfo?.role === "Personnel" && !pathName.includes("personnel")) {
       router.push("/personnel/");
     }
   }, [userInfo]);
-
-  // useEffect(() => {
-  //   if (!userInfo) {
-  //     router.push("/");
-  //   } else {
-  //     if (pathName.includes("officer") && userInfo?.role === "Personnel") {
-  //       router.push("/personnel/");
-  //     }
-
-  //     if (pathName.includes("personnel") && userInfo?.role === "Admin") {
-  //       router.push("/officer/");
-  //     }
-  //   }
-  // }, [userInfo]);
 
   useEffect(() => {
     if (activites && userInfo) {

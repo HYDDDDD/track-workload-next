@@ -49,7 +49,7 @@ export interface IExportUsersDataProps {
   lastName: string;
   branch: string;
   category: string;
-  totalHours: number | undefined;
+  totalHours: number;
 }
 
 export interface IActivityDataProps {

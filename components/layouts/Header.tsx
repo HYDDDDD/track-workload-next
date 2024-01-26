@@ -38,7 +38,7 @@ const Header = () => {
         className={clsx(`main-space-x flex items-center justify-between py-3`)}
       >
         <div className={clsx([`flex items-center space-x-2`])}>
-          <Link href={"#"}>
+          <Link href={`/${userInfo?.role.toLowerCase()}`}>
             <Image
               src={LogoICTPng}
               alt="logo ict png"
@@ -59,19 +59,22 @@ const Header = () => {
         </div>
 
         <div className={clsx([`flex items-center space-x-4`])}>
-          <span
-            className={clsx([`text-body-20`, `lg:text-body-16`, `sm:hidden`])}
-          >
-            หน้าหลัก
-          </span>
+          <Link href={`/${userInfo?.role.toLowerCase()}`}>
+            <span
+              className={clsx([`text-body-20`, `lg:text-body-16`, `sm:hidden`])}
+            >
+              หน้าหลัก
+            </span>
+          </Link>
 
+          {/* fix mobile */}
           {userInfo?.role === "Admin" && (
-            <Link href="/officer/summary-information">
+            <Link href="/admin/summary-information">
               <span
                 className={clsx([
                   `text-body-20`,
                   `lg:text-body-16`,
-                  `sm:hidden`,
+                  `sm:text-body-12`,
                 ])}
               >
                 ข้อมูลสรุปผล
