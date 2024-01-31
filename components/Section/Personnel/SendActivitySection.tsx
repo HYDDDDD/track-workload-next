@@ -19,7 +19,7 @@ interface ISendActivitySectionProps {
 
 const SendActivitySection = ({ lable }: ISendActivitySectionProps) => {
   // _Context
-  const { userInfo } = useAuth();
+  const { userInfo, getActivites } = useAuth();
 
   // _Router
   const router = useRouter();
@@ -98,6 +98,7 @@ const SendActivitySection = ({ lable }: ISendActivitySectionProps) => {
           )
           .then(() => {
             toast.success("ส่งหลักฐานสำเร็จ");
+            getActivites();
             router.push("/personnel");
           });
       } catch (error) {

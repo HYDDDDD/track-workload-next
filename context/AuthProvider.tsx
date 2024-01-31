@@ -22,6 +22,7 @@ interface AuthContextProps {
   fetchUserInfo: () => Promise<void>;
   userActivites: IActivityRequestDataProps[];
   activites: IActivityRequestDataProps[];
+  getActivites: () => Promise<void>;
 }
 
 interface userContextData {
@@ -61,6 +62,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const getActivites = async () => {
     const response = await axios.get(`${BASEURL}/api/activity/`);
+    console.log("Check it : ", response.data);
+
     setActivites(response.data);
   };
 
@@ -113,6 +116,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         fetchUserInfo,
         userActivites,
         activites,
+        getActivites,
       }}
     >
       {children}
