@@ -91,19 +91,21 @@ const VerticalBarChart = () => {
     setCulture([]);
     setHealth([]);
     summaryInfo.forEach((activity) => {
-      const existingItemIndex = labelChart.findIndex(
-        (item) => item == activity.firstName,
-      );
+      if (labelChart.length < 5) {
+        const existingItemIndex = labelChart.findIndex(
+          (item) => item == activity.firstName,
+        );
 
-      if (existingItemIndex !== -1) {
-        labelChart[existingItemIndex] = activity.firstName;
-      } else {
-        labelChart.push(activity.firstName);
+        if (existingItemIndex !== -1) {
+          labelChart[existingItemIndex] = activity.firstName;
+        } else {
+          labelChart.push(activity.firstName);
+        }
       }
 
       if (
-        activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม" &&
-        culture.length < 5
+        culture.length < 5 &&
+        activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม"
       ) {
         setCulture((prevInfo) => [
           ...prevInfo,
@@ -115,8 +117,8 @@ const VerticalBarChart = () => {
           },
         ]);
       } else if (
-        activity.category === "งานด้านส่งเสริมสุขภาพ" &&
-        health.length < 5
+        health.length < 5 &&
+        activity.category === "งานด้านส่งเสริมสุขภาพ"
       ) {
         setHealth((prevInfo) => [
           ...prevInfo,
@@ -129,6 +131,7 @@ const VerticalBarChart = () => {
         ]);
       }
     });
+
     culture.sort((a: IUser, b: IUser) => {
       if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
         return b.hourCulture - a.hourCulture;
