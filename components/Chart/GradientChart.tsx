@@ -13,7 +13,14 @@ import {
   Legend,
 } from "chart.js";
 
-import { OFFICERTABLE } from "@/constant/constant";
+import { useAuth } from "@/context/AuthProvider";
+import { IExportDataProps } from "@/types/activity/activity.types";
+import { IUserDataProps } from "@/types/user/user.types";
+
+import {
+  handleAddInfo,
+  handleGetUsers,
+} from "../Section/Officer/_action/AddUserDataTable";
 
 ChartJS.register(
   CategoryScale,
@@ -25,9 +32,14 @@ ChartJS.register(
 );
 
 const GradientChart = () => {
+  // _Context
+  const { activites } = useAuth();
+
   // _State
+  const [summaryInfo, setSummaryInfo] = useState<IExportDataProps[]>([]);
+  const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
   const [labelChart, setLabelChart] = useState<string[]>([]);
-  const [datas, setDatas] = useState<number[]>([]);
+  const [datas, setDatas] = useState<(number | undefined)[]>([]);
 
   const options = {
     responsive: true,
@@ -53,13 +65,14 @@ const GradientChart = () => {
     ],
   };
 
-  // _Effect
   useEffect(() => {
-    if (OFFICERTABLE) {
-      const filteredFirstName = OFFICERTABLE.map(
-        (info) => info.branch.branchName,
-      );
-      const filteredTotalHour = OFFICERTABLE.map((info) => info.totalHours);
+    handleAddInfo({ activites, infoUsers, setSummaryInfo });
+  }, [infoUsers]);
+
+  useEffect(() => {
+    if (summaryInfo) {
+      const filteredFirstName = summaryInfo.map((info) => info.branch);
+      const filteredTotalHour = summaryInfo.map((info) => info.totalHours);
 
       if (filteredFirstName) {
         setLabelChart(filteredFirstName);
@@ -69,7 +82,11 @@ const GradientChart = () => {
         setDatas(filteredTotalHour);
       }
     }
-  }, [OFFICERTABLE]);
+  }, [summaryInfo]);
+
+  useEffect(() => {
+    handleGetUsers(setInfoUsers);
+  }, []);
 
   return <Line options={options} data={data} />;
 };

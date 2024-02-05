@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-table";
 import clsx from "clsx";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 
 import SlideDownPng from "@/public/slide-down-icon.png";
 import SlideUpPng from "@/public/slide-up-icon.png";
@@ -35,6 +36,9 @@ const TableOfficer = <
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+
+  const router = useRouter();
+  const pathName = usePathname();
 
   return (
     <Fragment>
@@ -99,9 +103,23 @@ const TableOfficer = <
             {table.getPageCount() > 0 &&
               table.getRowModel().rows.map((row) => {
                 return (
-                  <tr key={row.id}>
+                  <tr
+                    key={row.id}
+                    className={clsx(`cursor-pointer hover:bg-slate-200`)}
+                  >
                     {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id}>
+                      <td
+                        key={cell.id}
+                        onClick={() => {
+                          if (!pathName.includes("/summary-information")) {
+                            router.push(
+                              `/admin/form/${
+                                cell.getContext().row.original.id
+                              }`,
+                            );
+                          }
+                        }}
+                      >
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext(),

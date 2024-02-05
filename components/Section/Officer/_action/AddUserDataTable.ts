@@ -15,6 +15,8 @@ import {
 } from "@/types/activity/activity.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
+import { handleCalculateHour } from "../../_action/CalculateHour";
+
 interface IHandleAddInfo {
   activites: IActivityRequestDataProps[];
   setActivityUsers?: React.Dispatch<
@@ -59,41 +61,31 @@ export const handleAddInfo = ({
             "งานด้านทำนุบำรุงศิลปวัฒนธรรม" === data.category
           ) {
             category = data.category;
-            hour += data.hours;
+            hour += data.hour;
           } else if (
             activity.category === "H" &&
             "งานด้านส่งเสริมสุขภาพ" === data.category
           ) {
             category = data.category;
-            hour += data.hours;
+            hour += data.hour;
           }
         });
 
+        // แยก
         if (activity.status === "P") {
-          const existingItemIndex = result.findIndex(
-            (item) =>
-              item.id == activity.activityUser && item.category == category,
-          );
-
-          if (existingItemIndex !== -1) {
-            result[existingItemIndex].totalHours += hour;
-          } else {
-            result.push({
-              id: filterInfo.id,
-              firstName: filterInfo.firstName,
-              lastName: filterInfo.lastName,
-              branch: branchName,
-              category: category,
-              totalHours: activity.hour,
-            });
-          }
-
-          if (setSummaryInfo) {
-            setSummaryInfo(result);
-          }
+          handleCalculateHour({
+            result: result,
+            activity: activity,
+            branchName: branchName,
+            category: category,
+            filterInfo: filterInfo,
+            hour: hour,
+            setSummaryInfo: setSummaryInfo,
+          });
         } else {
           const data: IActivityResponseDataOfficerProps = {
-            id: filterInfo.id,
+            id: activity.id,
+            userID: filterInfo.id,
             firstName: filterInfo.firstName,
             lastName: filterInfo.lastName,
             branch: {
@@ -104,7 +96,7 @@ export const handleAddInfo = ({
             category: {
               id: idActivity,
               category: category,
-              hours: hour,
+              hour: hour,
             },
             updateDate: activity.updateDate,
             totalHours: hour,

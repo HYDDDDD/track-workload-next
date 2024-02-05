@@ -23,6 +23,8 @@ interface AuthContextProps {
   userActivites: IActivityRequestDataProps[];
   activites: IActivityRequestDataProps[];
   getActivites: () => Promise<void>;
+  reload: boolean;
+  setReload: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface userContextData {
@@ -48,6 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userActivites, setUserActivites] = useState<
     IActivityRequestDataProps[]
   >([]);
+  const [reload, setReload] = useState<boolean>(false);
 
   // _Action
   const fetchUserInfo = async () => {
@@ -62,7 +65,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const getActivites = async () => {
     const response = await axios.get(`${BASEURL}/api/activity/`);
-    console.log("Check it : ", response.data);
 
     setActivites(response.data);
   };
@@ -117,6 +119,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         userActivites,
         activites,
         getActivites,
+        reload,
+        setReload,
       }}
     >
       {children}

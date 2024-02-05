@@ -14,6 +14,14 @@ import {
 } from "chart.js";
 
 import { OFFICERTABLE } from "@/constant/constant";
+import { useAuth } from "@/context/AuthProvider";
+import { IExportDataProps } from "@/types/activity/activity.types";
+import { IUserDataProps } from "@/types/user/user.types";
+
+import {
+  handleAddInfo,
+  handleGetUsers,
+} from "../Section/Officer/_action/AddUserDataTable";
 
 ChartJS.register(
   CategoryScale,
@@ -24,10 +32,28 @@ ChartJS.register(
   Legend,
 );
 
+interface IUser {
+  firstName: string;
+  branch: string;
+  category: string;
+  hourCulture?: number;
+  hourHealth?: number;
+}
+
 const VerticalBarChart = () => {
+  // _Context
+  const { activites } = useAuth();
+
   // _State
+  const [summaryInfo, setSummaryInfo] = useState<IExportDataProps[]>([]);
+  const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
   const [labelChart, setLabelChart] = useState<string[]>([]);
-  const [datas, setDatas] = useState<number[]>([]);
+  const [datas, setDatas] = useState<(number | undefined)[]>([]);
+  const [user, setUser] = useState<IUser>({
+    firstName: "",
+    branch: "",
+    category: "",
+  });
 
   const options = {
     responsive: true,
@@ -59,35 +85,106 @@ const VerticalBarChart = () => {
   };
 
   // _Effect
+  // useEffect(() => {
+  //   if (OFFICERTABLE && (labelChart.length && datas.length) < 5) {
+  //     const filteredFirstName = OFFICERTABLE.map((info) => info.firstName);
+  //     const filteredTotalHour = OFFICERTABLE.map((info) => info.totalHours);
+  //     // 10 20 30 40 50
+  //     // 50 40 30 20 10
+  //     const newTotalHour = new Array<number>();
+
+  //     for (let index = 0; index < OFFICERTABLE.length; index++) {
+  //       if (OFFICERTABLE[index] > OFFICERTABLE[index + 1]) {
+  //         OFFICERTABLE.map((info) => newTotalHour.push(info.totalHours));
+  //       } else {
+  //         OFFICERTABLE[OFFICERTABLE.length];
+  //       }
+  //     }
+
+  //     console.log("NEW : ", newTotalHour);
+
+  //     // if (filteredFirstName) {
+  //     //   setLabelChart(filteredFirstName);
+  //     // }
+
+  //     if (filteredTotalHour) {
+  //       console.log(filteredTotalHour);
+
+  //       // setDatas(filteredTotalHour);
+  //     }
+  //   }
+  // }, [OFFICERTABLE]);
+
   useEffect(() => {
-    if (OFFICERTABLE && (labelChart.length && datas.length) < 5) {
-      const filteredFirstName = OFFICERTABLE.map((info) => info.firstName);
-      const filteredTotalHour = OFFICERTABLE.map((info) => info.totalHours);
-      // 10 20 30 40 50
-      // 50 40 30 20 10
-      const newTotalHour = new Array<number>();
+    handleAddInfo({ activites, infoUsers, setSummaryInfo });
+  }, [infoUsers]);
 
-      for (let index = 0; index < OFFICERTABLE.length; index++) {
-        if (OFFICERTABLE[index] > OFFICERTABLE[index + 1]) {
-          OFFICERTABLE.map((info) => newTotalHour.push(info.totalHours));
+  useEffect(() => {
+    if (summaryInfo && (labelChart.length && datas.length) < 5) {
+      // console.log("Sum : ", summaryInfo);
+
+      summaryInfo.map((info) => {
+        // const user = {
+        //   firstName: info.firstName,
+        //   branch: info.branch,
+        //   category: info.category,
+        //   hour: info.totalHours,
+        // };
+        // setUser({
+        //   ...user,
+        //   firstName: info.firstName,
+        //   category: info.category,
+        // });
+
+        if (
+          info.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม" &&
+          info.totalHours
+        ) {
+          console.log("this :", info);
+
+          setUser({
+            ...user,
+            hourCulture: info.totalHours,
+          });
         } else {
-          OFFICERTABLE[OFFICERTABLE.length];
+          setUser({
+            ...user,
+            hourHealth: info.totalHours,
+          });
         }
-      }
 
-      console.log("NEW : ", newTotalHour);
+        return user;
+      });
+      const filteredTotalHour = summaryInfo.map((info) => info.totalHours);
+
+      // const newTotalHour = new Array<number | undefined>();
+
+      // for (let index = 0; index < summaryInfo.length; index++) {
+      //   if (summaryInfo[index] > summaryInfo[index + 1]) {
+      //     summaryInfo.map((info) => newTotalHour.push(info.totalHours));
+      //   } else {
+      //     summaryInfo[summaryInfo.length];
+      //   }
+      // }
+
+      // console.log("NEW : ", newTotalHour);
 
       // if (filteredFirstName) {
       //   setLabelChart(filteredFirstName);
       // }
 
-      if (filteredTotalHour) {
-        console.log(filteredTotalHour);
+      // console.log(filteredTotalHour);
 
-        // setDatas(filteredTotalHour);
-      }
+      // if (filteredTotalHour) {
+      //   setDatas(filteredTotalHour);
+      // }
     }
-  }, [OFFICERTABLE]);
+  }, [summaryInfo]);
+
+  useEffect(() => {
+    handleGetUsers(setInfoUsers);
+  }, []);
+  console.log(user);
 
   return <Bar options={options} data={data} />;
 };

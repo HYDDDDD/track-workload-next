@@ -134,17 +134,17 @@ export const DEFAULT_ACTIVITY: IActivityDataProps[] = [
   {
     id: "1",
     category: "ประเภท",
-    hours: 0,
+    hour: 0,
   },
   {
     id: "2",
     category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-    hours: 6,
+    hour: 6,
   },
   {
     id: "3",
     category: "งานด้านส่งเสริมสุขภาพ",
-    hours: 4,
+    hour: 4,
   },
 ];
 
@@ -163,7 +163,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     category: {
       id: "2",
       category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
-      hours: 6,
+      hour: 6,
     },
     totalHours: 10,
     updateDate: "11/11/2023",
@@ -182,7 +182,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     category: {
       id: "2",
       category: "งานด้านส่งเสริมสุขภาพ",
-      hours: 4,
+      hour: 4,
     },
     totalHours: 50,
     updateDate: "11/11/2023",
@@ -201,7 +201,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     category: {
       id: "2",
       category: "งานด้านส่งเสริมสุขภาพ",
-      hours: 4,
+      hour: 4,
     },
     totalHours: 60,
     updateDate: "11/11/2023",
@@ -220,7 +220,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     category: {
       id: "2",
       category: "งานด้านส่งเสริมสุขภาพ",
-      hours: 4,
+      hour: 4,
     },
     totalHours: 70,
     updateDate: "11/11/2023",
@@ -239,7 +239,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     category: {
       id: "2",
       category: "งานด้านส่งเสริมสุขภาพ",
-      hours: 4,
+      hour: 4,
     },
     totalHours: 80,
     updateDate: "11/11/2023",
@@ -258,7 +258,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
     category: {
       id: "2",
       category: "งานด้านส่งเสริมสุขภาพ",
-      hours: 4,
+      hour: 4,
     },
     totalHours: 90,
     updateDate: "11/11/2023",
@@ -266,7 +266,7 @@ export const OFFICERTABLE: IActivityResponseDataOfficerProps[] = [
   },
 ];
 
-export const DEFAULT_TOTAL_HOURS = 0;
+export const DEFAULT_TOTAL_HOUR = 0;
 
 // Days
 export const DEFAULT_DAYS_TH = [

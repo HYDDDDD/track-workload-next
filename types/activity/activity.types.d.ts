@@ -2,11 +2,13 @@ import { IBranchDataProps } from "../branch/branch.types";
 import { IStatusDataProps } from "../status/status.types";
 
 export interface IActivityRequestDataProps {
+  id: string;
   activityUser: string;
   category: string;
   status?: string;
   updateDate: string;
-  image: File | null;
+  image?: File | null;
+  isSelected?: boolean;
   hour: number;
 }
 
@@ -45,6 +47,7 @@ export interface IExportDataProps {
 
 export interface IExportUsersDataProps {
   id: string;
+  activityUser: string;
   firstName: string;
   lastName: string;
   branch: string;
@@ -55,5 +58,5 @@ export interface IExportUsersDataProps {
 export interface IActivityDataProps {
   id: string;
   category: string;
-  hours: number;
+  hour: number;
 }

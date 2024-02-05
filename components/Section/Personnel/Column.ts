@@ -33,4 +33,16 @@ export const UserColumns = [
       return info.getValue();
     },
   }),
+  columnHelper.accessor("status", {
+    header: "สถานะ",
+    cell: (info) => {
+      if (info.getValue() === "P") {
+        return "ผ่าน";
+      } else if (info.getValue() === "N") {
+        return "ไม่ผ่าน";
+      } else {
+        return "กำลังดำเนินการ";
+      }
+    },
+  }),
 ];

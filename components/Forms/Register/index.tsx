@@ -51,6 +51,8 @@ const RegisterForm = () => {
     }
   }, [selectedRole]);
 
+  console.log(selectedRole);
+
   useEffect(() => {
     if (newUser.role === "Personnel" && selectedBranch) {
       setNewUser({ ...newUser, branch: selectedBranch.value });

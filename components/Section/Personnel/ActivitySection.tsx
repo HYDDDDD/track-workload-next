@@ -26,10 +26,12 @@ const ActivitySection = () => {
     let countHealth = 0;
 
     userActivites.forEach((activity) => {
-      if (activity.category === "C") {
-        countCulture = countCulture + activity.hour;
-      } else {
-        countHealth = countHealth + activity.hour;
+      if (activity.status === "P") {
+        if (activity.category === "C") {
+          countCulture = countCulture + activity.hour;
+        } else {
+          countHealth = countHealth + activity.hour;
+        }
       }
     });
 

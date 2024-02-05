@@ -25,7 +25,7 @@ import { handleAddInfo, handleGetUsers } from "./_action/AddUserDataTable";
 
 const SearchDataSection = () => {
   // _Context
-  const { activites } = useAuth();
+  const { activites, reload, setReload } = useAuth();
 
   // _State
   const [activityUsers, setActivityUsers] = useState<
@@ -51,7 +51,7 @@ const SearchDataSection = () => {
         branch: info.branch.branchName,
         category: info.category.category,
         updateDate: info.updateDate,
-        hours: info.category.hours,
+        hours: info.category.hour,
       }));
 
       setExportData(filteredData);
@@ -65,6 +65,13 @@ const SearchDataSection = () => {
   useEffect(() => {
     handleGetUsers(setInfoUsers);
   }, []);
+
+  useEffect(() => {
+    if (reload) {
+      window.location.reload();
+      setReload(false);
+    }
+  }, [reload]);
 
   return (
     <section className={clsx([`space-y-8`])}>

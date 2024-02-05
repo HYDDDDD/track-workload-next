@@ -1,9 +1,9 @@
 import React from "react";
 
-import SendActivitySection from "@/components/Section/Personnel/SendActivitySection";
+import SendActivitySection from "@/components/Section/SendActivitySection";
 
 const HealthFormPage = () => {
-  return <SendActivitySection lable="หลักฐานภาระงานด้านส่งเสริมสุขภาพ" />;
+  return <SendActivitySection label="หลักฐานภาระงานด้านส่งเสริมสุขภาพ" />;
 };
 
 export default HealthFormPage;

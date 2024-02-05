@@ -1,10 +1,10 @@
 import React from "react";
 
-import SendActivitySection from "@/components/Section/Personnel/SendActivitySection";
+import SendActivitySection from "@/components/Section/SendActivitySection";
 
 const CultureFormPage = () => {
   return (
-    <SendActivitySection lable="หลักฐานภาระงานด้านทำนุบำรุงศิลปวัฒนธรรมและอนุรักษ์สิ่งแวดล้อม" />
+    <SendActivitySection label="หลักฐานภาระงานด้านทำนุบำรุงศิลปวัฒนธรรมและอนุรักษ์สิ่งแวดล้อม" />
   );
 };
 
