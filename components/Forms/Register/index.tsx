@@ -3,22 +3,24 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Form } from "react-final-form";
 
+
+
 import { Listbox, Transition } from "@headlessui/react";
 import clsx from "clsx";
 import Image from "next/image";
 
+
+
 import Spinner from "@/components/Progress/Spinner";
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
-import {
-  DEFAULT_BRANCH_DATA_AUTH,
-  DEFAULT_USER_ROLE_DATA,
-} from "@/constant/constant";
+import { DEFAULT_BRANCH_DATA_AUTH, DEFAULT_USER_ROLE_DATA } from "@/constant/constant";
 import { useRegister } from "@/hooks";
 import SortLeftPng from "@/public/sort-left-icon.png";
 import { IBranchDataProps } from "@/types/branch/branch.types";
 import { IRoleDataProps } from "@/types/role/role.types";
 import { IUserDataProps } from "@/types/user/user.types";
+
 
 const RegisterForm = () => {
   // _State
@@ -61,6 +63,9 @@ const RegisterForm = () => {
       setNewUser({ ...newUser, branch: "" });
     }
   }, [selectedBranch, newUser.role]);
+
+  console.log(selectedBranch);
+  
 
   return (
     <Form

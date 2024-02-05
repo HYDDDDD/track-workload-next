@@ -83,11 +83,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    if (userInfo?.role === "Admin" && !pathName.includes("admin")) {
-      router.push("/admin/");
-    }
-    if (userInfo?.role === "Personnel" && !pathName.includes("personnel")) {
-      router.push("/personnel/");
+    if (userInfo) {
+      if (userInfo?.role === "Admin" && !pathName.includes("admin")) {
+        router.push("/admin/");
+      }
+      if (userInfo?.role === "Personnel" && !pathName.includes("personnel")) {
+        router.push("/personnel/");
+      }
     }
   }, [userInfo]);
 
