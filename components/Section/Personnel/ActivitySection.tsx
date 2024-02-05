@@ -11,6 +11,7 @@ import Button from "@/components/UI/Button";
 import { useAuth } from "@/context/AuthProvider";
 import CulturePng from "@/public/culture-icon.png";
 import HealthPng from "@/public/health-icon.png";
+import { handleCalHourPersonnel } from "@/utils/CalculateHourPersonnel";
 
 const ActivitySection = () => {
   // _Context
@@ -20,28 +21,9 @@ const ActivitySection = () => {
   const [hourCulture, setHourCulture] = useState<number>(0);
   const [hourHealth, setHourHealth] = useState<number>(0);
 
-  // _Action
-  const handleCalHour = () => {
-    let countCulture = 0;
-    let countHealth = 0;
-
-    userActivites.forEach((activity) => {
-      if (activity.status === "P") {
-        if (activity.category === "C") {
-          countCulture = countCulture + activity.hour;
-        } else {
-          countHealth = countHealth + activity.hour;
-        }
-      }
-    });
-
-    setHourCulture(countCulture);
-    setHourHealth(countHealth);
-  };
-
   // _Effect
   useEffect(() => {
-    handleCalHour();
+    handleCalHourPersonnel({ userActivites, setHourCulture, setHourHealth });
   }, [userActivites]);
 
   return (

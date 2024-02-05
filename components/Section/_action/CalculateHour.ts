@@ -25,7 +25,8 @@ export const handleCalculateHour = ({
   setSummaryInfo,
 }: IHandleAddCalculateProps) => {
   const existingItemIndex = result.findIndex(
-    (item) => item.id == activity.activityUser && item.category == category,
+    (item) =>
+      item.activityUser == activity.activityUser && item.category == category,
   );
 
   if (existingItemIndex !== -1) {

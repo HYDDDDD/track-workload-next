@@ -71,7 +71,6 @@ export const handleAddInfo = ({
           }
         });
 
-        // แยก
         if (activity.status === "P") {
           handleCalculateHour({
             result: result,

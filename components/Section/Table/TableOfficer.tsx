@@ -46,7 +46,7 @@ const TableOfficer = <
         <table>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
+              <tr key={headerGroup.id} className={clsx(`cursor-pointer`)}>
                 {headerGroup.headers.map((header) => (
                   <Fragment key={header.id}>
                     {header.column.getCanSort() && (
