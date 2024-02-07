@@ -103,10 +103,7 @@ const VerticalBarChart = () => {
         }
       }
 
-      if (
-        culture.length < 5 &&
-        activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม"
-      ) {
+      if (activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม") {
         setCulture((prevInfo) => [
           ...prevInfo,
           {
@@ -116,10 +113,7 @@ const VerticalBarChart = () => {
             hourCulture: activity.totalHours,
           },
         ]);
-      } else if (
-        health.length < 5 &&
-        activity.category === "งานด้านส่งเสริมสุขภาพ"
-      ) {
+      } else if (activity.category === "งานด้านส่งเสริมสุขภาพ") {
         setHealth((prevInfo) => [
           ...prevInfo,
           {
@@ -132,18 +126,22 @@ const VerticalBarChart = () => {
       }
     });
 
-    culture.sort((a: IUser, b: IUser) => {
-      if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
-        return b.hourCulture - a.hourCulture;
-      }
-      return 0;
-    });
-    health.sort((a: IUser, b: IUser) => {
-      if (a.hourHealth !== undefined && b.hourHealth !== undefined) {
-        return b.hourHealth - a.hourHealth;
-      }
-      return 0;
-    });
+    culture
+      .sort((a: IUser, b: IUser) => {
+        if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
+          return b.hourCulture - a.hourCulture;
+        }
+        return 0;
+      })
+      .slice(0, 5);
+    health
+      .sort((a: IUser, b: IUser) => {
+        if (a.hourHealth !== undefined && b.hourHealth !== undefined) {
+          return b.hourHealth - a.hourHealth;
+        }
+        return 0;
+      })
+      .slice(0, 5);
   }, [summaryInfo]);
 
   return <Bar options={options} data={data} />;
