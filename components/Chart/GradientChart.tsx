@@ -84,9 +84,7 @@ const GradientChart = () => {
     summaryInfo.forEach((activity) => {
       if (activity.totalHour) {
         const existingItemIndex = info.findIndex(
-          (item) =>
-            item.activityUser == activity.activityUser &&
-            item.branch == activity.branch,
+          (item) => item.branch == activity.branch,
         );
 
         if (existingItemIndex !== -1) {
