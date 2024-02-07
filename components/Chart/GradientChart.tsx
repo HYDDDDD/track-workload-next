@@ -67,6 +67,7 @@ const GradientChart = () => {
       {
         label: "จำนวนชั่วโมงแต่ละสาขา(ชั่วโมง)",
         data: reports.map((data) => data.totalHour),
+        borderColor: "#FFC5C5",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],

@@ -1,14 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
-  Title,
+  PointElement,
+  LineElement,
   Tooltip,
   Legend,
 } from "chart.js";
@@ -25,20 +25,11 @@ import {
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
-  Title,
+  PointElement,
+  LineElement,
   Tooltip,
   Legend,
 );
-
-interface IUser {
-  id: string;
-  firstName: string;
-  branch: string;
-  category: string;
-  hourCulture?: number;
-  hourHealth?: number;
-}
 
 interface IInfo {
   activityUser?: string;
@@ -49,7 +40,7 @@ interface IInfo {
   hourHealth: number;
 }
 
-const VerticalBarChart = () => {
+const IntroGradientChart = () => {
   // _Context
   const { activites } = useAuth();
 
@@ -67,28 +58,31 @@ const VerticalBarChart = () => {
       },
       title: {
         display: true,
-        text: "Top 5 บุคลากรที่ได้ชั่วโมงมากที่สุด",
+        text: "จำนวนชั่วโมงทั้งหมดแต่ละสาขา",
       },
     },
   };
 
   const data = {
-    labels: reports.map((label) => label.firstName),
+    labels: reports.map((label) => label.branch),
     datasets: [
       {
         label: "จำนวนชั่วโมงด้านทำนุบำรุงศิลปวัฒนธรรม(ชั่วโมง)",
         data: reports.map((info) => info.hourCulture),
-        backgroundColor: "#BBD7E9",
+        borderColor: "#BBD7E9",
+        backgroundColor: "#3c9dda",
       },
       {
         label: "จำนวนชั่วโมงด้านส่งเสริมสุขภาพ(ชั่วโมง)",
         data: reports.map((info) => info.hourHealth),
-        backgroundColor: "#FFC5C5",
+        borderColor: "#FFC5C5",
+        backgroundColor: "#f74545",
       },
       {
         label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
         data: reports.map((info) => info.totalHour),
-        backgroundColor: "#67b450",
+        borderColor: "#67b450",
+        backgroundColor: "#2c6b19",
       },
     ],
   };
@@ -116,9 +110,7 @@ const VerticalBarChart = () => {
     summaryInfo.forEach((activity) => {
       if (activity.totalHour) {
         const existingItemIndex = info.findIndex(
-          (item) =>
-            item.activityUser == activity.activityUser &&
-            item.branch == activity.branch,
+          (item) => item.branch == activity.branch,
         );
 
         if (existingItemIndex !== -1) {
@@ -158,7 +150,7 @@ const VerticalBarChart = () => {
     });
   }, [summaryInfo]);
 
-  return <Bar options={options} data={data} />;
+  return <Line options={options} data={data} />;
 };
 
-export default VerticalBarChart;
+export default IntroGradientChart;

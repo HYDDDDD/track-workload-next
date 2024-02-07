@@ -121,6 +121,9 @@ module.exports = {
         stroke: {
           500: "#a0aac3",
         },
+        "dark-green": {
+          500: "#005B41",
+        },
       },
       width: {
         "90": "90px",

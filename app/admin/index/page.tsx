@@ -4,22 +4,22 @@ import React from "react";
 
 import clsx from "clsx";
 
-import IntroSection from "@/components/Section/Officer/IntroSection";
+import SearchDataSection from "@/components/Section/Officer/SearchDataSection";
 
-const OfficerIndexPage = () => {
+const OfficerHomePage = () => {
   return (
     <div
       className={clsx([
         `container`,
+        `mt-10`,
         `main-space-x`,
         `space-y-16`,
         `sm:space-y-6`,
-        `relative`,
       ])}
     >
-      <IntroSection />
+      <SearchDataSection />
     </div>
   );
 };
 
-export default OfficerIndexPage;
+export default OfficerHomePage;
