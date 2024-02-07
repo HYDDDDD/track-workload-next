@@ -4,14 +4,12 @@ interface IHandleCalHourPersonnelProps {
   userActivites: IActivityRequestDataProps[];
   setHourCulture: (value: React.SetStateAction<number>) => void;
   setHourHealth: (value: React.SetStateAction<number>) => void;
-  setHour?: (value: React.SetStateAction<number>) => void;
 }
 
 export const handleCalHourPersonnel = ({
   userActivites,
   setHourCulture,
   setHourHealth,
-  setHour,
 }: IHandleCalHourPersonnelProps) => {
   let countCulture = 0;
   let countHealth = 0;
@@ -25,10 +23,6 @@ export const handleCalHourPersonnel = ({
       }
     }
   });
-
-  if (setHour) {
-    setHour(countCulture + countHealth);
-  }
 
   setHourCulture(countCulture);
   setHourHealth(countHealth);

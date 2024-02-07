@@ -30,7 +30,7 @@ export const handleCalculateHour = ({
   );
 
   if (existingItemIndex !== -1) {
-    result[existingItemIndex].totalHours += hour;
+    result[existingItemIndex].totalHour += hour;
   } else {
     result.push({
       id: activity.id,
@@ -39,7 +39,7 @@ export const handleCalculateHour = ({
       lastName: filterInfo.lastName,
       branch: branchName,
       category: category,
-      totalHours: activity.hour,
+      totalHour: activity.hour,
     });
   }
 

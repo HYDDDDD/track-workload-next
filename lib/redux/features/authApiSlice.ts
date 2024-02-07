@@ -24,7 +24,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         phone,
         role,
         branch,
-        totalHours,
+        totalHour,
         password,
         re_password,
       }) => ({
@@ -37,7 +37,7 @@ const authApiSlice = apiSlice.injectEndpoints({
           phone,
           role,
           branch,
-          totalHours,
+          totalHour,
           password,
           re_password,
         },

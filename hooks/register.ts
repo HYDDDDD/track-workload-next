@@ -26,7 +26,6 @@ export default function useRegister(newUser: IUserDataProps) {
     phone,
     role,
     branch,
-    totalHours,
     password,
     re_password,
   } = newUser;
@@ -41,7 +40,6 @@ export default function useRegister(newUser: IUserDataProps) {
       phone,
       role,
       branch,
-      totalHours,
       password,
       re_password,
     })

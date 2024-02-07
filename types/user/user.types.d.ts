@@ -10,7 +10,6 @@ export interface IUserDataProps {
   phone: string;
   role: string;
   branch?: string;
-  totalHours?: number;
   password?: string;
   re_password?: string;
 }

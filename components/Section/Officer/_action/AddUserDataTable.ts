@@ -98,7 +98,7 @@ export const handleAddInfo = ({
               hour: hour,
             },
             updateDate: activity.updateDate,
-            totalHours: hour,
+            totalHour: hour,
             status: activity.status,
           };
           if (setActivityUsers) {

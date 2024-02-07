@@ -31,6 +31,13 @@ ChartJS.register(
   Legend,
 );
 
+interface IInfo {
+  activityUser?: string;
+  firstName: string;
+  branch: string;
+  totalHour: number;
+}
+
 const GradientChart = () => {
   // _Context
   const { activites } = useAuth();
@@ -38,8 +45,8 @@ const GradientChart = () => {
   // _State
   const [summaryInfo, setSummaryInfo] = useState<IExportDataProps[]>([]);
   const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
-  const [labelChart, setLabelChart] = useState<string[]>([]);
-  const [datas, setDatas] = useState<(number | undefined)[]>([]);
+  const [reports, setReports] = useState<IInfo[]>([]);
+  let info: IInfo[] = [];
 
   const options = {
     responsive: true,
@@ -49,17 +56,17 @@ const GradientChart = () => {
       },
       title: {
         display: true,
-        text: "จำนวนชั่วโมงของแต่ละสาขา",
+        text: "จำนวนชั่วโมงทั้งหมดแต่ละสาขา",
       },
     },
   };
 
   const data = {
-    labels: labelChart.map((label) => label),
+    labels: reports.map((label) => label.branch),
     datasets: [
       {
-        label: "จำนวนชั่วโมง(ชั่วโมง)",
-        data: datas.map((data) => data),
+        label: "จำนวนชั่วโมงแต่ละสาขา(ชั่วโมง)",
+        data: reports.map((data) => data.totalHour),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
@@ -70,23 +77,40 @@ const GradientChart = () => {
   }, [infoUsers]);
 
   useEffect(() => {
-    if (summaryInfo) {
-      const filteredFirstName = summaryInfo.map((info) => info.branch);
-      const filteredTotalHour = summaryInfo.map((info) => info.totalHours);
-
-      if (filteredFirstName) {
-        setLabelChart(filteredFirstName);
-      }
-
-      if (filteredTotalHour) {
-        setDatas(filteredTotalHour);
-      }
-    }
-  }, [summaryInfo]);
-
-  useEffect(() => {
     handleGetUsers(setInfoUsers);
   }, []);
+
+  useEffect(() => {
+    summaryInfo.forEach((activity) => {
+      if (activity.totalHour) {
+        const existingItemIndex = info.findIndex(
+          (item) =>
+            item.activityUser == activity.activityUser &&
+            item.branch == activity.branch,
+        );
+
+        if (existingItemIndex !== -1) {
+          info[existingItemIndex].totalHour += activity.totalHour;
+        } else {
+          info.push({
+            activityUser: activity.activityUser,
+            firstName: activity.firstName,
+            branch: activity.branch,
+            totalHour: activity.totalHour,
+          });
+        }
+
+        info.sort((a, b) => {
+          if (a.totalHour !== undefined && b.totalHour !== undefined) {
+            return b.totalHour - a.totalHour;
+          }
+          return 0;
+        });
+
+        setReports(info.slice(0, 5));
+      }
+    });
+  }, [summaryInfo]);
 
   return <Line options={options} data={data} />;
 };

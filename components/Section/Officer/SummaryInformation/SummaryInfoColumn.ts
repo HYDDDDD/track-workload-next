@@ -35,7 +35,7 @@ export const SummaryInfoColumn = [
       return info.getValue();
     },
   }),
-  columnHelper.accessor("totalHours", {
+  columnHelper.accessor("totalHour", {
     header: "จำนวนชั่วโมง",
     cell: (info) => {
       return info.getValue();

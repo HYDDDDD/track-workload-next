@@ -145,8 +145,6 @@ const SendActivitySection = ({
           updateDate: format(Date.now(), "yyyy-MM-dd"),
         });
       }
-    } else {
-      console.error("ไม่ได้ล็อคอิน");
     }
   }, [userInfo]);
 

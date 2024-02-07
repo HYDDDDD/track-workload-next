@@ -32,11 +32,21 @@ ChartJS.register(
 );
 
 interface IUser {
+  id: string;
   firstName: string;
   branch: string;
   category: string;
   hourCulture?: number;
   hourHealth?: number;
+}
+
+interface IInfo {
+  activityUser?: string;
+  firstName: string;
+  branch: string;
+  totalHour: number;
+  hourCulture: number;
+  hourHealth: number;
 }
 
 const VerticalBarChart = () => {
@@ -46,9 +56,10 @@ const VerticalBarChart = () => {
   // _State
   const [summaryInfo, setSummaryInfo] = useState<IExportDataProps[]>([]);
   const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
-  const [labelChart, setLabelChart] = useState<string[]>([]);
   const [culture, setCulture] = useState<IUser[]>([]);
   const [health, setHealth] = useState<IUser[]>([]);
+  const [reports, setReports] = useState<IInfo[]>([]);
+  let info: IInfo[] = [];
 
   const options = {
     responsive: true,
@@ -64,19 +75,35 @@ const VerticalBarChart = () => {
   };
 
   const data = {
-    labels: labelChart.map((label) => label),
+    labels: reports.map((label) => label.firstName),
     datasets: [
       {
         label: "จำนวนชั่วโมงด้านทำนุบำรุงศิลปวัฒนธรรม(ชั่วโมง)",
-        data: culture.map((info) => info.hourCulture),
+        data: reports.map((info) => info.hourCulture),
         backgroundColor: "#BBD7E9",
       },
       {
         label: "จำนวนชั่วโมงด้านส่งเสริมสุขภาพ(ชั่วโมง)",
-        data: health.map((info) => info.hourHealth),
+        data: reports.map((info) => info.hourHealth),
         backgroundColor: "#FFC5C5",
       },
+      {
+        label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
+        data: reports.map((info) => info.totalHour),
+        backgroundColor: "#67b450",
+      },
     ],
+  };
+
+  const handleSortArray = (arr: IUser[]) => {
+    arr
+      .sort((a: IUser, b: IUser) => {
+        if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
+          return b.hourCulture - a.hourCulture;
+        }
+        return 0;
+      })
+      .slice(0, 5);
   };
 
   useEffect(() => {
@@ -90,58 +117,59 @@ const VerticalBarChart = () => {
   useEffect(() => {
     setCulture([]);
     setHealth([]);
+
     summaryInfo.forEach((activity) => {
-      if (labelChart.length < 5) {
-        const existingItemIndex = labelChart.findIndex(
-          (item) => item == activity.firstName,
+      if (activity.totalHour) {
+        const existingItemIndex = info.findIndex(
+          (item) =>
+            item.activityUser == activity.activityUser &&
+            item.branch == activity.branch,
         );
 
         if (existingItemIndex !== -1) {
-          labelChart[existingItemIndex] = activity.firstName;
-        } else {
-          labelChart.push(activity.firstName);
-        }
-      }
+          info[existingItemIndex].totalHour += activity.totalHour;
 
-      if (activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม") {
-        setCulture((prevInfo) => [
-          ...prevInfo,
-          {
-            firstName: activity.firstName,
-            branch: activity.branch,
-            category: activity.category,
-            hourCulture: activity.totalHours,
-          },
-        ]);
-      } else if (activity.category === "งานด้านส่งเสริมสุขภาพ") {
-        setHealth((prevInfo) => [
-          ...prevInfo,
-          {
-            firstName: activity.firstName,
-            branch: activity.branch,
-            category: activity.category,
-            hourHealth: activity.totalHours,
-          },
-        ]);
+          if (activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม") {
+            info[existingItemIndex].hourCulture += activity.totalHour;
+          } else if (activity.category === "งานด้านส่งเสริมสุขภาพ") {
+            info[existingItemIndex].hourHealth += activity.totalHour;
+          }
+        } else {
+          if (activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม") {
+            info.push({
+              activityUser: activity.activityUser,
+              firstName: activity.firstName,
+              branch: activity.branch,
+              totalHour: activity.totalHour,
+              hourCulture: activity.totalHour,
+              hourHealth: 0,
+            });
+          } else if (activity.category === "งานด้านส่งเสริมสุขภาพ") {
+            info.push({
+              activityUser: activity.activityUser,
+              firstName: activity.firstName,
+              branch: activity.branch,
+              totalHour: activity.totalHour,
+              hourCulture: 0,
+              hourHealth: activity.totalHour,
+            });
+          }
+        }
+
+        info.sort((a, b) => {
+          if (a.totalHour !== undefined && b.totalHour !== undefined) {
+            return b.totalHour - a.totalHour;
+          }
+          return 0;
+        });
+
+        setReports(info.slice(0, 5));
       }
     });
 
-    culture
-      .sort((a: IUser, b: IUser) => {
-        if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
-          return b.hourCulture - a.hourCulture;
-        }
-        return 0;
-      })
-      .slice(0, 5);
-    health
-      .sort((a: IUser, b: IUser) => {
-        if (a.hourHealth !== undefined && b.hourHealth !== undefined) {
-          return b.hourHealth - a.hourHealth;
-        }
-        return 0;
-      })
-      .slice(0, 5);
+    handleSortArray(culture);
+
+    handleSortArray(health);
   }, [summaryInfo]);
 
   return <Bar options={options} data={data} />;
