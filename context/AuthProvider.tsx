@@ -33,6 +33,8 @@ interface userContextData {
   lastName: string;
   role: string;
   branch: string;
+  phone: string;
+  email: string;
   token: string;
 }
 

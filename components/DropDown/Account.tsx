@@ -84,41 +84,36 @@ const AccountDropDown = () => {
             `absolute right-1 top-14 w-80 space-y-4 rounded-2xl bg-white p-8 shadow-03`,
           ])}
         >
-          <div className={clsx([`flex items-center justify-between `])}>
-            <div
-              className={clsx([`h-20 w-20  rounded-full bg-primary-500`])}
-            ></div>
-            <div>
-              <p className={clsx([`text-body-20 text-blue-second-500`])}>
-                {userInfo?.firstName + " " + userInfo?.lastName}
-              </p>
-              <p className={clsx([`text-bodyNormal-14 text-muted-500`])}>
-                {DEFAULT_BRANCH_DATA_AUTH.filter(
-                  (branch) => userInfo?.branch === branch.value,
-                ).map((branch) => {
-                  return branch.branchName;
-                })}
-              </p>
-              <p className={clsx(`text-body-16 text-blue-second-500`)}>
-                {DEFAULT_USER_ROLE_DATA.filter(
-                  (role) => userInfo?.role === role.value,
-                ).map((role) => {
-                  return role.role;
-                })}
-              </p>
-            </div>
+          <div>
+            <p className={clsx([`text-body-20 text-blue-second-500`])}>
+              {userInfo?.firstName + " " + userInfo?.lastName}
+            </p>
+            <p className={clsx([`text-bodyNormal-14 text-muted-500`])}>
+              {DEFAULT_BRANCH_DATA_AUTH.filter(
+                (branch) => userInfo?.branch === branch.value,
+              ).map((branch) => {
+                return branch.branchName;
+              })}
+            </p>
+            <p className={clsx(`text-body-16 text-blue-second-500`)}>
+              {DEFAULT_USER_ROLE_DATA.filter(
+                (role) => userInfo?.role === role.value,
+              ).map((role) => {
+                return role.role;
+              })}
+            </p>
           </div>
 
           <div className={clsx([`space-y-4 border-b border-stroke-500 pb-4`])}>
             <p className={clsx([`text-body-20`])}>ช่องทางการติดต่อ</p>
             <p>
               <span className={clsx([`text-body-16`])}>เบอร์โทรศัพท์ :</span>{" "}
-              099-999-9999
+              {userInfo?.phone ? "0" + userInfo.phone : "-"}
             </p>
             <p>
               {" "}
               <span className={clsx([`text-body-16`])}>Email :</span>{" "}
-              Example@gmail.com
+              {userInfo?.email ? userInfo.email : "-"}
             </p>
           </div>
 
