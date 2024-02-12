@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import { Listbox, Transition } from "@headlessui/react";
 import clsx from "clsx";
@@ -11,7 +11,10 @@ import Table from "@/components/Section/Table/Table";
 import { DEFAULT_ACTIVITY } from "@/constant/constant";
 import { useAuth } from "@/context/AuthProvider";
 import SortLeftPng from "@/public/sort-left-icon.png";
-import { IActivityDataProps } from "@/types/activity/activity.types";
+import {
+  IActivityDataProps,
+  IActivityRequestDataProps,
+} from "@/types/activity/activity.types";
 
 import { UserColumns } from "./Column";
 
@@ -20,11 +23,31 @@ const SearchDataSection = () => {
   const { userActivites } = useAuth();
 
   // _State
+  const [info, setInfo] = useState<IActivityRequestDataProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<IActivityDataProps>(
     DEFAULT_ACTIVITY[0],
   );
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+
+  // _Effect
+  useEffect(() => {
+    if (userActivites) {
+      const filter = userActivites.sort((a, b) => {
+        a.updateDate = a.updateDate.split("-").join("-");
+        b.updateDate = b.updateDate.split("-").join("-");
+        return a.updateDate > b.updateDate
+          ? 1
+          : a.updateDate < b.updateDate
+            ? -1
+            : 0;
+      });
+
+      if (filter) {
+        setInfo(filter);
+      }
+    }
+  }, [userActivites]);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -82,7 +105,7 @@ const SearchDataSection = () => {
         endDate={endDate}
         setEndDate={setEndDate}
       />
-      <Table info={userActivites} columns={UserColumns} />
+      <Table info={info} columns={UserColumns} />
     </section>
   );
 };

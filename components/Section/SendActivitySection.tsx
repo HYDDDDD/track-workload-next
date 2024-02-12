@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import clsx from "clsx";
 import { format } from "date-fns";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import Button from "@/components/UI/Button";
 import { BASEURL } from "@/constant/constant";
@@ -35,6 +35,7 @@ const SendActivitySection = ({
 
   // _Router
   const router = useRouter();
+  const pathName = usePathname();
 
   // _State
   const imageURL = `${imageActivity}`;
@@ -48,6 +49,7 @@ const SendActivitySection = ({
     image: selectedImage,
     updateDate: "",
   });
+  const userID = pathName.replace("/personnel/form/", "");
 
   // _Action
   const handleSelectActivity = (event: ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +92,41 @@ const SendActivitySection = ({
       setSelectedImage(null);
     } else {
       toast.error("กรุณาเลือกไฟล์");
+    }
+  };
+
+  const handleEditActivity = async () => {
+    if (selectedImage !== null) {
+      try {
+        await axios
+          .put(
+            `${BASEURL}/api/activity/${userID}/`,
+            {
+              activityUser: newActivity.activityUser,
+              category: newActivity.category,
+              hour: newActivity.hour,
+              updateDate: format(Date.now(), "yyyy-MM-dd"),
+              image: newActivity.image,
+              status: "D",
+            },
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            },
+          )
+          .then(() => {
+            toast.success("ส่งหลักฐานสำเร็จ");
+            handleAddInfo({ activites, infoUsers });
+            getActivites();
+            router.push("/personnel");
+          });
+      } catch (error) {
+        console.error("Error post api activity : ", error);
+        toast.error("กรุณาส่งหลักฐานอีกครั้ง");
+      }
+    } else {
+      toast.error("กรุณาเลือกรูปภาพให้ตรงกับกิจกรรมที่จะส่ง");
     }
   };
 
@@ -173,21 +210,22 @@ const SendActivitySection = ({
           {label}
         </p>
 
-        {userInfo?.role === "Personnel" && (
-          <div className={clsx([`list-box-search`])}>
-            <div className={clsx([`list-box-search-label`])}>
-              <label>ประเภท</label>
-              <span>:</span>
-            </div>
+        {userInfo?.role === "Personnel" &&
+          (activity === undefined || activity.status === "N") && (
+            <div className={clsx([`list-box-search`])}>
+              <div className={clsx([`list-box-search-label`])}>
+                <label>ประเภท</label>
+                <span>:</span>
+              </div>
 
-            <input
-              type="file"
-              accept="image/*"
-              className={clsx([`rounded-3xl bg-primary-500 px-6 py-2`])}
-              onChange={handleSelectActivity}
-            />
-          </div>
-        )}
+              <input
+                type="file"
+                accept="image/*"
+                className={clsx([`rounded-3xl bg-primary-500 px-6 py-2`])}
+                onChange={handleSelectActivity}
+              />
+            </div>
+          )}
 
         <div className={clsx([`flex items-center justify-center`])}>
           {selectedImage ? (
@@ -212,32 +250,10 @@ const SendActivitySection = ({
               <p>JPG, GIF or PNG. Max size of 20MB</p>
             </div>
           )}
-          {/* {imageURL ? (
-            <img
-              src={imageURL}
-              alt="image activity"
-              className={clsx(`h-412 w-412 object-cover`)}
-            />
-          ) : selectedImage ? (
-            <img
-              src={URL.createObjectURL(selectedImage)}
-              alt="image activity"
-              className={clsx(`h-412 w-412 object-cover`)}
-            />
-          ) : (
-            <div
-              className={clsx([
-                `flex h-412 w-412 flex-col items-center justify-center bg-secondary-500 text-center`,
-              ])}
-            >
-              <p>รูปภาพตัวอย่าง</p>
-              <p>JPG, GIF or PNG. Max size of 20MB</p>
-            </div>
-          )} */}
         </div>
 
-        <div className={clsx([`flex items-center justify-center pb-10`])}>
-          {userInfo?.role === "Admin" ? (
+        {userInfo?.role === "Admin" && (
+          <div className={clsx([`flex items-center justify-center pb-10`])}>
             <div className={clsx([`space-x-20`, `sm:space-x-4`])}>
               <Button
                 variant="success"
@@ -258,16 +274,27 @@ const SendActivitySection = ({
                 </p>
               </Button>
             </div>
-          ) : (
-            <Button
-              variant="milk-pink"
-              rounder="full"
-              onClick={handleAddActivity}
-            >
-              <p className={clsx([`px-5 text-body-24`])}>ส่ง</p>
-            </Button>
+          </div>
+        )}
+
+        {userInfo?.role === "Personnel" &&
+          (activity === undefined || activity.status === "N") && (
+            <div className={clsx([`flex items-center justify-center pb-10`])}>
+              <Button
+                variant="milk-pink"
+                rounder="full"
+                onClick={() => {
+                  if (activity === undefined) {
+                    handleAddActivity();
+                  } else {
+                    handleEditActivity();
+                  }
+                }}
+              >
+                <p className={clsx([`px-5 text-body-24`])}>ส่ง</p>
+              </Button>
+            </div>
           )}
-        </div>
       </div>
     </section>
   );

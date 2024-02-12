@@ -109,7 +109,7 @@ const AccountDropDown = () => {
             <p className={clsx([`text-body-20`])}>ช่องทางการติดต่อ</p>
             <p>
               <span className={clsx([`text-body-16`])}>เบอร์โทรศัพท์ :</span>{" "}
-              {userInfo?.phone ? "0" + userInfo.phone : "-"}
+              {userInfo?.phone ? "" + userInfo.phone : "-"}
             </p>
             <p>
               {" "}

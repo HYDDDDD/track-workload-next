@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-table";
 import clsx from "clsx";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import { useAuth } from "@/context/AuthProvider";
 import SlideDownPng from "@/public/slide-down-icon.png";
@@ -31,6 +32,9 @@ const Table = <T extends IActivityRequestDataProps>({
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+
+  // _Router
+  const router = useRouter();
 
   // _Context
   const { userInfo } = useAuth();
@@ -101,9 +105,21 @@ const Table = <T extends IActivityRequestDataProps>({
                 .rows.filter((row) => row.original.activityUser == userInfo?.id)
                 .map((row) => {
                   return (
-                    <tr key={row.id}>
+                    <tr
+                      key={row.id}
+                      className={clsx(`cursor-pointer hover:bg-slate-200`)}
+                    >
                       {row.getVisibleCells().map((cell) => (
-                        <td key={cell.id}>
+                        <td
+                          key={cell.id}
+                          onClick={() => {
+                            router.push(
+                              `/personnel/form/${
+                                cell.getContext().row.original.id
+                              }`,
+                            );
+                          }}
+                        >
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext(),

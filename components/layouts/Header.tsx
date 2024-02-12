@@ -39,7 +39,13 @@ const Header = () => {
         className={clsx(`main-space-x flex items-center justify-between py-3`)}
       >
         <div className={clsx([`flex items-center space-x-2`])}>
-          <Link href={`/${userInfo?.role.toLowerCase()}/index`}>
+          <Link
+            href={
+              userInfo?.role === "Admin"
+                ? `/${userInfo?.role.toLowerCase()}/index`
+                : `/${userInfo?.role.toLowerCase()}`
+            }
+          >
             <Image
               src={LogoICTPng}
               alt="logo ict png"
@@ -60,7 +66,13 @@ const Header = () => {
         </div>
 
         <div className={clsx([`flex items-center space-x-4`])}>
-          <Link href={`/${userInfo?.role.toLowerCase()}/index`}>
+          <Link
+            href={
+              userInfo?.role === "Admin"
+                ? `/${userInfo?.role.toLowerCase()}/index`
+                : `/${userInfo?.role.toLowerCase()}`
+            }
+          >
             <span
               className={clsx([
                 `text-body-20`,
