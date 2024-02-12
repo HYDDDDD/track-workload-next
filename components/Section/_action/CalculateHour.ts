@@ -44,6 +44,13 @@ export const handleCalculateHour = ({
   }
 
   if (setSummaryInfo) {
-    setSummaryInfo(result);
+    setSummaryInfo(
+      result.sort((a, b) => {
+        if (a.totalHour !== undefined && b.totalHour !== undefined) {
+          return b.totalHour - a.totalHour;
+        }
+        return 0;
+      }),
+    );
   }
 };

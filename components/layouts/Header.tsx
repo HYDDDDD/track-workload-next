@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DEFAULT_USER_ROLE_DATA } from "@/constant/constant";
 import { useAuth } from "@/context/AuthProvider";
 import LinePng from "@/public/line-icon.png";
 import LogoICTPng from "@/public/logo-ict.png";
@@ -61,13 +62,16 @@ const Header = () => {
         <div className={clsx([`flex items-center space-x-4`])}>
           <Link href={`/${userInfo?.role.toLowerCase()}/index`}>
             <span
-              className={clsx([`text-body-20`, `lg:text-body-16`, `sm:hidden`])}
+              className={clsx([
+                `text-body-20`,
+                `lg:text-body-16`,
+                `sm:hidden`,
+                `hover:text-gray-500`,
+              ])}
             >
               หน้าหลัก
             </span>
           </Link>
-
-          {/* fix mobile */}
           {userInfo?.role === "Admin" && (
             <Link href="/admin/summary-information">
               <span
@@ -75,6 +79,7 @@ const Header = () => {
                   `text-body-20`,
                   `lg:text-body-16`,
                   `sm:text-body-12`,
+                  `hover:text-gray-500`,
                 ])}
               >
                 ข้อมูลสรุปผล
@@ -87,6 +92,15 @@ const Header = () => {
             className={clsx(`sm:hidden`)}
           />
           <AccountDropDown />
+          <p
+            className={clsx([`text-body-16 text-blue-second-500`, `sm:hidden`])}
+          >
+            {DEFAULT_USER_ROLE_DATA.filter(
+              (role) => userInfo?.role === role.value,
+            ).map((role) => {
+              return role.role;
+            })}
+          </p>
         </div>
       </div>
     </header>

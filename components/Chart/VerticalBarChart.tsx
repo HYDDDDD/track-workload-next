@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import clsx from "clsx";
 
 import { useAuth } from "@/context/AuthProvider";
 import { IExportDataProps } from "@/types/activity/activity.types";
@@ -61,13 +62,39 @@ const VerticalBarChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2,
     plugins: {
       legend: {
         position: "top" as const,
+        labels: {
+          font: {
+            size: 16,
+          },
+        },
       },
       title: {
         display: true,
         text: "Top 5 บุคลากรที่ได้ชั่วโมงมากที่สุด",
+        font: {
+          size: 18,
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            size: 12,
+          },
+        },
+      },
+      y: {
+        ticks: {
+          font: {
+            size: 14,
+          },
+        },
       },
     },
   };
@@ -75,6 +102,11 @@ const VerticalBarChart = () => {
   const data = {
     labels: reports.map((label) => label.firstName),
     datasets: [
+      {
+        label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
+        data: reports.map((info) => info.totalHour),
+        backgroundColor: "#67b450",
+      },
       {
         label: "จำนวนชั่วโมงด้านทำนุบำรุงศิลปวัฒนธรรม(ชั่วโมง)",
         data: reports.map((info) => info.hourCulture),
@@ -85,19 +117,14 @@ const VerticalBarChart = () => {
         data: reports.map((info) => info.hourHealth),
         backgroundColor: "#FFC5C5",
       },
-      {
-        label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
-        data: reports.map((info) => info.totalHour),
-        backgroundColor: "#67b450",
-      },
     ],
   };
 
   const handleSortArray = (arr: IInfo[]) => {
     arr
       .sort((a, b) => {
-        if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
-          return b.hourCulture - a.hourCulture;
+        if (a.totalHour !== undefined && b.totalHour !== undefined) {
+          return b.totalHour - a.totalHour;
         }
         return 0;
       })
@@ -157,8 +184,15 @@ const VerticalBarChart = () => {
       }
     });
   }, [summaryInfo]);
-
-  return <Bar options={options} data={data} />;
+  return (
+    <div
+      className={clsx(`h-full w-full`, `sm:overflow-hidden sm:overflow-x-auto`)}
+    >
+      <div className={clsx([`relative`, `sm:h-40-vh sm:w-80-vh`])}>
+        <Bar options={options} data={data} className="canvas" />
+      </div>
+    </div>
+  );
 };
 
 export default VerticalBarChart;

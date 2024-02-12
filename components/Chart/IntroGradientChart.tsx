@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import clsx from "clsx";
 
 import { useAuth } from "@/context/AuthProvider";
 import { IExportDataProps } from "@/types/activity/activity.types";
@@ -52,13 +53,49 @@ const IntroGradientChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2,
     plugins: {
       legend: {
         position: "top" as const,
+        labels: {
+          font: {
+            size: 16,
+          },
+          color: "#fff",
+        },
       },
       title: {
         display: true,
         text: "จำนวนชั่วโมงทั้งหมดแต่ละสาขา",
+        font: {
+          size: 18,
+        },
+        color: "#fff",
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          color: "#575757",
+        },
+        ticks: {
+          color: "#fff",
+          font: {
+            size: 14,
+          },
+        },
+      },
+      y: {
+        grid: {
+          color: "#575757",
+        },
+        ticks: {
+          color: "#fff",
+          font: {
+            size: 14,
+          },
+        },
       },
     },
   };
@@ -71,19 +108,21 @@ const IntroGradientChart = () => {
         data: reports.map((info) => info.hourCulture),
         borderColor: "#BBD7E9",
         backgroundColor: "#3c9dda",
+        borderWidth: 5,
       },
       {
         label: "จำนวนชั่วโมงด้านส่งเสริมสุขภาพ(ชั่วโมง)",
         data: reports.map((info) => info.hourHealth),
         borderColor: "#FFC5C5",
         backgroundColor: "#f74545",
+        borderWidth: 5,
       },
-      {
-        label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
-        data: reports.map((info) => info.totalHour),
-        borderColor: "#67b450",
-        backgroundColor: "#2c6b19",
-      },
+      // {
+      //   label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
+      //   data: reports.map((info) => info.totalHour),
+      //   borderColor: "#67b450",
+      //   backgroundColor: "#2c6b19",
+      // },
     ],
   };
 
@@ -150,7 +189,15 @@ const IntroGradientChart = () => {
     });
   }, [summaryInfo]);
 
-  return <Line options={options} data={data} />;
+  return (
+    <div
+      className={clsx(`h-full w-full`, `sm:overflow-hidden sm:overflow-x-auto`)}
+    >
+      <div className={clsx([`relative`, `sm:h-40-vh sm:w-80-vh`])}>
+        <Line options={options} data={data} className="canvas" />
+      </div>
+    </div>
+  );
 };
 
 export default IntroGradientChart;

@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import clsx from "clsx";
 
 import { useAuth } from "@/context/AuthProvider";
 import { IExportDataProps } from "@/types/activity/activity.types";
@@ -50,13 +51,39 @@ const GradientChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 2,
     plugins: {
       legend: {
         position: "top" as const,
+        labels: {
+          font: {
+            size: 16,
+          },
+        },
       },
       title: {
         display: true,
         text: "จำนวนชั่วโมงทั้งหมดแต่ละสาขา",
+        font: {
+          size: 18,
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            size: 12,
+          },
+        },
+      },
+      y: {
+        ticks: {
+          font: {
+            size: 14,
+          },
+        },
       },
     },
   };
@@ -69,6 +96,7 @@ const GradientChart = () => {
         data: reports.map((data) => data.totalHour),
         borderColor: "#FFC5C5",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderWidth: 5,
       },
     ],
   };
@@ -111,7 +139,15 @@ const GradientChart = () => {
     });
   }, [summaryInfo]);
 
-  return <Line options={options} data={data} />;
+  return (
+    <div
+      className={clsx(`h-full w-full`, `sm:overflow-hidden sm:overflow-x-auto`)}
+    >
+      <div className={clsx([`relative`, `sm:h-40-vh sm:w-80-vh`])}>
+        <Line options={options} data={data} className="canvas" />
+      </div>
+    </div>
+  );
 };
 
 export default GradientChart;

@@ -9,13 +9,7 @@ import IntroSection from "@/components/Section/Officer/IntroSection";
 const OfficerIndexPage = () => {
   return (
     <div
-      className={clsx([
-        `container`,
-        `main-space-x`,
-        `space-y-16`,
-        `sm:space-y-6`,
-        `relative`,
-      ])}
+      className={clsx([`container`, `space-y-16`, `sm:space-y-6`, `relative`])}
     >
       <IntroSection />
     </div>

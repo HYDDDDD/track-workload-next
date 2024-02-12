@@ -128,10 +128,12 @@ module.exports = {
       width: {
         "90": "90px",
         "412": "412px",
+        "80-vh": "80vh",
       },
       height: {
         "90": "90px",
         "412": "412px",
+        "40-vh": "40vh",
       },
       gridTemplateColumns: {
         "space-3": "224px auto auto",

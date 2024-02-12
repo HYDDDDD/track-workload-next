@@ -81,7 +81,7 @@ export const handleAddInfo = ({
             hour: hour,
             setSummaryInfo: setSummaryInfo,
           });
-        } else {
+        } else if (activity.status === "D") {
           const data: IActivityResponseDataOfficerProps = {
             id: activity.id,
             userID: filterInfo.id,

@@ -106,7 +106,7 @@ const SendActivitySection = ({
         .then(() => {
           toast.success("ทำรายการเสร็จสิ้น");
           setReload(true);
-          router.push("/admin");
+          router.push("/admin/index");
         });
     } else {
       await axios
@@ -117,7 +117,7 @@ const SendActivitySection = ({
         .then(() => {
           toast.success("ทำรายการเสร็จสิ้น");
           setReload(true);
-          router.push("/admin");
+          router.push("/admin/index");
         });
     }
   };

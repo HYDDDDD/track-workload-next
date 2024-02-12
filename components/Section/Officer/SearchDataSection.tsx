@@ -6,7 +6,6 @@ import { Listbox, Transition } from "@headlessui/react";
 import clsx from "clsx";
 import Image from "next/image";
 
-import DownloadButton from "@/components/Button/Download";
 import StartDateEndDatePicker from "@/components/DatePicker/StartDateEndDate";
 import { DEFAULT_ACTIVITY, DEFAULT_STATUS } from "@/constant/constant";
 import { useAuth } from "@/context/AuthProvider";
@@ -42,22 +41,6 @@ const SearchDataSection = () => {
   const [exportData, setExportData] = useState<IExportDataProps[]>([]);
 
   // _Effect
-  useEffect(() => {
-    if (activityUsers) {
-      const filteredData = activityUsers.map((info) => ({
-        id: info.id,
-        firstName: info.firstName,
-        lastName: info.lastName,
-        branch: info.branch.branchName,
-        category: info.category.category,
-        updateDate: info.updateDate,
-        hours: info.category.hour,
-      }));
-
-      setExportData(filteredData);
-    }
-  }, [activityUsers]);
-
   useEffect(() => {
     handleAddInfo({ activites, infoUsers, setActivityUsers });
   }, [infoUsers]);
@@ -187,10 +170,6 @@ const SearchDataSection = () => {
         setEndDate={setEndDate}
       />
       <TableOfficer info={activityUsers} columns={UsersColumns} />
-
-      <div className={clsx([`mb-2 flex justify-between`])}>
-        <DownloadButton data={exportData} fileName="Export file" />
-      </div>
     </section>
   );
 };

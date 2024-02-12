@@ -71,7 +71,7 @@ export const USERS: IUserDataProps[] = [
 export const DEFAULT_USER_ROLE_DATA: IRoleDataProps[] = [
   { id: "1", role: "", value: "" },
   { id: "2", role: "บุคลากร", value: "Personnel" },
-  { id: "3", role: "เจ้าหน้าที่", value: "Officer" },
+  { id: "3", role: "เจ้าหน้าที่", value: "Admin" },
 ];
 
 // Branch

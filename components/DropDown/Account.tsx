@@ -76,6 +76,7 @@ const AccountDropDown = () => {
       <Image
         src={AvatarPng}
         alt="avatar icon png"
+        className={clsx(`hover:cursor-pointer`)}
         onClick={() => setAccountMenu((val) => !val)}
       />
       {accountMenu && (
