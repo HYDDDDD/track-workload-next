@@ -102,11 +102,11 @@ const VerticalBarChart = () => {
   const data = {
     labels: reports.map((label) => label.firstName),
     datasets: [
-      {
-        label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
-        data: reports.map((info) => info.totalHour),
-        backgroundColor: "#67b450",
-      },
+      // {
+      //   label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
+      //   data: reports.map((info) => info.totalHour),
+      //   backgroundColor: "#67b450",
+      // },
       {
         label: "จำนวนชั่วโมงด้านทำนุบำรุงศิลปวัฒนธรรม(ชั่วโมง)",
         data: reports.map((info) => info.hourCulture),
@@ -123,8 +123,8 @@ const VerticalBarChart = () => {
   const handleSortArray = (arr: IInfo[]) => {
     arr
       .sort((a, b) => {
-        if (a.totalHour !== undefined && b.totalHour !== undefined) {
-          return b.totalHour - a.totalHour;
+        if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
+          return b.hourCulture - a.hourCulture;
         }
         return 0;
       })
