@@ -132,11 +132,6 @@ export const DEFAULT_STATUS: IStatusDataProps[] = [
 // Activity
 export const DEFAULT_ACTIVITY: IActivityDataProps[] = [
   {
-    id: "1",
-    category: "ประเภท",
-    hour: 0,
-  },
-  {
     id: "2",
     category: "งานด้านทำนุบำรุงศิลปวัฒนธรรม",
     hour: 6,
@@ -145,6 +140,11 @@ export const DEFAULT_ACTIVITY: IActivityDataProps[] = [
     id: "3",
     category: "งานด้านส่งเสริมสุขภาพ",
     hour: 4,
+  },
+  {
+    id: "1",
+    category: "ทั้งหมด",
+    hour: 0,
   },
 ];
 

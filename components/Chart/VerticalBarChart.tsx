@@ -32,15 +32,6 @@ ChartJS.register(
   Legend,
 );
 
-interface IUser {
-  id: string;
-  firstName: string;
-  branch: string;
-  category: string;
-  hourCulture?: number;
-  hourHealth?: number;
-}
-
 interface IInfo {
   activityUser?: string;
   firstName: string;
