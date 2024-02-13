@@ -41,8 +41,6 @@ const SearchSummaryInfoSection = () => {
 
   // _Action
   const handleFilterCategory = () => {
-    console.log("inside category");
-
     const filterDropdown = summaryInfo.filter((activity) => {
       if (activity.category === selectedCategory.category) {
         return activity;

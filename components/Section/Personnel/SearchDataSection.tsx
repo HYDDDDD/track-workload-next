@@ -34,8 +34,6 @@ const SearchDataSection = () => {
   // _Action
   const handleFilterCategory = () => {
     const filterDropdown = userActivites.filter((activity) => {
-      console.log(activity);
-
       if (
         activity.category === "C" &&
         "งานด้านทำนุบำรุงศิลปวัฒนธรรม" === selectedCategory.category
