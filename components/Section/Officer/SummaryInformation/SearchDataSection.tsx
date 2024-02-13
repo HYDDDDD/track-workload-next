@@ -30,13 +30,49 @@ const SearchSummaryInfoSection = () => {
 
   // _State
   const [summaryInfo, setSummaryInfo] = useState<IExportDataProps[]>([]);
+  const [info, setInfo] = useState<IExportDataProps[]>([]);
   const [infoUsers, setInfoUsers] = useState<IUserDataProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<IActivityDataProps>(
-    DEFAULT_ACTIVITY[0],
+    DEFAULT_ACTIVITY[2],
   );
   const [branch, setBranch] = useState<IBranchDataProps>(
     DEFAULT_BRANCH_DATA_SUMMARY_OFFICER[0],
   );
+
+  // _Action
+  const handleFilterCategory = () => {
+    console.log("inside category");
+
+    const filterDropdown = summaryInfo.filter((activity) => {
+      if (activity.category === selectedCategory.category) {
+        return activity;
+      }
+    });
+
+    setInfo(filterDropdown);
+  };
+
+  const handleFilterBranch = () => {
+    const filterDropdown = summaryInfo.filter((activity) => {
+      if (activity.branch === branch.branchName) {
+        return activity;
+      }
+    });
+
+    setInfo(filterDropdown);
+  };
+
+  const handleFilter = () => {
+    const filterDropdown = summaryInfo.filter((activity) => {
+      if (activity.branch === branch.branchName) {
+        if (activity.category === selectedCategory.category) {
+          return activity;
+        }
+      }
+    });
+
+    setInfo(filterDropdown);
+  };
 
   // _Effect
   useEffect(() => {
@@ -46,6 +82,27 @@ const SearchSummaryInfoSection = () => {
   useEffect(() => {
     handleAddInfo({ activites, infoUsers, setSummaryInfo });
   }, [infoUsers]);
+
+  useEffect(() => {
+    if (selectedCategory.id === "1" && branch.id === "1") {
+      setInfo(summaryInfo);
+    }
+
+    if (
+      selectedCategory.id !== "1" ||
+      (selectedCategory.id !== "1" && branch.id === "1")
+    ) {
+      handleFilterCategory();
+    }
+
+    if (branch.id !== "1") {
+      handleFilterBranch();
+    }
+
+    if (selectedCategory.id !== "1" && branch.id !== "1") {
+      handleFilter();
+    }
+  }, [summaryInfo, selectedCategory, branch]);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -81,18 +138,15 @@ const SearchSummaryInfoSection = () => {
                     <Listbox.Option
                       key={activity.id}
                       className={({ active }) =>
-                        `${
-                          activity.id !== "1" &&
-                          `relative cursor-default select-none py-2 pl-10 pr-4`
-                        } ${
-                          activity.id !== "1" && active
-                            ? `bg-amber-100 text-primary-900`
+                        `${`relative cursor-default select-none py-2 pl-10 pr-4`} ${
+                          active
+                            ? `cursor-pointer bg-amber-100 text-primary-900`
                             : `text-gray-900`
                         }`
                       }
                       value={activity}
                     >
-                      {activity.id !== "1" && activity.category}
+                      {activity.category}
                     </Listbox.Option>
                   ))}
                 </Listbox.Options>
@@ -133,18 +187,15 @@ const SearchSummaryInfoSection = () => {
                     <Listbox.Option
                       key={branch.id}
                       className={({ active }) =>
-                        `${
-                          branch.id !== "1" &&
-                          `relative cursor-default select-none py-2 pl-10 pr-4`
-                        } ${
-                          branch.id !== "1" && active
+                        `${`relative cursor-default select-none py-2 pl-10 pr-4`} ${
+                          active
                             ? `bg-amber-100 text-primary-900`
                             : `text-gray-900`
                         }`
                       }
                       value={branch}
                     >
-                      {branch.id !== "1" && branch.branchName}
+                      {branch.branchName}
                     </Listbox.Option>
                   ))}
                 </Listbox.Options>
@@ -154,12 +205,9 @@ const SearchSummaryInfoSection = () => {
         </div>
       </div>
 
-      <TableOfficer info={summaryInfo} columns={SummaryInfoColumn} />
+      <TableOfficer info={info} columns={SummaryInfoColumn} />
       <div className={clsx([`mb-2 flex justify-between`])}>
-        <DownloadButton
-          data={summaryInfo}
-          fileName="Export summary data file"
-        />
+        <DownloadButton data={info} fileName="Export summary data file" />
       </div>
     </section>
   );

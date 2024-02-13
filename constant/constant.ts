@@ -92,21 +92,21 @@ export const DEFAULT_BRANCH_DATA_AUTH: IBranchDataProps[] = [
 ];
 
 export const DEFAULT_BRANCH_DATA_SUMMARY_OFFICER: IBranchDataProps[] = [
-  { id: "1", branchName: "", value: "" },
   { id: "2", branchName: "สาขาวิชาธุรกิจดิจิทัล", value: "DB" },
   { id: "3", branchName: "สาขาวิชาเทคโนโลยีสารสนเทศ", value: "IT" },
   { id: "4", branchName: "สาขาวิชาภูมิสารสนเทศศาสตร์", value: "GIS" },
   { id: "5", branchName: "สาขาวิชาวิทยาการคอมพิวเตอร์", value: "CS" },
   { id: "6", branchName: "สาขาวิชาวิทยาการข้อมูลและการประยุกต์", value: "DSA" },
-  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร", value: "CPE" },
-  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร", value: "SE" },
+  { id: "7", branchName: "สาขาวิชาวิศวกรรมคอมพิวเตอร์", value: "CPE" },
+  { id: "8", branchName: "สาขาวิชาวิศวกรรมซอฟต์แวร์", value: "SE" },
   {
     id: "9",
     branchName: "สาขาวิชาคอมพิวเตอร์กราฟิกและมัลติมีเดีย",
     value: "CG",
   },
   { id: "10", branchName: "สำนักงานคณะ", value: "OF" },
-  { id: "11", branchName: "ทั้งหมด", value: "ALL" },
+  { id: "1", branchName: "ทั้งหมด", value: "ALL" },
+  // { id: "11", branchName: "ทั้งหมด", value: "ALL" },
 ];
 
 // Status
