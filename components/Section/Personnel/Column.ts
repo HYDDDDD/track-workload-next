@@ -1,4 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
+import { format } from "date-fns";
 
 import { IActivityRequestDataProps } from "@/types/activity/activity.types";
 
@@ -24,7 +25,7 @@ export const UserColumns = [
   columnHelper.accessor("updateDate", {
     header: "วันที่ส่ง",
     cell: (info) => {
-      return info.getValue();
+      return format(new Date(info.getValue()), "yyyy-MM-dd");
     },
   }),
   columnHelper.accessor("hour", {

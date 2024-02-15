@@ -106,11 +106,62 @@ const SearchDataSection = () => {
 
   useEffect(() => {
     if (activityUsers) {
+      const filter = activityUsers.sort((a, b) => {
+        a.updateDate = format(
+          new Date(a.updateDate),
+          "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+        )
+          .split("-")
+          .join("-");
+        b.updateDate = format(
+          new Date(b.updateDate),
+          "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+        )
+          .split("-")
+          .join("-");
+        return a.updateDate > b.updateDate
+          ? 1
+          : a.updateDate < b.updateDate
+            ? -1
+            : 0;
+      });
+
+      if (filter) {
+        console.log("filter out : ", filter);
+
+        setInfo(filter);
+      }
+
       if (
         selectedCategory.id === "1" &&
         (startDate === null || endDate === null)
       ) {
-        setInfo(activityUsers);
+        const filter = activityUsers.sort((a, b) => {
+          a.updateDate = format(
+            new Date(a.updateDate),
+            "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+          )
+            .split("-")
+            .join("-");
+          b.updateDate = format(
+            new Date(b.updateDate),
+            "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+          )
+            .split("-")
+            .join("-");
+          return a.updateDate > b.updateDate
+            ? 1
+            : a.updateDate < b.updateDate
+              ? -1
+              : 0;
+        });
+
+        if (filter) {
+          console.log("filter in : ", filter);
+
+          setInfo(filter);
+        }
+        // setInfo(activityUsers);
       } else if (
         selectedCategory.id !== "1" &&
         startDate !== null &&

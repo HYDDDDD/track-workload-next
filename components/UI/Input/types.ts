@@ -8,7 +8,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string | number | undefined;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
-  type: "text" | "number" | "email" | "password";
+  type: "text" | "number" | "email" | "password" | "tel";
   required?: boolean;
   children: ReactNode;
 }

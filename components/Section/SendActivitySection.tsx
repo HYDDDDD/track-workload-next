@@ -107,11 +107,11 @@ const SendActivitySection = ({
           .put(
             `${BASEURL}/api/activity/${userID}/`,
             {
-              activityUser: newActivity.activityUser,
-              category: newActivity.category,
-              hour: newActivity.hour,
-              updateDate: format(Date.now(), "yyyy-MM-dd"),
-              image: newActivity.image,
+              activityUser: activity?.activityUser,
+              category: activity?.category,
+              hour: activity?.hour,
+              updateDate: format(Date.now(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+              image: selectedImage,
               status: "D",
             },
             {
@@ -171,7 +171,8 @@ const SendActivitySection = ({
           activityUser: userInfo.id,
           category: "C",
           hour: 6,
-          updateDate: format(Date.now(), "yyyy-MM-dd"),
+          updateDate: format(Date.now(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+          // updateDate: Date.now(),
         });
       } else {
         setNewActivity({
@@ -179,7 +180,8 @@ const SendActivitySection = ({
           activityUser: userInfo.id,
           category: "H",
           hour: 4,
-          updateDate: format(Date.now(), "yyyy-MM-dd"),
+          updateDate: format(Date.now(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+          // updateDate: Date.now(),
         });
       }
     }
