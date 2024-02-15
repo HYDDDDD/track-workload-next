@@ -57,6 +57,7 @@ const AccountDropDown = () => {
         localStorage.removeItem("auth_token");
       })
       .finally(() => {
+        localStorage.removeItem("auth_token");
         toast.success("ล็อกเอาท์สำเร็จ");
         router.push("/");
       });
