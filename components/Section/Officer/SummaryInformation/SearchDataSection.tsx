@@ -36,7 +36,7 @@ const SearchSummaryInfoSection = () => {
     DEFAULT_ACTIVITY[2],
   );
   const [branch, setBranch] = useState<IBranchDataProps>(
-    DEFAULT_BRANCH_DATA_SUMMARY_OFFICER[0],
+    DEFAULT_BRANCH_DATA_SUMMARY_OFFICER[9],
   );
 
   // _Action

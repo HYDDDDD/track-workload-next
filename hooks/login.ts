@@ -37,7 +37,7 @@ export default function useLogin(email: string, password: string) {
         toast.success("ล็อกอินสำเร็จ");
       })
       .catch(() => {
-        toast.error("กรุณาล็อกอินอีกครั้ง");
+        toast.error("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาล็อกอินอีกครั้ง");
       });
   };
 

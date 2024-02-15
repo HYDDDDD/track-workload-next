@@ -35,6 +35,7 @@ ChartJS.register(
 interface IInfo {
   activityUser?: string;
   firstName: string;
+  lastName: string;
   branch: string;
   totalHour: number;
   hourCulture: number;
@@ -91,7 +92,7 @@ const VerticalBarChart = () => {
   };
 
   const data = {
-    labels: reports.map((label) => label.firstName),
+    labels: reports.map((label) => label.firstName + " " + label.lastName),
     datasets: [
       // {
       //   label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
@@ -152,6 +153,7 @@ const VerticalBarChart = () => {
             info.push({
               activityUser: activity.activityUser,
               firstName: activity.firstName,
+              lastName: activity.lastName,
               branch: activity.branch,
               totalHour: activity.totalHour,
               hourCulture: activity.totalHour,
@@ -161,6 +163,7 @@ const VerticalBarChart = () => {
             info.push({
               activityUser: activity.activityUser,
               firstName: activity.firstName,
+              lastName: activity.lastName,
               branch: activity.branch,
               totalHour: activity.totalHour,
               hourCulture: 0,

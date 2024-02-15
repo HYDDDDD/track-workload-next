@@ -14,6 +14,8 @@ import { useAuth } from "@/context/AuthProvider";
 import { IActivityRequestDataProps } from "@/types/activity/activity.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
+import ConfirmChangeStatusModal from "../Modal/ConfirmChangeStatus";
+import ConfirmSendActivityModal from "../Modal/ConfirmSendActivity";
 import {
   handleAddInfo,
   handleGetUsers,
@@ -49,6 +51,9 @@ const SendActivitySection = ({
     image: selectedImage,
     updateDate: "",
   });
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalChangeStatus, setModalChangeStatus] = useState<boolean>(false);
+  const [statusLabel, setStatusLabel] = useState<string>("");
   const userID = pathName.replace("/personnel/form/", "");
 
   // _Action
@@ -134,29 +139,24 @@ const SendActivitySection = ({
     const storedToken = localStorage.getItem("auth_token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
 
-    if (pass) {
-      await axios
-        .put(`${BASEURL}/api/activity/${activity?.id}/`, {
-          ...activity,
-          status: "P",
-        })
-        .then(() => {
-          toast.success("ทำรายการเสร็จสิ้น");
-          setReload(true);
-          router.push("/admin/index");
-        });
-    } else {
-      await axios
-        .put(`${BASEURL}/api/activity/${activity?.id}/`, {
-          ...activity,
-          status: "N",
-        })
-        .then(() => {
-          toast.success("ทำรายการเสร็จสิ้น");
-          setReload(true);
-          router.push("/admin/index");
-        });
-    }
+    await axios
+      .put(`${BASEURL}/api/activity/${activity?.id}/`, {
+        ...activity,
+        status: pass ? "P" : "N",
+      })
+      .then(() => {
+        toast.success("ทำรายการเสร็จสิ้น");
+        setReload(true);
+        router.push("/admin/index");
+      });
+  };
+
+  const handleCloseModalConfirmSendAcitvity = () => {
+    setModalOpen(false);
+  };
+
+  const handleCloseModalConfirmChangeStatus = () => {
+    setModalChangeStatus(false);
   };
 
   // _Effect
@@ -258,7 +258,11 @@ const SendActivitySection = ({
               <Button
                 variant="success"
                 rounder="full"
-                onClick={() => handleChangeStatusActivity(true)}
+                // onClick={() => handleChangeStatusActivity(true)}
+                onClick={() => {
+                  setStatusLabel("ผ่าน");
+                  setModalChangeStatus(true);
+                }}
               >
                 <p className={clsx([`px-5 text-body-24 sm:text-body-18`])}>
                   ผ่าน
@@ -267,7 +271,11 @@ const SendActivitySection = ({
               <Button
                 variant="milk-pink"
                 rounder="full"
-                onClick={() => handleChangeStatusActivity(false)}
+                // onClick={() => handleChangeStatusActivity(false)}
+                onClick={() => {
+                  setStatusLabel("ไม่ผ่าน");
+                  setModalChangeStatus(true);
+                }}
               >
                 <p className={clsx([`px-5 text-body-24 sm:text-body-18`])}>
                   ไม่ผ่าน
@@ -285,7 +293,11 @@ const SendActivitySection = ({
                 rounder="full"
                 onClick={() => {
                   if (activity === undefined) {
-                    handleAddActivity();
+                    if (selectedImage !== null) {
+                      setModalOpen(true);
+                    } else {
+                      toast.error("กรุณาเลือกไฟล์");
+                    }
                   } else {
                     handleEditActivity();
                   }
@@ -296,6 +308,17 @@ const SendActivitySection = ({
             </div>
           )}
       </div>
+      <ConfirmSendActivityModal
+        isOpen={modalOpen}
+        handleAddActivity={handleAddActivity}
+        closeModal={handleCloseModalConfirmSendAcitvity}
+      />
+      <ConfirmChangeStatusModal
+        label={statusLabel}
+        handleChangeStatusActivity={handleChangeStatusActivity}
+        closeModal={handleCloseModalConfirmChangeStatus}
+        isOpen={modalChangeStatus}
+      />
     </section>
   );
 };
