@@ -127,8 +127,6 @@ const SearchDataSection = () => {
       });
 
       if (filter) {
-        console.log("filter out : ", filter);
-
         setInfo(filter);
       }
 
@@ -157,8 +155,6 @@ const SearchDataSection = () => {
         });
 
         if (filter) {
-          console.log("filter in : ", filter);
-
           setInfo(filter);
         }
         // setInfo(activityUsers);

@@ -102,10 +102,16 @@ const SearchDataSection = () => {
         (startDate === null || endDate === null)
       ) {
         const filter = userActivites.sort((a, b) => {
-          a.updateDate = format(new Date(a.updateDate), "yyyy-MM-dd")
+          a.updateDate = format(
+            new Date(a.updateDate),
+            "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+          )
             .split("-")
             .join("-");
-          b.updateDate = format(new Date(b.updateDate), "yyyy-MM-dd")
+          b.updateDate = format(
+            new Date(b.updateDate),
+            "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+          )
             .split("-")
             .join("-");
           return a.updateDate > b.updateDate
