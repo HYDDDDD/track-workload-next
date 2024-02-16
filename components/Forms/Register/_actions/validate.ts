@@ -35,6 +35,8 @@ export const handleValidate = (error: string) => {
     return "รหัสผ่านคล้ายกับที่อยู่อีเมลมากเกินไป";
   } else if (error == "This password is too common.") {
     return "รหัสผ่านนี้ใช้บ่อยเกินไป";
+  } else if (error == "The two password fields didn't match.") {
+    return "รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน";
   } else {
     return error;
   }

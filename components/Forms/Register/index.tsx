@@ -86,6 +86,24 @@ const RegisterForm = () => {
   useEffect(() => {
     if (error && "data" in error && error.data) {
       const errorRegister: IResponseRegisterForm = error.data;
+      let errorPhone = "";
+      let errorRepassword = "";
+
+      if (
+        newUser.phone.length < 10 ||
+        newUser.phone.length > 10 ||
+        newUser.phone.length == 0
+      ) {
+        errorPhone = "หมายเลขโทรศัพท์ไม่ถูกต้อง";
+      }
+
+      if (
+        newUser.re_password &&
+        newUser.password &&
+        !newUser.re_password.includes(newUser.password)
+      ) {
+        errorRepassword = "รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน";
+      }
 
       setErrorResponse({
         firstName: errorRegister.firstName,
@@ -94,21 +112,17 @@ const RegisterForm = () => {
         branch: errorRegister.branch,
         role: errorRegister.role,
         password: errorRegister.password,
-        re_password: errorRegister.re_password,
-        phone: errorRegister.phone,
+        re_password: errorRegister.re_password || [errorRepassword],
+        phone: [errorPhone],
       });
     } else {
       console.log("No data property in error object");
     }
-  }, [error]);
+  }, [error, newUser.phone.length]);
 
   return (
     <Form
-      onSubmit={() => {
-        if (newUser.phone.length == 10) {
-          onSubmit();
-        }
-      }}
+      onSubmit={onSubmit}
       render={({ handleSubmit }) => (
         <form
           onSubmit={handleSubmit}
@@ -185,11 +199,21 @@ const RegisterForm = () => {
           >
             หมายเลขโทรศัพท์
           </Input>
-          {newUser.phone.length < 10 && (
-            <p className={clsx(`text-red-500`)}>หมายเลขโทรศัพท์ไม่ถูกต้อง</p>
-          )}
-          {newUser.phone.length > 10 && (
-            <p className={clsx(`text-red-500`)}>หมายเลขโทรศัพท์ไม่ถูกต้อง</p>
+          {errorResponse.phone && errorResponse.phone?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.phone[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.phone &&
+                errorResponse.phone.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
           )}
 
           <Input
