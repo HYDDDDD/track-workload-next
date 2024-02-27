@@ -57,8 +57,14 @@ const SearchDataSection = () => {
         const end = format(endDate, "yyyyMMdd");
 
         if (
-          start <= activity.updateDate.replace("-", "").replace("-", "") &&
-          end >= activity.updateDate.replace("-", "").replace("-", "")
+          start <=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "") &&
+          end >=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "")
         ) {
           return activity;
         }
@@ -74,8 +80,14 @@ const SearchDataSection = () => {
         const end = format(endDate, "yyyyMMdd");
 
         if (
-          start <= activity.updateDate.replace("-", "").replace("-", "") &&
-          end >= activity.updateDate.replace("-", "").replace("-", "")
+          start <=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "") &&
+          end >=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "")
         ) {
           if (
             activity.category === "C" &&
@@ -136,6 +148,10 @@ const SearchDataSection = () => {
       }
     }
   }, [userActivites, selectedCategory, startDate, endDate]);
+
+  // console.log("check selectedCategory : ", selectedCategory);
+  // console.log("check start : ", startDate);
+  // console.log("check end : ", endDate);
 
   return (
     <section className={clsx([`space-y-8`])}>

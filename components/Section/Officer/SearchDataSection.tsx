@@ -57,8 +57,14 @@ const SearchDataSection = () => {
         const end = format(endDate, "yyyyMMdd");
 
         if (
-          start <= activity.updateDate.replace("-", "").replace("-", "") &&
-          end >= activity.updateDate.replace("-", "").replace("-", "")
+          start <=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "") &&
+          end >=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "")
         ) {
           return activity;
         }
@@ -74,8 +80,14 @@ const SearchDataSection = () => {
         const end = format(endDate, "yyyyMMdd");
 
         if (
-          start <= activity.updateDate.replace("-", "").replace("-", "") &&
-          end >= activity.updateDate.replace("-", "").replace("-", "")
+          start <=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "") &&
+          end >=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "")
         ) {
           if (activity.category.category === selectedCategory.category) {
             return activity;
