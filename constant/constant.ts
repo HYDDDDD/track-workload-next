@@ -9,7 +9,8 @@ import { IStatusDataProps } from "@/types/status/status.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
 // URL
-export const BASEURL = "http://127.0.0.1:8000";
+// export const BASEURL = "http://127.0.0.1:8000";
+export const BASEURL = "https://ec01-61-7-146-67.ngrok-free.app/";
 
 // User
 export const USERS: IUserDataProps[] = [
