@@ -37,9 +37,11 @@ interface IInfo {
   firstName: string;
   branch: string;
   totalHour: number;
+  hourCulture: number;
+  hourHealth: number;
 }
 
-const GradientChart = () => {
+const IntroGradientChart = () => {
   // _Context
   const { activites } = useAuth();
 
@@ -60,6 +62,7 @@ const GradientChart = () => {
           font: {
             size: 16,
           },
+          color: "#fff",
         },
       },
       title: {
@@ -68,18 +71,27 @@ const GradientChart = () => {
         font: {
           size: 18,
         },
+        color: "#fff",
       },
     },
     scales: {
       x: {
+        grid: {
+          color: "#575757",
+        },
         ticks: {
+          color: "#fff",
           font: {
-            size: 12,
+            size: 14,
           },
         },
       },
       y: {
+        grid: {
+          color: "#575757",
+        },
         ticks: {
+          color: "#fff",
           font: {
             size: 14,
           },
@@ -92,13 +104,37 @@ const GradientChart = () => {
     labels: reports.map((label) => label.branch),
     datasets: [
       {
-        label: "จำนวนชั่วโมงแต่ละสาขา(ชั่วโมง)",
-        data: reports.map((data) => data.totalHour),
-        borderColor: "#FFC5C5",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        label: "จำนวนชั่วโมงด้านทำนุบำรุงศิลปวัฒนธรรม(ชั่วโมง)",
+        data: reports.map((info) => info.hourCulture),
+        borderColor: "#BBD7E9",
+        backgroundColor: "#3c9dda",
         borderWidth: 5,
       },
+      {
+        label: "จำนวนชั่วโมงด้านส่งเสริมสุขภาพ(ชั่วโมง)",
+        data: reports.map((info) => info.hourHealth),
+        borderColor: "#FFC5C5",
+        backgroundColor: "#f74545",
+        borderWidth: 5,
+      },
+      // {
+      //   label: "จำนวนชั่วโมงทั้งหมด(ชั่วโมง)",
+      //   data: reports.map((info) => info.totalHour),
+      //   borderColor: "#67b450",
+      //   backgroundColor: "#2c6b19",
+      // },
     ],
+  };
+
+  const handleSortArray = (arr: IInfo[]) => {
+    arr
+      .sort((a, b) => {
+        if (a.hourCulture !== undefined && b.hourCulture !== undefined) {
+          return b.hourCulture - a.hourCulture;
+        }
+        return 0;
+      })
+      .slice(0, 5);
   };
 
   useEffect(() => {
@@ -118,21 +154,35 @@ const GradientChart = () => {
 
         if (existingItemIndex !== -1) {
           info[existingItemIndex].totalHour += activity.totalHour;
+
+          if (activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม") {
+            info[existingItemIndex].hourCulture += activity.totalHour;
+          } else if (activity.category === "งานด้านส่งเสริมสุขภาพ") {
+            info[existingItemIndex].hourHealth += activity.totalHour;
+          }
         } else {
-          info.push({
-            activityUser: activity.activityUser,
-            firstName: activity.firstName,
-            branch: activity.branch,
-            totalHour: activity.totalHour,
-          });
+          if (activity.category === "งานด้านทำนุบำรุงศิลปวัฒนธรรม") {
+            info.push({
+              activityUser: activity.activityUser,
+              firstName: activity.firstName,
+              branch: activity.branch,
+              totalHour: activity.totalHour,
+              hourCulture: activity.totalHour,
+              hourHealth: 0,
+            });
+          } else if (activity.category === "งานด้านส่งเสริมสุขภาพ") {
+            info.push({
+              activityUser: activity.activityUser,
+              firstName: activity.firstName,
+              branch: activity.branch,
+              totalHour: activity.totalHour,
+              hourCulture: 0,
+              hourHealth: activity.totalHour,
+            });
+          }
         }
 
-        info.sort((a, b) => {
-          if (a.totalHour !== undefined && b.totalHour !== undefined) {
-            return b.totalHour - a.totalHour;
-          }
-          return 0;
-        });
+        handleSortArray(info);
 
         setReports(info.slice(0, 5));
       }
@@ -150,4 +200,4 @@ const GradientChart = () => {
   );
 };
 
-export default GradientChart;
+export default IntroGradientChart;

@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 
 import clsx from "clsx";
 import Image from "next/image";
@@ -6,10 +8,24 @@ import Link from "next/link";
 
 import Progress from "@/components/Progress";
 import Button from "@/components/UI/Button";
+import { useAuth } from "@/context/AuthProvider";
 import CulturePng from "@/public/culture-icon.png";
 import HealthPng from "@/public/health-icon.png";
+import { handleCalHourPersonnel } from "@/utils/CalculateHourPersonnel";
 
 const ActivitySection = () => {
+  // _Context
+  const { userActivites } = useAuth();
+
+  // _State
+  const [hourCulture, setHourCulture] = useState<number>(0);
+  const [hourHealth, setHourHealth] = useState<number>(0);
+
+  // _Effect
+  useEffect(() => {
+    handleCalHourPersonnel({ userActivites, setHourCulture, setHourHealth });
+  }, [userActivites]);
+
   return (
     <section>
       <div
@@ -20,7 +36,7 @@ const ActivitySection = () => {
         ])}
       >
         <div className={clsx([`space-y-16`, `sm:space-y-6`])}>
-          <Progress maxHour={102} hour={70} type="warn" />
+          <Progress maxHour={102} hour={hourCulture} />
           <Button variant="secondary">
             <Link
               href="/personnel/form/culture"
@@ -48,7 +64,7 @@ const ActivitySection = () => {
           </Button>
         </div>
         <div className={clsx([`space-y-16`, `sm:space-y-6`])}>
-          <Progress maxHour={102} hour={25} type="danger" />
+          <Progress maxHour={102} hour={hourHealth} />
           <Button variant="secondary">
             <Link
               href="/personnel/form/health"

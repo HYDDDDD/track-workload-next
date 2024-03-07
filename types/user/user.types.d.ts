@@ -3,14 +3,13 @@ import { IBranchDataProps } from "../branch/branch.types";
 import { IRoleDataProps } from "../role/role.types";
 
 export interface IUserDataProps {
-  userID: string;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   role: string;
   branch?: string;
-  totalHours?: number;
   password?: string;
   re_password?: string;
 }

@@ -5,7 +5,7 @@ import { apiSlice } from "../services/apiSlice";
 const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     retrieveUser: builder.query<IUserDataProps, void>({
-      query: () => "/users/me/",
+      query: () => ({ url: "/users/me/", withCredentials: true }),
     }),
 
     login: builder.mutation({
@@ -13,6 +13,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         url: "/jwt/create/",
         method: "POST",
         body: { email, password },
+        withCredentials: true,
       }),
     }),
     register: builder.mutation({
@@ -23,7 +24,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         phone,
         role,
         branch,
-        totalHours,
+        totalHour,
         password,
         re_password,
       }) => ({
@@ -36,22 +37,25 @@ const authApiSlice = apiSlice.injectEndpoints({
           phone,
           role,
           branch,
-          totalHours,
+          totalHour,
           password,
           re_password,
         },
+        withCredentials: true,
       }),
     }),
     verify: builder.mutation({
       query: () => ({
         url: "/jwt/verify/",
         method: "POST",
+        withCredentials: true,
       }),
     }),
     logout: builder.mutation({
       query: () => ({
         url: "/logout/",
         method: "POST",
+        withCredentials: true,
       }),
     }),
     resetPassword: builder.mutation({
@@ -59,6 +63,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         url: "/users/reset_password/",
         method: "POST",
         body: { email },
+        withCredentials: true,
       }),
     }),
     resetPasswordConfirm: builder.mutation({
@@ -66,6 +71,7 @@ const authApiSlice = apiSlice.injectEndpoints({
         url: "/users/reset_password_confirm/",
         method: "POST",
         body: { token, new_password, re_new_password },
+        withCredentials: true,
       }),
     }),
   }),

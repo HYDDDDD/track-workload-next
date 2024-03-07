@@ -11,17 +11,21 @@ import {
 } from "@tanstack/react-table";
 import clsx from "clsx";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-import { useAuth } from "@/context/AuthProvider";
 import SlideDownPng from "@/public/slide-down-icon.png";
 import SlideUpPng from "@/public/slide-up-icon.png";
-import { IActivityRequestDataProps } from "@/types/activity/activity.types";
+import {
+  IActivityResponseDataOfficerProps,
+  IExportDataProps,
+} from "@/types/activity/activity.types";
 
 import PaginationTable from "../PaginationTable";
 import { TableType } from "./types";
 
-const Table = <T extends IActivityRequestDataProps>({
+const TableOfficer = <
+  T extends IExportDataProps | IActivityResponseDataOfficerProps,
+>({
   info,
   columns,
 }: TableType<T>) => {
@@ -33,11 +37,8 @@ const Table = <T extends IActivityRequestDataProps>({
     getSortedRowModel: getSortedRowModel(),
   });
 
-  // _Router
   const router = useRouter();
-
-  // _Context
-  const { userInfo } = useAuth();
+  const pathName = usePathname();
 
   return (
     <Fragment>
@@ -100,35 +101,34 @@ const Table = <T extends IActivityRequestDataProps>({
           </thead>
           <tbody>
             {table.getPageCount() > 0 &&
-              table
-                .getRowModel()
-                .rows.filter((row) => row.original.activityUser == userInfo?.id)
-                .map((row) => {
-                  return (
-                    <tr
-                      key={row.id}
-                      className={clsx(`cursor-pointer hover:bg-slate-200`)}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <td
-                          key={cell.id}
-                          onClick={() => {
+              table.getRowModel().rows.map((row) => {
+                return (
+                  <tr
+                    key={row.id}
+                    className={clsx(`cursor-pointer hover:bg-slate-200`)}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        onClick={() => {
+                          if (!pathName.includes("/summary-information")) {
                             router.push(
-                              `/personnel/form/${
+                              `/admin/form/${
                                 cell.getContext().row.original.id
                               }`,
                             );
-                          }}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  );
-                })}
+                          }
+                        }}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
         {table.getPageCount() === 0 && (
@@ -142,4 +142,4 @@ const Table = <T extends IActivityRequestDataProps>({
   );
 };
 
-export default Table;
+export default TableOfficer;

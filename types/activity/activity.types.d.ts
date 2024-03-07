@@ -3,12 +3,13 @@ import { IStatusDataProps } from "../status/status.types";
 
 export interface IActivityRequestDataProps {
   id: string;
+  activityUser: string;
   category: string;
-  image: string;
-  createDate: string;
-  createBy: string;
+  status?: string;
   updateDate: string;
-  hours: number;
+  image?: File | null;
+  isSelected?: boolean;
+  hour: number;
 }
 
 export interface IActivityResponseDataProps {
@@ -27,13 +28,12 @@ export interface IActivityResponseDataOfficerProps {
   branch: IBranchDataProps;
   category: IActivityDataProps;
   updateDate: string;
-  // hours: number;
-  totalHours: number;
-  status: IStatusDataProps;
+  totalHour?: number;
+  status?: string;
 }
 
 export interface IExportDataProps {
-  userID?: string;
+  activityUser?: string;
   id: string;
   firstName: string;
   lastName: string;
@@ -41,21 +41,22 @@ export interface IExportDataProps {
   category: string;
   updateDate?: string;
   hours?: number;
-  totalHours?: number;
+  totalHour?: number;
   status?: IStatusDataProps;
 }
 
 export interface IExportUsersDataProps {
   id: string;
+  activityUser: string;
   firstName: string;
   lastName: string;
   branch: string;
   category: string;
-  totalHours: number | undefined;
+  totalHour: number;
 }
 
 export interface IActivityDataProps {
   id: string;
   category: string;
-  hours: number;
+  hour: number;
 }

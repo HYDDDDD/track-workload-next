@@ -2,6 +2,7 @@
 
 import React, { Fragment, useEffect, useState } from "react";
 import { Form } from "react-final-form";
+import { toast } from "react-toastify";
 
 import { Listbox, Transition } from "@headlessui/react";
 import clsx from "clsx";
@@ -20,6 +21,19 @@ import { IBranchDataProps } from "@/types/branch/branch.types";
 import { IRoleDataProps } from "@/types/role/role.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
+import { handleValidate } from "./_actions/validate";
+
+interface IResponseRegisterForm {
+  firstName?: string[];
+  lastName?: string[];
+  email?: string[];
+  branch?: string[];
+  password?: string[];
+  re_password?: string[];
+  role?: string[];
+  phone?: string[];
+}
+
 const RegisterForm = () => {
   // _State
   const [selectedRole, setSelectedRole] = useState<IRoleDataProps>(
@@ -29,36 +43,82 @@ const RegisterForm = () => {
     DEFAULT_BRANCH_DATA_AUTH[0],
   );
   const [newUser, setNewUser] = useState<IUserDataProps>({
-    userID: "",
+    id: "",
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
     role: "",
     branch: "",
-    totalHours: 0,
     password: "",
     re_password: "",
   });
+  const [errorResponse, setErrorResponse] = useState<IResponseRegisterForm>({
+    firstName: [""],
+    lastName: [""],
+    email: [""],
+    branch: [""],
+    role: [""],
+    password: [""],
+    re_password: [""],
+    phone: [""],
+  });
 
   // _Hook
-  const { isLoading, onSubmit } = useRegister(newUser);
+  const { isLoading, error, onSubmit } = useRegister(newUser);
 
   // _Effect
   useEffect(() => {
     if (selectedRole) {
-      setNewUser({ ...newUser, role: selectedRole.role });
+      setNewUser({ ...newUser, role: selectedRole.value });
     }
   }, [selectedRole]);
 
   useEffect(() => {
     if (newUser.role === "Personnel" && selectedBranch) {
-      setNewUser({ ...newUser, branch: selectedBranch.branchName });
+      setNewUser({ ...newUser, branch: selectedBranch.value });
     } else {
       setSelectedBranch(DEFAULT_BRANCH_DATA_AUTH[0]);
-      setNewUser({ ...newUser, branch: "" });
+      setNewUser({ ...newUser, branch: "-" });
     }
   }, [selectedBranch, newUser.role]);
+
+  useEffect(() => {
+    if (error && "data" in error && error.data) {
+      const errorRegister: IResponseRegisterForm = error.data;
+      let errorPhone = "";
+      let errorRepassword = "";
+
+      if (
+        newUser.phone.length < 10 ||
+        newUser.phone.length > 10 ||
+        newUser.phone.length == 0
+      ) {
+        errorPhone = "หมายเลขโทรศัพท์ไม่ถูกต้อง";
+      }
+
+      if (
+        newUser.re_password &&
+        newUser.password &&
+        !newUser.re_password.includes(newUser.password)
+      ) {
+        errorRepassword = "รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน";
+      }
+
+      setErrorResponse({
+        firstName: errorRegister.firstName,
+        lastName: errorRegister.lastName,
+        email: errorRegister.email,
+        branch: errorRegister.branch,
+        role: errorRegister.role,
+        password: errorRegister.password,
+        re_password: errorRegister.re_password || [errorRepassword],
+        phone: [errorPhone],
+      });
+    } else {
+      console.log("No data property in error object");
+    }
+  }, [error, newUser.phone.length]);
 
   return (
     <Form
@@ -80,6 +140,23 @@ const RegisterForm = () => {
           >
             ชื่อ
           </Input>
+          {errorResponse.firstName && errorResponse.firstName?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.firstName[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.firstName &&
+                errorResponse.firstName.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
+          )}
+
           <Input
             name="lastName"
             component="input"
@@ -92,6 +169,23 @@ const RegisterForm = () => {
           >
             นามสกุล
           </Input>
+          {errorResponse.lastName && errorResponse.lastName?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.lastName[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.lastName &&
+                errorResponse.lastName.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
+          )}
+
           <Input
             name="phoneNumber"
             component="input"
@@ -99,12 +193,29 @@ const RegisterForm = () => {
             onChange={(e) => {
               setNewUser({ ...newUser, phone: e.target.value });
             }}
-            type="number"
+            type="tel"
             pattern="0-9"
             placeholder="08XXXXXXXX"
           >
             หมายเลขโทรศัพท์
           </Input>
+          {errorResponse.phone && errorResponse.phone?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.phone[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.phone &&
+                errorResponse.phone.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
+          )}
+
           <Input
             name="email"
             component="input"
@@ -117,6 +228,23 @@ const RegisterForm = () => {
           >
             อีเมล
           </Input>
+          {errorResponse.email && errorResponse.email?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.email[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.email &&
+                errorResponse.email.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
+          )}
+
           <Input
             name="password"
             component="input"
@@ -129,6 +257,23 @@ const RegisterForm = () => {
           >
             รหัสผ่าน
           </Input>
+          {errorResponse.password && errorResponse.password?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.password[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.password &&
+                errorResponse.password.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
+          )}
+
           <Input
             name="password"
             component="input"
@@ -141,6 +286,23 @@ const RegisterForm = () => {
           >
             ยืนยันรหัสผ่าน
           </Input>
+          {errorResponse.re_password &&
+          errorResponse.re_password?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.re_password[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.re_password &&
+                errorResponse.re_password.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
+          )}
 
           <div className={clsx([`field-box`])}>
             <label>สถานะ</label>
@@ -188,8 +350,24 @@ const RegisterForm = () => {
               </div>
             </Listbox>
           </div>
+          {errorResponse.role && errorResponse.role?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.role[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.role &&
+                errorResponse.role.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
+          )}
 
-          {selectedRole.role === "Personnel" && (
+          {selectedRole.value === "Personnel" && (
             <div className={clsx([`field-box`])}>
               <label>สาขา</label>
               <Listbox value={selectedBranch} onChange={setSelectedBranch}>
@@ -236,6 +414,22 @@ const RegisterForm = () => {
                 </div>
               </Listbox>
             </div>
+          )}
+          {errorResponse.branch && errorResponse.branch?.length <= 1 ? (
+            <p className={clsx(`text-red-500`)}>
+              {handleValidate(errorResponse.branch[0])}
+            </p>
+          ) : (
+            <>
+              {errorResponse.branch &&
+                errorResponse.branch.map((error, index) => {
+                  return (
+                    <p className={clsx(`text-red-500`)} key={index}>
+                      {handleValidate(error)}
+                    </p>
+                  );
+                })}
+            </>
           )}
 
           <div className={clsx([`flex justify-center`])}>

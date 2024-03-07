@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
+import { DEFAULT_USER_ROLE_DATA } from "@/constant/constant";
 import { useAuth } from "@/context/AuthProvider";
 import LinePng from "@/public/line-icon.png";
 import LogoICTPng from "@/public/logo-ict.png";
@@ -38,7 +39,13 @@ const Header = () => {
         className={clsx(`main-space-x flex items-center justify-between py-3`)}
       >
         <div className={clsx([`flex items-center space-x-2`])}>
-          <Link href={"#"}>
+          <Link
+            href={
+              userInfo?.role === "Admin"
+                ? `/${userInfo?.role.toLowerCase()}/index`
+                : `/${userInfo?.role.toLowerCase()}`
+            }
+          >
             <Image
               src={LogoICTPng}
               alt="logo ict png"
@@ -59,19 +66,32 @@ const Header = () => {
         </div>
 
         <div className={clsx([`flex items-center space-x-4`])}>
-          <span
-            className={clsx([`text-body-20`, `lg:text-body-16`, `sm:hidden`])}
+          <Link
+            href={
+              userInfo?.role === "Admin"
+                ? `/${userInfo?.role.toLowerCase()}/index`
+                : `/${userInfo?.role.toLowerCase()}`
+            }
           >
-            หน้าหลัก
-          </span>
-
-          {userInfo?.role === "ADMIN" && (
-            <Link href="/officer/summary-information">
+            <span
+              className={clsx([
+                `text-body-20`,
+                `lg:text-body-16`,
+                `sm:hidden`,
+                `hover:text-gray-500`,
+              ])}
+            >
+              หน้าหลัก
+            </span>
+          </Link>
+          {userInfo?.role === "Admin" && (
+            <Link href="/admin/summary-information">
               <span
                 className={clsx([
                   `text-body-20`,
                   `lg:text-body-16`,
-                  `sm:hidden`,
+                  `sm:text-body-12`,
+                  `hover:text-gray-500`,
                 ])}
               >
                 ข้อมูลสรุปผล
@@ -84,6 +104,15 @@ const Header = () => {
             className={clsx(`sm:hidden`)}
           />
           <AccountDropDown />
+          <p
+            className={clsx([`text-body-16 text-blue-second-500`, `sm:hidden`])}
+          >
+            {DEFAULT_USER_ROLE_DATA.filter(
+              (role) => userInfo?.role === role.value,
+            ).map((role) => {
+              return role.role;
+            })}
+          </p>
         </div>
       </div>
     </header>

@@ -1,42 +1,48 @@
 import { createColumnHelper } from "@tanstack/react-table";
+import { format } from "date-fns";
 
-import { IActivityResponseDataProps } from "@/types/activity/activity.types";
+import { IActivityRequestDataProps } from "@/types/activity/activity.types";
 
-const columnHelper = createColumnHelper<IActivityResponseDataProps>();
-
-// _MOCK
-const userContext = "1";
+const columnHelper = createColumnHelper<IActivityRequestDataProps>();
 
 export const UserColumns = [
-  columnHelper.accessor("id", {
+  columnHelper.accessor("activityUser", {
     header: "ลำดับ",
     cell: (info) => {
-      if (userContext === info.row.original.userID) {
-        return info.row.index + 1;
-      }
+      return info.row.index + 1;
     },
   }),
   columnHelper.accessor("category", {
     header: "ประเภทภาระงาน",
     cell: (info) => {
-      if (userContext === info.row.original.userID) {
-        return info.getValue();
+      if (info.getValue() === "C") {
+        return "งานด้านทำนุบำรุงศิลปวัฒนธรรม";
+      } else {
+        return "งานด้านส่งเสริมสุขภาพ";
       }
     },
   }),
   columnHelper.accessor("updateDate", {
     header: "วันที่ส่ง",
     cell: (info) => {
-      if (userContext === info.row.original.userID) {
-        return info.getValue();
-      }
+      return format(new Date(info.getValue()), "yyyy-MM-dd");
     },
   }),
-  columnHelper.accessor("hours", {
+  columnHelper.accessor("hour", {
     header: "จำนวนชั่วโมง",
     cell: (info) => {
-      if (userContext === info.row.original.userID) {
-        return info.getValue();
+      return info.getValue();
+    },
+  }),
+  columnHelper.accessor("status", {
+    header: "สถานะ",
+    cell: (info) => {
+      if (info.getValue() === "P") {
+        return "ผ่าน";
+      } else if (info.getValue() === "N") {
+        return "ไม่ผ่าน";
+      } else {
+        return "กำลังดำเนินการ";
       }
     },
   }),

@@ -1,26 +1,157 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import { Listbox, Transition } from "@headlessui/react";
 import clsx from "clsx";
+import { format } from "date-fns";
 import Image from "next/image";
 
 import StartDateEndDatePicker from "@/components/DatePicker/StartDateEndDate";
 import Table from "@/components/Section/Table/Table";
-import { PERSONNELTABLE, DEFAULT_ACTIVITY } from "@/constant/constant";
+import { DEFAULT_ACTIVITY } from "@/constant/constant";
+import { useAuth } from "@/context/AuthProvider";
 import SortLeftPng from "@/public/sort-left-icon.png";
-import { IActivityDataProps } from "@/types/activity/activity.types";
+import {
+  IActivityDataProps,
+  IActivityRequestDataProps,
+} from "@/types/activity/activity.types";
 
 import { UserColumns } from "./Column";
 
 const SearchDataSection = () => {
+  // _Context
+  const { userActivites } = useAuth();
+
   // _State
+  const [info, setInfo] = useState<IActivityRequestDataProps[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<IActivityDataProps>(
-    DEFAULT_ACTIVITY[0],
+    DEFAULT_ACTIVITY[2],
   );
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+
+  // _Action
+  const handleFilterCategory = () => {
+    const filterDropdown = userActivites.filter((activity) => {
+      if (
+        activity.category === "C" &&
+        "งานด้านทำนุบำรุงศิลปวัฒนธรรม" === selectedCategory.category
+      ) {
+        return activity;
+      } else if (
+        activity.category === "H" &&
+        "งานด้านส่งเสริมสุขภาพ" === selectedCategory.category
+      ) {
+        return activity;
+      }
+    });
+
+    setInfo(filterDropdown);
+  };
+
+  const handleFilterDate = () => {
+    if (startDate !== null && endDate !== null) {
+      const filterDate = userActivites.filter((activity) => {
+        const start = format(startDate, "yyyyMMdd");
+        const end = format(endDate, "yyyyMMdd");
+
+        if (
+          start <=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "") &&
+          end >=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "")
+        ) {
+          return activity;
+        }
+      });
+      setInfo(filterDate);
+    }
+  };
+
+  const handleFilter = () => {
+    if (startDate !== null && endDate !== null) {
+      const filterDate = userActivites.filter((activity) => {
+        const start = format(startDate, "yyyyMMdd");
+        const end = format(endDate, "yyyyMMdd");
+
+        if (
+          start <=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "") &&
+          end >=
+            format(new Date(activity.updateDate), "yyyyMMdd")
+              .replace("-", "")
+              .replace("-", "")
+        ) {
+          if (
+            activity.category === "C" &&
+            "งานด้านทำนุบำรุงศิลปวัฒนธรรม" === selectedCategory.category
+          ) {
+            return activity;
+          } else if (
+            activity.category === "H" &&
+            "งานด้านส่งเสริมสุขภาพ" === selectedCategory.category
+          ) {
+            return activity;
+          }
+        }
+      });
+      setInfo(filterDate);
+    }
+  };
+
+  // _Effect
+  useEffect(() => {
+    if (userActivites) {
+      if (
+        selectedCategory.id === "1" &&
+        (startDate === null || endDate === null)
+      ) {
+        const filter = userActivites.sort((a, b) => {
+          a.updateDate = format(
+            new Date(a.updateDate),
+            "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+          )
+            .split("-")
+            .join("-");
+          b.updateDate = format(
+            new Date(b.updateDate),
+            "yyyy-MM-dd'T'HH:mm:ss.SSSxxx",
+          )
+            .split("-")
+            .join("-");
+          return a.updateDate > b.updateDate
+            ? 1
+            : a.updateDate < b.updateDate
+              ? -1
+              : 0;
+        });
+
+        if (filter) {
+          setInfo(filter);
+        }
+      } else if (
+        selectedCategory.id !== "1" &&
+        startDate !== null &&
+        endDate !== null
+      ) {
+        handleFilter();
+      } else {
+        handleFilterCategory();
+        handleFilterDate();
+      }
+    }
+  }, [userActivites, selectedCategory, startDate, endDate]);
+
+  // console.log("check selectedCategory : ", selectedCategory);
+  // console.log("check start : ", startDate);
+  // console.log("check end : ", endDate);
 
   return (
     <section className={clsx([`space-y-8`])}>
@@ -53,18 +184,15 @@ const SearchDataSection = () => {
                   <Listbox.Option
                     key={activity.id}
                     className={({ active }) =>
-                      `${
-                        activity.id !== "1" &&
-                        `relative cursor-default select-none py-2 pl-10 pr-4`
-                      } ${
-                        activity.id !== "1" && active
-                          ? `bg-amber-100 text-primary-900`
+                      `${`relative cursor-default select-none py-2 pl-10 pr-4`} ${
+                        active
+                          ? `cursor-pointer bg-amber-100 text-primary-900`
                           : `text-gray-900`
                       }`
                     }
                     value={activity}
                   >
-                    {activity.id !== "1" && activity.category}
+                    {activity.category}
                   </Listbox.Option>
                 ))}
               </Listbox.Options>
@@ -78,7 +206,7 @@ const SearchDataSection = () => {
         endDate={endDate}
         setEndDate={setEndDate}
       />
-      <Table info={PERSONNELTABLE} columns={UserColumns} />
+      <Table info={info} columns={UserColumns} />
     </section>
   );
 };

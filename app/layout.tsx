@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={clsx(`font-sans`)}>
+      <body className={clsx([`font-sans`])}>
         <Providers>
           <Toast />
           <AuthProvider>{children}</AuthProvider>

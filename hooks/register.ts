@@ -10,7 +10,7 @@ import { IUserDataProps } from "@/types/user/user.types";
 
 export default function useRegister(newUser: IUserDataProps) {
   // _Mutation
-  const [register, { isLoading }] = useRegisterMutation();
+  const [register, { isLoading, error }] = useRegisterMutation();
 
   // _Router
   const router = useRouter();
@@ -19,14 +19,13 @@ export default function useRegister(newUser: IUserDataProps) {
   const [infoUser, setInfoUser] = useState(false);
 
   const {
-    userID,
+    id,
     firstName,
     lastName,
     email,
     phone,
     role,
     branch,
-    totalHours,
     password,
     re_password,
   } = newUser;
@@ -34,14 +33,13 @@ export default function useRegister(newUser: IUserDataProps) {
   // _Action
   const onSubmit = () => {
     register({
-      userID,
+      id,
       firstName,
       lastName,
       email,
       phone,
       role,
       branch,
-      totalHours,
       password,
       re_password,
     })
@@ -57,6 +55,7 @@ export default function useRegister(newUser: IUserDataProps) {
 
   return {
     isLoading,
+    error,
     onSubmit,
   };
 }

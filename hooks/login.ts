@@ -21,9 +21,6 @@ export default function useLogin(email: string, password: string) {
   // _Context
   const { fetchUserInfo } = useAuth();
 
-  // _Router
-  const router = useRouter();
-
   // _Action
   const onSubmit = () => {
     login({ email, password })
@@ -37,11 +34,10 @@ export default function useLogin(email: string, password: string) {
 
         fetchUserInfo();
 
-        router.push("/personnel/");
         toast.success("ล็อกอินสำเร็จ");
       })
       .catch(() => {
-        toast.error("กรุณาล็อกอินอีกครั้ง");
+        toast.error("อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาล็อกอินอีกครั้ง");
       });
   };
 

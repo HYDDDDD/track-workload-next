@@ -5,12 +5,8 @@ import React from "react";
 import clsx from "clsx";
 
 import SearchDataSection from "@/components/Section/Officer/SearchDataSection";
-import { useAuth } from "@/context/AuthProvider";
 
-const OfficerIndexPage = () => {
-  // _Context
-  const { userInfo } = useAuth();
-
+const OfficerHomePage = () => {
   return (
     <div
       className={clsx([
@@ -26,4 +22,4 @@ const OfficerIndexPage = () => {
   );
 };
 
-export default OfficerIndexPage;
+export default OfficerHomePage;
