@@ -116,7 +116,11 @@ export const handleGetUsers = async (
 
   if (storedToken) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
-    const response = await axios.get(`${BASEURL}/api/user/`);
+    const response = await axios.get(`${BASEURL}/api/user/`, {
+      headers: {
+        "ngrok-skip-browser-warning": "69420",
+      },
+    });
     setInfoUsers(response.data);
   } else {
     console.error("No token found in Local Storage");

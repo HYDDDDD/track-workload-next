@@ -57,7 +57,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // _Action
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get(`${BASEURL}/api/users/me/`);
+      const response = await axios.get(`${BASEURL}/api/users/me/`, {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
+      });
+
       setUserInfo(response.data);
       setIsActivated(true);
     } catch (error) {
@@ -66,22 +71,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const getActivites = async () => {
-    const response = await axios.get(`${BASEURL}/api/activity/`);
+    const response = await axios.get(`${BASEURL}/api/activity/`, {
+      headers: {
+        "ngrok-skip-browser-warning": "69420",
+      },
+    });
 
-    setActivites(response.data);
+    if (response.data) {
+      setActivites(response.data);
+    }
   };
 
   // _Effect
   useEffect(() => {
-    const storedToken = localStorage.getItem("auth_token");
+    async () => {
+      const storedToken = localStorage.getItem("auth_token");
 
-    if (storedToken) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${storedToken}`;
-      fetchUserInfo();
-      getActivites();
-    } else {
-      console.error("No token found in Local Storage");
-    }
+      if (storedToken) {
+        axios.defaults.headers.common["Authorization"] =
+          `Bearer ${storedToken}`;
+        await fetchUserInfo();
+        await getActivites();
+      } else {
+        console.error("No token found in Local Storage");
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -97,14 +111,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (activites && userInfo) {
-      const filterActivity = activites
-        .filter((activity) => activity.activityUser == userInfo.id)
-        .map((activity) => {
-          return activity;
-        });
+      console.log("check this : ", activites);
+
+      const filterActivity = activites.filter(
+        (activity) => activity.activityUser == userInfo.id,
+      );
       setUserActivites(filterActivity);
     }
-  }, [activites]);
+  }, [activites, userInfo]);
 
   useEffect(() => {
     if (userInfo) {

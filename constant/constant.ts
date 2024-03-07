@@ -1,7 +1,6 @@
 import {
   IActivityDataProps,
   IActivityResponseDataOfficerProps,
-  IActivityResponseDataProps,
 } from "@/types/activity/activity.types";
 import { IBranchDataProps } from "@/types/branch/branch.types";
 import { IRoleDataProps } from "@/types/role/role.types";
@@ -9,7 +8,8 @@ import { IStatusDataProps } from "@/types/status/status.types";
 import { IUserDataProps } from "@/types/user/user.types";
 
 // URL
-export const BASEURL = "http://127.0.0.1:8000";
+// export const BASEURL = "http://127.0.0.1:8000";
+export const BASEURL = "https://7c23-61-7-146-67.ngrok-free.app";
 
 // User
 export const USERS: IUserDataProps[] = [

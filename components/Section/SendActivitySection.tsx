@@ -63,6 +63,9 @@ const SendActivitySection = ({
     setSelectedImage(fileImage);
   };
 
+  console.log("check img : ", imageURL);
+  console.log("check this : ", imageURL !== "undefined");
+
   const handleAddActivity = async () => {
     if (selectedImage !== null) {
       try {
@@ -80,6 +83,7 @@ const SendActivitySection = ({
             {
               headers: {
                 "Content-Type": "multipart/form-data",
+                "ngrok-skip-browser-warning": "69420",
               },
             },
           )
@@ -117,6 +121,7 @@ const SendActivitySection = ({
             {
               headers: {
                 "Content-Type": "multipart/form-data",
+                "ngrok-skip-browser-warning": "69420",
               },
             },
           )
@@ -141,6 +146,9 @@ const SendActivitySection = ({
 
     await axios
       .put(`${BASEURL}/api/activity/${activity?.id}/`, {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
         ...activity,
         status: pass ? "P" : "N",
       })
@@ -260,7 +268,6 @@ const SendActivitySection = ({
               <Button
                 variant="success"
                 rounder="full"
-                // onClick={() => handleChangeStatusActivity(true)}
                 onClick={() => {
                   setStatusLabel("ผ่าน");
                   setModalChangeStatus(true);
